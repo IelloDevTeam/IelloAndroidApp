@@ -35,6 +35,7 @@ import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.apiConnection.AsyncDownloadParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
+import com.projectiello.teampiattaforme.iello.utilities.AsyncTrovaParcheggiByIndirizzo;
 import com.projectiello.teampiattaforme.iello.utilities.HelperGeolocalizzazione;
 
 import java.util.ArrayList;
@@ -108,10 +109,9 @@ public class MainActivity extends AppCompatActivity
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // todo trova con google le coordinate dell'indirizzo
-
-                AsyncDownloadParcheggi adp = new AsyncDownloadParcheggi(MainActivity.this, 43.724283, 12.635698);
-                adp.execute();
+               AsyncTrovaParcheggiByIndirizzo adpi
+                        = new AsyncTrovaParcheggiByIndirizzo(MainActivity.this, query);
+                adpi.execute();
 
                 return false;
             }
@@ -160,10 +160,10 @@ public class MainActivity extends AppCompatActivity
         mGoogleMap = googleMap;
 
         LatLng urbino = new LatLng(43.724283, 12.635698);
-        Marker marker = googleMap.addMarker(new MarkerOptions().position(urbino).title("Marker in Sydney"));
-        mListMarker.add(marker);
+        //Marker marker = googleMap.addMarker(new MarkerOptions().position(urbino).title("Marker in Sydney"));
+        //mListMarker.add(marker);
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(urbino, 16.0f));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(urbino, 15.0f));
     }
 
 

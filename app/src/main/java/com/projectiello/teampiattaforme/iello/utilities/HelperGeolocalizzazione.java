@@ -58,6 +58,10 @@ public class HelperGeolocalizzazione {
                                         = new AsyncDownloadParcheggi(mMainActivity, location.getLatitude(),
                                         location.getLongitude());
                                 asyncDownload.execute();
+
+                            } else {
+                                Toast.makeText(mMainActivity, "attiva la geolocalizzazione per poter utilizzare questa funzione.",
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });

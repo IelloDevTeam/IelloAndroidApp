@@ -56,7 +56,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
             int range = hp.getRange();
 
             ElencoParcheggi.getInstance().getListParcheggi().clear();
-            TestDownloader.ottieniParcheggi(range, mLatitudine, mLongitudine);
+            TestDownloader.ottieniParcheggi(range, mLatitudine, mLongitudine, mActivity);
 
             if(ElencoParcheggi.getInstance().getListParcheggi().size() == 0)
                 return COMPLETATA_NO_RIS;
