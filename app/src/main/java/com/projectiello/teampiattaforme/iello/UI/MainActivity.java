@@ -23,19 +23,27 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
 
+
+/**
+ * Created by riccardomaldini on 25/09/17.
+ * Activity principale.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
-    // riferimento al tasto della search bar
+    // riferimento alla search bar
     private MaterialSearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // inizializza il fab. Un click nel fab determina la posizione dell'utente, sposta la mappa
+        // su tale posizione, inizializza la mappa e mostra i risultati della ricerca.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +89,7 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });*/
+
 
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.

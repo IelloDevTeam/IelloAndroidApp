@@ -9,4 +9,17 @@
     <string name="impostazioni">Impostazioni</string>
     <string name="cerca_ind">Inserisci un indirizzo&#8230;</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="slide_1_title">Titolo slide 1</string>
+    <string name="slide_1_desc">Descrizione slide 1</string>
+
+    <string name="slide_2_title">Titolo slide 2</string>
+    <string name="slide_2_desc">Descrizione slide 2</string>
+
+    <string name="slide_3_title">Titolo slide 3</string>
+    <string name="slide_3_desc">Descrizione slide 3</string>
+
+    <string name="slide_4_title">Titolo slide 4</string>
+    <string name="slide_4_desc">Descrizione slide 4</string>
+
 </resources>
