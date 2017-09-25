@@ -1,8 +1,14 @@
 package com.projectiello.teampiattaforme.iello.UI;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,7 +18,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -21,13 +30,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.projectiello.teampiattaforme.iello.Manifest;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.apiConnection.AsyncDownloadParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
+import com.projectiello.teampiattaforme.iello.utilities.HelperGeolocalizzazione;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -35,13 +48,18 @@ import java.util.List;
  * Activity principale.
  */
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
 
     // riferimento alla search bar
     private MaterialSearchView mSearchView;
 
     // riferimento alla mappa
     private GoogleMap mGoogleMap;
+
+    // classe per la gestione della geolocalizzazione
+    private HelperGeolocalizzazione mHelpLocalization;
+
+
 
     // lista dei marker nella mappa
     private List<Marker> mListMarker = new ArrayList<>();
@@ -54,6 +72,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        mHelpLocalization = new HelperGeolocalizzazione(this);
+
         // inizializza il fab. Un click nel fab determina la posizione dell'utente, sposta la mappa
         // su tale posizione, inizializza la mappa e mostra i risultati della ricerca.
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -62,8 +83,9 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 // todo ottieni la posizione
 
-                AsyncDownloadParcheggi asyncDownload = new AsyncDownloadParcheggi(MainActivity.this, 43.724283, 12.635698);
-                asyncDownload.execute();
+                mHelpLocalization.avviaRicercaPosizione();
+
+
             }
         });
 
@@ -107,7 +129,20 @@ public class MainActivity extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED) {
+            mHelpLocalization.avviaRicercaPosizione();
+        }
+    }
+
+
 
 
     /**
@@ -233,4 +268,5 @@ public class MainActivity extends AppCompatActivity
         // crea fragment parcheggi
         ParcheggiFragment.newInstance(this);
     }
+
 }
