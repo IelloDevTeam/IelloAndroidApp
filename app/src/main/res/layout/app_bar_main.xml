@@ -9,15 +9,36 @@
 
     <include layout="@layout/content_main"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:fabSize="normal"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_my_location_white_24px" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            app:fabSize="normal"
+            android:layout_above="@+id/fragment_parcheggi_container"
+            app:backgroundTint="@color/colorPrimary"
+            app:srcCompat="@drawable/ic_my_location_white_24px" />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_parcheggi_container"
+            android:layout_gravity="bottom"
+            android:layout_alignParentBottom="true">
+            <!--<include layout="@layout/fragment_parcheggi"/>-->
+        </FrameLayout>
+    </RelativeLayout>
+
+
 
 
     <android.support.design.widget.AppBarLayout

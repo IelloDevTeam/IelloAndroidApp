@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.dataLogic;
+package com.projectiello.teampiattaforme.iello.utilities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +15,9 @@ public class HelperPreferences {
 
     // opzione primoAvvio
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
+
+    // opzione range di ricerca
+    private static final String RANGE = "Range";
 
 
     // costruttore
@@ -33,4 +36,14 @@ public class HelperPreferences {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
+
+    public void setRange(int rangeInMetri){
+        editor.putInt(RANGE, rangeInMetri);
+        editor.commit();
+    }
+
+
+    public int getRange() {
+        return pref.getInt(RANGE, 100);
+    }
 }

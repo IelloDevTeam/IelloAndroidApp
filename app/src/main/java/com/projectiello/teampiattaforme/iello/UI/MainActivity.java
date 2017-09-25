@@ -3,7 +3,6 @@ package com.projectiello.teampiattaforme.iello.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,9 +18,16 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.apiConnection.AsyncDownloadParcheggi;
+import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
+import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -33,6 +39,12 @@ public class MainActivity extends AppCompatActivity
 
     // riferimento alla search bar
     private MaterialSearchView mSearchView;
+
+    // riferimento alla mappa
+    private GoogleMap mGoogleMap;
+
+    // lista dei marker nella mappa
+    private List<Marker> mListMarker = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +60,10 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                // todo ottieni la posizione
+
+                AsyncDownloadParcheggi asyncDownload = new AsyncDownloadParcheggi(MainActivity.this, 43.724283, 12.635698);
+                asyncDownload.execute();
             }
         });
 
@@ -69,16 +83,13 @@ public class MainActivity extends AppCompatActivity
         mSearchView.setVoiceSearch(true);
         //mArraySquadre = ElencoPartite.getInstance().getArrayPartite();
         //mSearchView.setSuggestions(mArraySquadre);
-        /*mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                PartitaWeb partita = ElencoPartite.getInstance().partitaDaString(query);
+                // todo trova con google le coordinate dell'indirizzo
 
-                if (partita != null) {
-                    StatsActivity.newInstanceMain(partita, MainActivity.this);
-                } else {
-                    Toast.makeText(MainActivity.this, R.string.non_riconosciuta, Toast.LENGTH_LONG).show();
-                }
+                AsyncDownloadParcheggi adp = new AsyncDownloadParcheggi(MainActivity.this, 43.724283, 12.635698);
+                adp.execute();
 
                 return false;
             }
@@ -88,7 +99,7 @@ public class MainActivity extends AppCompatActivity
                 // Do some magic
                 return false;
             }
-        });*/
+        });
 
 
         // Get the SupportMapFragment and request notification
@@ -110,11 +121,13 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Add a marker in Sydney, Australia,
-        // and move the map's camera to the same location.
+
+        mGoogleMap = googleMap;
+
         LatLng urbino = new LatLng(43.724283, 12.635698);
-        googleMap.addMarker(new MarkerOptions().position(urbino)
-                .title("Marker in Sydney"));
+        Marker marker = googleMap.addMarker(new MarkerOptions().position(urbino).title("Marker in Sydney"));
+        mListMarker.add(marker);
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(urbino, 16.0f));
     }
 
@@ -190,5 +203,34 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void posizionaCamera(double lat, double lon) {
+        // riposiziona la camera
+        LatLng actualPosition = new LatLng(lat, lon);
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualPosition, 16.0f));
+    }
+
+
+    // metodo per concludere la ricerca dei parcheggi. Posiziona la mappa, la popola e inizializza
+    // il fragment parcheggi
+    public void popolaParcheggi() {
+
+        // rimuovi tutti i marker
+        for(Marker m : mListMarker) {
+            m.remove();
+        }
+        mListMarker.clear();
+
+        // aggiungi un marker per ogni posizione
+        for (Parcheggio p : ElencoParcheggi.getInstance().getListParcheggi()) {
+            LatLng posParcheggio = new LatLng(p.getLat(), p.getLong());
+            Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(posParcheggio).title(p.getIndirizzoUI()));
+            mListMarker.add(marker);
+        }
+
+        // crea fragment parcheggi
+        ParcheggiFragment.newInstance(this);
     }
 }

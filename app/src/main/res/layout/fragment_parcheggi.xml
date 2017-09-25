@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btnEspandi"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tutti_i_risultati"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
+        android:drawableRight="@drawable/ic_keyboard_arrow_up_black_24px"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_up_black_24px"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        android:contentDescription="@string/divider" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Il parcheggio più vicino"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="16dp"/>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:id="@+id/item_parcheggio"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgLocation"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_location_on_black_48px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/txtIndirizzo"
+            android:layout_toEndOf="@id/imgLocation"
+            android:layout_toRightOf="@id/imgLocation"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:text="Indirizzo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/imgLocation"
+            android:layout_toRightOf="@id/imgLocation"
+            android:layout_alignBottom="@id/imgLocation"
+            android:id="@+id/txtDistanza"
+            android:layout_height="wrap_content"
+            android:textSize="14dp"
+            android:text="105 m"/>
+
+        <ImageView
+            android:id="@+id/imgNavigation"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/ic_navigation_yellow_24px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="VAI"
+            android:textAlignment="center"
+            android:layout_toLeftOf="@id/imgNavigation"
+            android:layout_centerVertical="true"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGrey"
+            android:contentDescription="divider"
+
+            android:layout_below="@id/imgLocation"/>
+
+
+
+    </RelativeLayout>
+
+
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expRecParcheggi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ael_expanded="false"
+        app:ael_duration="500"
+        android:background="@color/clearBackground"
+        app:ael_interpolator="accelerate"
+        app:ael_orientation="vertical">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/recParcheggi"/>
+
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+</LinearLayout>

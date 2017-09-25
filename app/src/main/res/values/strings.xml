@@ -21,5 +21,8 @@
 
     <string name="slide_4_title">Titolo slide 4</string>
     <string name="slide_4_desc">Descrizione slide 4</string>
+    <string name="divider">Divider</string>
+    <string name="tutti_i_risultati">Tutti i risultati</string>
+    <string name="nascondi_risultati">Nascondi risultati</string>
 
 </resources>
