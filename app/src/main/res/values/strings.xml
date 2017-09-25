@@ -8,4 +8,5 @@
     <string name="segnala_posteggio">Segnala posteggio</string>
     <string name="impostazioni">Impostazioni</string>
     <string name="cerca_ind">Inserisci un indirizzo&#8230;</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
