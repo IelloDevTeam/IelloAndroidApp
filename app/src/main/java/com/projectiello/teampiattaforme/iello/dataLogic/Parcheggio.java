@@ -56,7 +56,8 @@ public class Parcheggio {
 
     }
 
-    public int getDistanza() {
+
+    int getDistanza() {
         return mDistanza;
     }
 

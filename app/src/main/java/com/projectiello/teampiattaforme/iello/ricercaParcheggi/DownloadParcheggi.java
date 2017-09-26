@@ -41,7 +41,7 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
     /**
      * Costruttore con popolamento degli attributi
      */
-    public DownloadParcheggi(MainActivity activity, LatLng coordinateRicerca) {
+    DownloadParcheggi(MainActivity activity, LatLng coordinateRicerca) {
         mActivity = activity;
         mCoordRicerca = coordinateRicerca;
         mRange = HelperPreferences.getRange(activity);
@@ -89,12 +89,12 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
         switch(result) {
             case RICERCA_COMPLETATA:
                 ParcheggiFragment.newInstance(mActivity);
-                MappaPrincipale.getInstance().settaMarkers();
+                MappaPrincipale.getInstance().settaMarkers(mActivity);
                 break;
 
             case COMPLETATA_NO_RIS:
                 ParcheggiFragment.clearFragment(mActivity);
-                MappaPrincipale.getInstance().settaMarkers();
+                MappaPrincipale.getInstance().settaMarkers(mActivity);
                 Toast.makeText(mActivity, R.string.no_parcheggi, Toast.LENGTH_SHORT).show();
                 break;
 

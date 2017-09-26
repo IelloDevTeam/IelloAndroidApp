@@ -1,15 +1,17 @@
 package com.projectiello.teampiattaforme.iello.utilities;
 
+import android.content.Context;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.projectiello.teampiattaforme.iello.UI.MainActivity;
+import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
-import com.projectiello.teampiattaforme.iello.ricercaParcheggi.DownloadParcheggi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,8 @@ public class MappaPrincipale {
     // lista dei marker nella mappa
     private List<Marker> mListMarker = new ArrayList<>();
 
-    public LatLng mCoordIniziali = new LatLng(43.724283, 12.635698);
+    // coordinate iniziale impostate su urbino
+    private LatLng mCoordIniziali = new LatLng(43.724283, 12.635698);
 
 
     public void inizializzaMappa(GoogleMap gmap) {
@@ -56,7 +59,7 @@ public class MappaPrincipale {
     /**
      * Imposta un marker per ogni parcheggio, e se disponibile per la posizione attuale
      */
-    public void settaMarkers() {
+    public void settaMarkers(Context c) {
         // rimuovi tutti i marker
         for(Marker m : mListMarker) {
             m.remove();
@@ -66,13 +69,19 @@ public class MappaPrincipale {
         // aggiungi un marker per ogni posizione
         for (Parcheggio p : ElencoParcheggi.getInstance().getListParcheggi()) {
             LatLng posParcheggio = p.getCoordinate();
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(posParcheggio).title(p.getIndirizzoUI()));
+            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                    .position(posParcheggio)
+                    .title(p.getIndirizzoUI())
+                    .icon(BitmapDescriptorFactory.defaultMarker(45)));
             mListMarker.add(marker);
         }
 
 
         if(ElencoParcheggi.getInstance().getCoordAttuali() != mCoordIniziali) {
-            // todo imposta un marker per la posizione attuale
+            Marker marker = mGoogleMap.addMarker(new MarkerOptions()
+                    .position(ElencoParcheggi.getInstance().getCoordAttuali())
+                    .title(c.getString(R.string.tua_posizione)));
+            mListMarker.add(marker);
         }
     }
 }

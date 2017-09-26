@@ -145,12 +145,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
+/*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == MaterialSearchView.REQUEST_VOICE && resultCode == RESULT_OK) {
             // gestione ricerca vocale
-            /*
+
             ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             if (matches != null && matches.size() > 0) {
                 String searchWrd = matches.get(0);
@@ -159,11 +159,11 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             return;
-            */
+
         }
 
         super.onActivityResult(requestCode, resultCode, data);
-    }
+    }*/
 
 
     @Override

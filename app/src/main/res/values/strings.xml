@@ -26,5 +26,8 @@
     <string name="nascondi_risultati">Nascondi risultati</string>
     <string name="no_parcheggi">Non ci sono parcheggi nelle vicinanze.</string>
     <string name="no_connection">Connessione internet non disponibile.</string>
+    <string name="attiva_gps">Attiva il GPS per poter utilizzare questa funzione</string>
+    <string name="autorizza_permesso">Autorizza il permesso per poter indivudare la tua posizione</string>
+    <string name="tua_posizione">La tua posizione</string>
 
 </resources>

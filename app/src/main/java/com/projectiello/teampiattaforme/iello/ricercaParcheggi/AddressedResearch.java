@@ -2,7 +2,6 @@ package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;

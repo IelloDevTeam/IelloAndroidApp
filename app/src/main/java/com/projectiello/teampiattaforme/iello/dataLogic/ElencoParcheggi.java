@@ -73,7 +73,7 @@ public class ElencoParcheggi {
     /**
      * Calcola la distanza in metri di un parcheggio dall'origine
      */
-    public int calcolaDistanzaDaOrigine(LatLng coordParcheggio) {
+    int calcolaDistanzaDaOrigine(LatLng coordParcheggio) {
 
         double lat1 = mCoordAttuali.latitude;
         double lon1 = mCoordAttuali.longitude;
@@ -104,6 +104,9 @@ public class ElencoParcheggi {
     }
 
 
+    /**
+     * Ordina i parcheggi in ordine crescente a seconda della distanza dall'origine
+     */
     public void ordinaParcheggiPerDistanza() {
         Collections.sort(mListParcheggi, new Comparator<Parcheggio>() {
             @Override

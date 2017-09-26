@@ -10,6 +10,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.UI.MainActivity;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 
@@ -70,14 +71,14 @@ public class GeolocalizedResearch {
                                         = new LatLng(location.getLatitude(), location.getLongitude());
 
                                 ElencoParcheggi.getInstance().setCoordAttuali(coordRicerca);
-                                mMainActivity.setTitle("La tua posizione");
+                                mMainActivity.setTitle(mMainActivity.getString(R.string.tua_posizione));
 
                                 DownloadParcheggi asyncDownload
                                         = new DownloadParcheggi(mMainActivity, coordRicerca);
                                 asyncDownload.execute();
 
                             } else {
-                                Toast.makeText(mMainActivity, "Attiva il GPS per poter utilizzare questa funzione",
+                                Toast.makeText(mMainActivity, R.string.attiva_gps,
                                         Toast.LENGTH_LONG).show();
                             }
                         }
@@ -86,7 +87,7 @@ public class GeolocalizedResearch {
         } else {
 
             // se non si dispone del permesso, richiedi il permesso all'utente
-            Toast.makeText(mMainActivity, "Autorizza il permesso per poter indivudare la tua posizione", Toast.LENGTH_LONG).show();
+            Toast.makeText(mMainActivity, R.string.autorizza_permesso, Toast.LENGTH_LONG).show();
             Log.v(TAG,"Permission is revoked");
             ActivityCompat.requestPermissions(mMainActivity, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
