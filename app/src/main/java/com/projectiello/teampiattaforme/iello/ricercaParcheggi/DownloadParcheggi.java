@@ -70,6 +70,8 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
             if(ElencoParcheggi.getInstance().getListParcheggi().size() == 0)
                 return COMPLETATA_NO_RIS;
 
+            ElencoParcheggi.getInstance().ordinaParcheggiPerDistanza();
+
             return RICERCA_COMPLETATA;
 
 

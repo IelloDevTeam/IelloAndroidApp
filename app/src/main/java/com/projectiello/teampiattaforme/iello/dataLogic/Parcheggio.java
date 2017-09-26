@@ -56,6 +56,9 @@ public class Parcheggio {
 
     }
 
+    public int getDistanza() {
+        return mDistanza;
+    }
 
     public LatLng getCoordinate() {
         return mCoordinate;

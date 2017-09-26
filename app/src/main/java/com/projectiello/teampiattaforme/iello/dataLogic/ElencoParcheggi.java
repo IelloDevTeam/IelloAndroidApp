@@ -3,6 +3,8 @@ package com.projectiello.teampiattaforme.iello.dataLogic;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -99,5 +101,23 @@ public class ElencoParcheggi {
 
     private double rad2deg(double rad) {
         return (rad * 180.0 / Math.PI);
+    }
+
+
+    public void ordinaParcheggiPerDistanza() {
+        Collections.sort(mListParcheggi, new Comparator<Parcheggio>() {
+            @Override
+            public int compare(Parcheggio o1, Parcheggio o2) {
+                if (o1.getDistanza() > o2.getDistanza()) {
+                    return 1;
+                }
+                else if (o1.getDistanza() < o2.getDistanza()) {
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
     }
 }
