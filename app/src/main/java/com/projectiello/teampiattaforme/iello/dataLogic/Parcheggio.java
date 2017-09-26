@@ -1,9 +1,17 @@
 package com.projectiello.teampiattaforme.iello.dataLogic;
 
+import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by riccardomaldini on 25/09/17.
@@ -27,15 +35,25 @@ public class Parcheggio {
      * download dei parcheggi tramite IelloApi.
      * @throws JSONException dovuta alla conversione dell'oggetto JSON in dati del parcheggio
      */
-    public Parcheggio(JSONObject jParcheggio) throws JSONException {
+    public Parcheggio(JSONObject jParcheggio, Context c) throws JSONException {
         double lat = jParcheggio.getDouble("latitudine");
         double lng = jParcheggio.getDouble("longitudine");
 
         mCoordinate = new LatLng(lat, lng);
 
-        // todo imposta indirizzo tramite reverse geocoding, distanza tramite conversione
-        mDistanza = 100;
-        mIndirizzo = "Via del Tutto Eccezionale";
+        // todo imposta indirizzo tramite reverse geocoding
+        mDistanza = ElencoParcheggi.getInstance().calcolaDistanzaDaOrigine(mCoordinate);
+
+        Geocoder geocoder = new Geocoder(c, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            mIndirizzo = addresses.get(0).getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
+            mIndirizzo = "Via del Tutto Eccezionale";
+        }
+
+
     }
 
 

@@ -115,8 +115,8 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
         // creazione URL
         String url = "http://cloudpi.webhop.me:4000/parking" +
                      "?lat="    + mCoordRicerca.latitude +
-                     "&lon= "   + mCoordRicerca.longitude /*+
-                     "&radius=" + mRange*/; // todo per i test non utilizziamo il range
+                     "&lon= "   + mCoordRicerca.longitude +
+                     "&radius=" + mRange;
 
         // interrogazione dell'Api
         JSONObject response = HelperRete.volleySyncRequest(mActivity, url);
@@ -134,7 +134,7 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
                 ElencoParcheggi.getInstance().getListParcheggi().clear();
 
                 for(int i = 0; i < jArrayParcheggi.length(); i++) {
-                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i));
+                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i), mActivity);
                     ElencoParcheggi.getInstance().getListParcheggi().add(newPark);
                 }
             }
