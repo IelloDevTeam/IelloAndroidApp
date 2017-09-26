@@ -24,5 +24,7 @@
     <string name="divider">Divider</string>
     <string name="tutti_i_risultati">Tutti i risultati</string>
     <string name="nascondi_risultati">Nascondi risultati</string>
+    <string name="no_parcheggi">Non ci sono parcheggi nelle vicinanze.</string>
+    <string name="no_connection">Connessione internet non disponibile.</string>
 
 </resources>

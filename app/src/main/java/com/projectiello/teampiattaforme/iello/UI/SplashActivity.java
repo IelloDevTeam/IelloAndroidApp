@@ -21,12 +21,11 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // procedi in modo diverso a seconda della tipologia dell'accesso
-        HelperPreferences helperPref = new HelperPreferences(this);
-        boolean isFirstLaunch = helperPref.isFirstTimeLaunch();
+        boolean isFirstLaunch = HelperPreferences.isFirstTimeLaunch(this);
 
         if (isFirstLaunch) {
             // primo accesso assoluto: vai a introScreen
-            helperPref.setFirstTimeLaunch(false);
+            HelperPreferences.setFirstTimeLaunch(this, false);
             // intro
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);

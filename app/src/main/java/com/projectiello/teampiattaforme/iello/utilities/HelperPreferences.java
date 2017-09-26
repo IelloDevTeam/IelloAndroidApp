@@ -6,12 +6,10 @@ import android.preference.PreferenceManager;
 
 /**
  * Created by riccardomaldini on 25/09/17.
- * Classe per la gestione facilitata delle sharedPreferences.
+ * Classe per la gestione semplificata delle sharedPreferences.
  */
 
 public class HelperPreferences {
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
 
     // opzione primoAvvio
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
@@ -20,30 +18,29 @@ public class HelperPreferences {
     private static final String RANGE = "Range";
 
 
-    // costruttore
-    public HelperPreferences(Context context) {
-        pref = PreferenceManager.getDefaultSharedPreferences(context);
-        editor = pref.edit();
-    }
-
-
-    public void setFirstTimeLaunch(boolean isFirstTime) {
+    public static void setFirstTimeLaunch(Context c, boolean isFirstTime) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
-        editor.commit();
+        editor.apply();
     }
 
-    public boolean isFirstTimeLaunch() {
+    public static boolean isFirstTimeLaunch(Context c) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
 
-    public void setRange(int rangeInMetri){
+    public static void setRange(Context c, int rangeInMetri){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = pref.edit();
         editor.putInt(RANGE, rangeInMetri);
-        editor.commit();
+        editor.apply();
     }
 
 
-    public int getRange() {
-        return pref.getInt(RANGE, 100);
+    public static int getRange(Context c) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        return pref.getInt(RANGE, 1000);
     }
 }

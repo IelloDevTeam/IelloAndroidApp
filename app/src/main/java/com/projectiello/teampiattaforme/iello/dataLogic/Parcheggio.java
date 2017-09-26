@@ -1,15 +1,9 @@
 package com.projectiello.teampiattaforme.iello.dataLogic;
 
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.util.Log;
+import com.google.android.gms.maps.model.LatLng;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by riccardomaldini on 25/09/17.
@@ -17,46 +11,43 @@ import java.util.Locale;
  */
 
 public class Parcheggio {
+
+    // indirizzo del parcheggio, calcolato tramite reverse geocoding
     private  String mIndirizzo;
+
+    // distanza del parcheggio dalla posizione dell'utente, o dalla posizione scelta
     private int mDistanza;
-    private double mLat, mLong;
 
-    public Parcheggio() {
+    // cordinate del parcheggio
+    private LatLng mCoordinate;
 
+
+    /**
+     * Costruttore per l'assegnamento del parcheggio da un oggetto JSON, utilizzato durante il
+     * download dei parcheggi tramite IelloApi.
+     * @throws JSONException dovuta alla conversione dell'oggetto JSON in dati del parcheggio
+     */
+    public Parcheggio(JSONObject jParcheggio) throws JSONException {
+        double lat = jParcheggio.getDouble("latitudine");
+        double lng = jParcheggio.getDouble("longitudine");
+
+        mCoordinate = new LatLng(lat, lng);
+
+        // todo imposta indirizzo tramite reverse geocoding, distanza tramite conversione
+        mDistanza = 100;
+        mIndirizzo = "Via del Tutto Eccezionale";
     }
 
-    public void setIndirizzo(String s) {
-        mIndirizzo = s;
-    }
 
-
-    public void setDistanza(int mDistanza) {
-        this.mDistanza = mDistanza;
-    }
-
-    public void setLat(double mLat) {
-        this.mLat = mLat;
-    }
-
-    public void setLong(double mLong) {
-        this.mLong = mLong;
+    public LatLng getCoordinate() {
+        return mCoordinate;
     }
 
     public String getDistanzaUI() {
-        return mDistanza + "m";
+        return mDistanza + " m";
     }
 
     public String getIndirizzoUI() {
         return mIndirizzo;
     }
-
-
-    public double getLat() {
-        return mLat;
-    }
-
-    public double getLong() {
-        return mLong;
-    }
-
 }

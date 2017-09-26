@@ -1,9 +1,10 @@
 package com.projectiello.teampiattaforme.iello.UI;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -16,7 +17,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.github.aakira.expandablelayout.ExpandableLinearLayout;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.RecyclerItemClickListener;
@@ -33,23 +33,35 @@ import java.util.List;
 
 public class ParcheggiFragment extends Fragment {
 
-
-    // dati del primo parcheggio
-    private TextView mTxtIndirizzoPP;
-    private RelativeLayout mLayoutPP;
-    private TextView mTxtDistanzaPP;
-
     // componenti del fragment
-    private RecyclerView mRecParcheggi;
     private Button mBtnEspandi;
     private ExpandableRelativeLayout mExpLayParcheggi;
 
-    public static void newInstance(Activity activity) {
-        Fragment fragmentStats = new ParcheggiFragment();
+
+    /**
+     * Metodo statico per instanziare più facilmente il fragment quando necessario
+     */
+    public static void newInstance(MainActivity activity) {
+        ParcheggiFragment newFragment = new ParcheggiFragment();
         FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_parcheggi_container, fragmentStats);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.fragment_parcheggi_container, newFragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
+        activity.setFragmentAttivo(newFragment);
+    }
+
+
+    /**
+     * Metodo statico per eliminare il fragment, quando non sono disponibili parcheggi
+     */
+    public static void clearFragment(MainActivity activity) {
+        if(activity.getFragmentAttivo() != null) {
+            ParcheggiFragment fragAttivo = activity.getFragmentAttivo();
+            FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
+            ft.remove(fragAttivo);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+            ft.commit();
+        }
     }
 
 
@@ -58,6 +70,7 @@ public class ParcheggiFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,42 +78,53 @@ public class ParcheggiFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_parcheggi, container, false);
 
-        // assegna i componenti del fragment
-        mTxtIndirizzoPP = (TextView) view.findViewById(R.id.txtIndirizzo);
-        mTxtDistanzaPP = (TextView) view.findViewById(R.id.txtDistanza);
-        mLayoutPP = (RelativeLayout) view.findViewById(R.id.item_parcheggio);
+        /* assegna i componenti del fragment */
+        TextView mTxtIndirizzoPP = view.findViewById(R.id.txtIndirizzo);
+        TextView mTxtDistanzaPP = view.findViewById(R.id.txtDistanza);
+        RelativeLayout mLayoutPP = view.findViewById(R.id.item_parcheggio);
 
-        mBtnEspandi = (Button) view.findViewById(R.id.btnEspandi);
-        mExpLayParcheggi = (ExpandableRelativeLayout) view.findViewById(R.id.expRecParcheggi);
-        mRecParcheggi = (RecyclerView) view.findViewById(R.id.recParcheggi);
+        mBtnEspandi = view.findViewById(R.id.btnEspandi);
+        mExpLayParcheggi = view.findViewById(R.id.expRecParcheggi);
+        final RecyclerView mRecParcheggi = view.findViewById(R.id.recParcheggi);
 
+
+        /* inizializza i componenti del fragment */
 
         // inizializza il primo elemento
         Parcheggio piuVicino = ElencoParcheggi.getInstance().getParkPiuVicino();
         mTxtIndirizzoPP.setText(piuVicino.getIndirizzoUI());
         mTxtDistanzaPP.setText(piuVicino.getDistanzaUI());
-
         mLayoutPP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // todo naviga alla posizione
+                // naviga alla posizione
+                double lat = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().latitude;
+                double lng = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().longitude;
+
+                String uri = "http://maps.google.com/maps?daddr="+ lat +"," + lng;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
             }
         });
 
-
         // inizializza il RecyclerView
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        ParcheggiAdapter pAdapter = new ParcheggiAdapter();
+        final ParcheggiAdapter pAdapter = new ParcheggiAdapter();
         mRecParcheggi.setLayoutManager(mLayoutManager);
         mRecParcheggi.setItemAnimator(new DefaultItemAnimator());
         mRecParcheggi.setAdapter(pAdapter);
-
-        // listener per gestire click e long click sugli elementi della lista
         mRecParcheggi.addOnItemTouchListener(new RecyclerItemClickListener(getActivity(),
                 mRecParcheggi, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // todo naviga verso la posizione selezionata
+                double lat = pAdapter.getListParcheggi().get(position).getCoordinate().latitude;
+                double lng = pAdapter.getListParcheggi().get(position).getCoordinate().longitude;
+
+                String uri = "http://maps.google.com/maps?daddr="+ lat +"," + lng;
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                startActivity(intent);
             }
 
             @Override
@@ -108,10 +132,8 @@ public class ParcheggiFragment extends Fragment {
             }
         }));
 
-
-        // chiude le stats estese all'avvio (a causa di un bug dell'API)
+        // chiude le stats estese all'avvio (a causa di un bug dell'expandable API)
         mExpLayParcheggi.collapse();
-
 
         // inizializza il button di espansione
         mBtnEspandi.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +141,13 @@ public class ParcheggiFragment extends Fragment {
             public void onClick(View view) {
                 if (mExpLayParcheggi.isExpanded()) {
                     mBtnEspandi.setText(getString(R.string.tutti_i_risultati));
-                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(), R.drawable.ic_keyboard_arrow_up_black_24px, null);
+                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(),
+                                   R.drawable.ic_keyboard_arrow_up_black_24px, null);
                     mBtnEspandi.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
                 } else {
                     mBtnEspandi.setText(R.string.nascondi_risultati);
-                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(), R.drawable.ic_keyboard_arrow_down_black_24px, null);
+                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(),
+                                   R.drawable.ic_keyboard_arrow_down_black_24px, null);
                     mBtnEspandi.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
                 }
                 mExpLayParcheggi.toggle();
@@ -132,6 +156,7 @@ public class ParcheggiFragment extends Fragment {
 
         return view;
     }
+
 
 
     /** inner class dentro la quale viene definito un custom adapter per la recyclerView */
@@ -151,8 +176,8 @@ public class ParcheggiFragment extends Fragment {
 
             MyViewHolder(View view) {
                 super(view);
-                txtIndirizzo = (TextView) view.findViewById(R.id.txtIndirizzo);
-                txtDistanza = (TextView) view.findViewById(R.id.txtDistanza);
+                txtIndirizzo = view.findViewById(R.id.txtIndirizzo);
+                txtDistanza = view.findViewById(R.id.txtDistanza);
             }
         }
 
@@ -177,6 +202,10 @@ public class ParcheggiFragment extends Fragment {
             holder.txtDistanza.setText(parcheggio.getDistanzaUI());
         }
 
+
+        List<Parcheggio> getListParcheggi() {
+            return mParcheggiRecycler;
+        }
 
         @Override
         public int getItemCount() {

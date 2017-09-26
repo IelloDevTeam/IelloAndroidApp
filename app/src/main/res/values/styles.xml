@@ -31,7 +31,7 @@
         <item name="searchBackground">@color/white</item>
 
         <!-- Change voice icon -->
-        <!--<item name="searchVoiceIcon">@drawable/ic_action_voice_search_inverted</item>-->
+        <item name="searchVoiceIcon">@drawable/ic_action_voice_search</item>
 
         <!-- Change clear text icon -->
         <!--<item name="searchCloseIcon">@drawable/ic_action_navigation_close_inverted</item>-->

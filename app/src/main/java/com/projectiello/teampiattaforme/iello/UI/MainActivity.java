@@ -4,11 +4,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,30 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.FrameLayout;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
-import com.projectiello.teampiattaforme.iello.Manifest;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.apiConnection.AsyncDownloadParcheggi;
-import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
-import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
-import com.projectiello.teampiattaforme.iello.utilities.AsyncTrovaParcheggiByIndirizzo;
-import com.projectiello.teampiattaforme.iello.utilities.HelperGeolocalizzazione;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
+import com.projectiello.teampiattaforme.iello.ricercaParcheggi.AddressedResearch;
+import com.projectiello.teampiattaforme.iello.ricercaParcheggi.GeolocalizedResearch;
+import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
 
 
 /**
@@ -54,16 +37,16 @@ public class MainActivity extends AppCompatActivity
     // riferimento alla search bar
     private MaterialSearchView mSearchView;
 
-    // riferimento alla mappa
-    private GoogleMap mGoogleMap;
+    // classe per la gestione della geolocalizzazione e della ricerca geolocalizzata
+    private GeolocalizedResearch mHelpLocalization;
 
-    // classe per la gestione della geolocalizzazione
-    private HelperGeolocalizzazione mHelpLocalization;
+    // riferimento al fragment parcheggi
+    private ParcheggiFragment mFragmentAttivo;
+
+    // riferimento alla progressbar
+    private FrameLayout mProgBar;
 
 
-
-    // lista dei marker nella mappa
-    private List<Marker> mListMarker = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +57,9 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        mHelpLocalization = new HelperGeolocalizzazione(this);
+        mHelpLocalization = new GeolocalizedResearch(this);
+
+        mProgBar = (FrameLayout) findViewById(R.id.clippedProgressBar);
 
         // inizializza il fab. Un click nel fab determina la posizione dell'utente, sposta la mappa
         // su tale posizione, inizializza la mappa e mostra i risultati della ricerca.
@@ -109,8 +94,8 @@ public class MainActivity extends AppCompatActivity
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-               AsyncTrovaParcheggiByIndirizzo adpi
-                        = new AsyncTrovaParcheggiByIndirizzo(MainActivity.this, query);
+               AddressedResearch adpi
+                        = new AddressedResearch(MainActivity.this, query);
                 adpi.execute();
 
                 return false;
@@ -156,14 +141,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-        mGoogleMap = googleMap;
-
-        LatLng urbino = new LatLng(43.724283, 12.635698);
-        //Marker marker = googleMap.addMarker(new MarkerOptions().position(urbino).title("Marker in Sydney"));
-        //mListMarker.add(marker);
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(urbino, 15.0f));
+        MappaPrincipale.getInstance().inizializzaMappa(googleMap);
     }
 
 
@@ -187,6 +165,7 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -196,6 +175,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -208,24 +188,10 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -241,32 +207,22 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public void posizionaCamera(double lat, double lon) {
-        // riposiziona la camera
-        LatLng actualPosition = new LatLng(lat, lon);
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(actualPosition, 16.0f));
+    public ParcheggiFragment getFragmentAttivo() {
+        return mFragmentAttivo;
     }
 
 
-    // metodo per concludere la ricerca dei parcheggi. Posiziona la mappa, la popola e inizializza
-    // il fragment parcheggi
-    public void popolaParcheggi() {
-
-        // rimuovi tutti i marker
-        for(Marker m : mListMarker) {
-            m.remove();
-        }
-        mListMarker.clear();
-
-        // aggiungi un marker per ogni posizione
-        for (Parcheggio p : ElencoParcheggi.getInstance().getListParcheggi()) {
-            LatLng posParcheggio = new LatLng(p.getLat(), p.getLong());
-            Marker marker = mGoogleMap.addMarker(new MarkerOptions().position(posParcheggio).title(p.getIndirizzoUI()));
-            mListMarker.add(marker);
-        }
-
-        // crea fragment parcheggi
-        ParcheggiFragment.newInstance(this);
+    public void setFragmentAttivo(ParcheggiFragment mFragmentAttivo) {
+        this.mFragmentAttivo = mFragmentAttivo;
     }
 
+
+    public void showProgressBar() {
+        mProgBar.setVisibility(View.VISIBLE);
+    }
+
+
+    public void hideProgressBar() {
+        mProgBar.setVisibility(View.GONE);
+    }
 }
