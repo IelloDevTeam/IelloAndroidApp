@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                         break;
                     }
                     case R.id.nav_personalizza: {
+                        DialogStileMappa.newInstance(MainActivity.this);
                         break;
                     }
                     case R.id.nav_project: {

@@ -83,7 +83,6 @@ public class AddressedResearch extends AsyncTask<String, Void, JSONObject> {
                     .getJSONObject("geometry").getJSONObject("location")
                     .getDouble("lat");
 
-
             LatLng coordRicerca = new LatLng(lat, lng);
             ElencoParcheggi.getInstance().setCoordAttuali(coordRicerca);
 

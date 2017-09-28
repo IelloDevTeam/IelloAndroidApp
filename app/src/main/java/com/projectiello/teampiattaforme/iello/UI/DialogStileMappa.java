@@ -18,13 +18,14 @@ import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
+import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
 
 /**
  * Created by riccardomaldini on 28/09/17.
  * Dialog che permette di impostare il raggio della ricerca.
  */
 
-public class DialogRaggioRicerca extends DialogFragment {
+public class DialogStileMappa extends DialogFragment {
 
     private RadioGroup mGroup;
 
@@ -32,8 +33,8 @@ public class DialogRaggioRicerca extends DialogFragment {
      * metodo statico che permette di inizializzare e avviare il dialog facilmente
      */
     public static void newInstance(Activity a) {
-        DialogRaggioRicerca f = new DialogRaggioRicerca();
-        f.show(a.getFragmentManager(), "raggioRicerca");
+        DialogStileMappa f = new DialogStileMappa();
+        f.show(a.getFragmentManager(), "stileMappa");
     }
 
 
@@ -44,34 +45,30 @@ public class DialogRaggioRicerca extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater  = getActivity().getLayoutInflater();
         final ViewGroup nullParent = null;
-        View dialogView = inflater.inflate(R.layout.dialog_raggio_ricerca, nullParent);
+        View dialogView = inflater.inflate(R.layout.dialog_stile_mappa, nullParent);
 
         // inizializza l'interfaccia del dialog
-        builder.setIcon(R.drawable.ic_straighten_black_24px);
-        builder.setTitle(getString(R.string.raggio_ricerca));
+        builder.setIcon(R.drawable.ic_layers_black_24px);
+        builder.setTitle(getString(R.string.personalizza_mappa));
 
-        builder.setMessage("Seleziona il raggio entro il quale visualizzare i parcheggi " +
-                "nelle vicinanze.");
+        builder.setMessage("Seleziona i colori della mappa nella schermata principale.");
 
-        mGroup = dialogView.findViewById(R.id.rgpRaggi);
+        mGroup = dialogView.findViewById(R.id.rgpStili);
 
-        int raggioDiPartenza = HelperPreferences.getRange(getActivity());
+        int stileMappa = HelperPreferences.getStileMappa(getActivity());
 
-        switch (raggioDiPartenza) {
-            case 100:
-                mGroup.check(R.id.rdb100m);
+        switch (stileMappa) {
+            case R.raw.style_standard:
+                mGroup.check(R.id.rdb1);
                 break;
-            case 200:
-                mGroup.check(R.id.rdb200m);
+            case R.raw.style_silver:
+                mGroup.check(R.id.rdb2);
                 break;
-            case 500:
-                mGroup.check(R.id.rdb500m);
+            case R.raw.style_night:
+                mGroup.check(R.id.rdb3);
                 break;
-            case 1000:
-                mGroup.check(R.id.rdb1km);
-                break;
-            case 10000:
-                mGroup.check(R.id.rdb10km);
+            case R.raw.style_dark:
+                mGroup.check(R.id.rdb4);
                 break;
         }
 
@@ -114,23 +111,20 @@ public class DialogRaggioRicerca extends DialogFragment {
                 public void onClick(View v) {
                     // salva il nuovo risultato
                     switch(mGroup.getCheckedRadioButtonId()) {
-                        case R.id.rdb100m:
-                            HelperPreferences.setRange(getActivity(), 100);
+                        case R.id.rdb1:
+                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_standard);
                             break;
-                        case R.id.rdb200m:
-                            HelperPreferences.setRange(getActivity(), 200);
+                        case R.id.rdb2:
+                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_silver);
                             break;
-                        case R.id.rdb500m:
-                            HelperPreferences.setRange(getActivity(), 500);
+                        case R.id.rdb3:
+                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_night);
                             break;
-                        case R.id.rdb1km:
-                            HelperPreferences.setRange(getActivity(), 1000);
-                            break;
-                        case R.id.rdb10km:
-                            HelperPreferences.setRange(getActivity(), 10000);
+                        case R.id.rdb4:
+                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_dark);
                             break;
                     }
-
+                    MappaPrincipale.getInstance().aggiornaStile(getActivity());
                     dismiss();
 
                 } // end if

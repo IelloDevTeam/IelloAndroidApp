@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.projectiello.teampiattaforme.iello.R;
+
 /**
  * Created by riccardomaldini on 25/09/17.
  * Classe per la gestione semplificata delle sharedPreferences.
@@ -16,6 +18,7 @@ public class HelperPreferences {
 
     // opzione range di ricerca
     private static final String RANGE = "Range";
+    private static final String STILE_MAPPA = "StileMappa";
 
 
     public static void setFirstTimeLaunch(Context c, boolean isFirstTime) {
@@ -42,5 +45,19 @@ public class HelperPreferences {
     public static int getRange(Context c) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
         return pref.getInt(RANGE, 1000);
+    }
+
+
+    public static void setStileMappa(Context c, int resStile){
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(STILE_MAPPA, resStile);
+        editor.commit();
+    }
+
+
+    public static int getStileMappa(Context c) {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        return pref.getInt(STILE_MAPPA, R.raw.style_standard);
     }
 }

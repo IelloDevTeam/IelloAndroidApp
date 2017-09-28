@@ -1,9 +1,11 @@
 package com.projectiello.teampiattaforme.iello.utilities;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projectiello.teampiattaforme.iello.R;
@@ -24,6 +27,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by riccardomaldini on 26/09/17.
@@ -47,7 +52,7 @@ public class MappaPrincipale {
     private List<Marker> mListMarker = new ArrayList<>();
 
     // coordinate iniziale impostate su urbino
-    public static LatLng COORD_INIZIALI = new LatLng(43.724283, 12.635698);
+    public static LatLng COORD_INIZIALI = new LatLng(43.7262568, 12.6365634);
 
 
     /**
@@ -57,12 +62,30 @@ public class MappaPrincipale {
     public void inizializzaMappa(final AppCompatActivity activity) {
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
+        ((MainActivity) activity).showProgressBar();
+
         SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mGoogleMap = googleMap;
+
+                // imposta stile mappa
+                int stileMappa = HelperPreferences.getStileMappa(activity);
+                try {
+                    // Customise the styling of the base map using a JSON object defined
+                    // in a raw resource file.
+                    boolean success = mGoogleMap.setMapStyle(
+                            MapStyleOptions.loadRawResourceStyle(
+                                    activity, stileMappa));
+
+                    if (!success) {
+                        Log.e(TAG, "Style parsing failed.");
+                    }
+                } catch (Resources.NotFoundException e) {
+                    Log.e(TAG, "Can't find style. Error: ", e);
+                }
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(COORD_INIZIALI, 15.0f));
 
                 // avvia una ricerca preliminare cercando i posteggi nelle vicinanze di urbino
@@ -70,6 +93,27 @@ public class MappaPrincipale {
                 dp.execute();
             }
         });
+    }
+
+    /**
+     * Metodo invocato per modificare lo stile della mappa
+     */
+    public void aggiornaStile(Context c) {
+        // imposta stile mappa
+        int stileMappa = HelperPreferences.getStileMappa(c);
+        try {
+            // Customise the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = mGoogleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            c, stileMappa));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
     }
 
 
