@@ -1,11 +1,14 @@
 package com.projectiello.teampiattaforme.iello.UI;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -71,19 +74,25 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
                 switch(menuItem.getItemId()) {
                     case R.id.nav_segnalazione: {
-
+                        break;
                     }
                     case R.id.nav_raggio: {
-
+                        DialogRaggioRicerca.newInstance(MainActivity.this);
+                        break;
                     }
                     case R.id.nav_personalizza: {
-
+                        break;
                     }
                     case R.id.nav_project: {
-
+                        avviaDialogProject();
+                        break;
                     }
-                    case R.id.nav_version: {
-
+                    case R.id.nav_api: {
+                        String url = "http://www.github.com";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                        break;
                     }
                 }
 
@@ -130,6 +139,24 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         // inizializza la mappa mostrata nell'activity
         MappaPrincipale.getInstance().inizializzaMappa(this);
+
+    }
+
+
+    /**
+     * Metodo per creare il dialog project.
+     */
+    private void avviaDialogProject() {
+
+        AlertDialog.Builder alertProject = new AlertDialog.Builder(this);
+
+        alertProject.setIcon(R.drawable.ic_help_outline_black_24px);
+        alertProject.setTitle(R.string.project_iello);
+        alertProject.setMessage(R.string.project_iello_description);
+        alertProject.setPositiveButton(R.string.fantastico, null);
+
+        AlertDialog alert = alertProject.create();
+        alert.show();
 
     }
 

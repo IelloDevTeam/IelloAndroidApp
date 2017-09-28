@@ -24,9 +24,9 @@
                     android:icon="@drawable/ic_help_outline_black_24px"
                     android:title="@string/project_iello" />
                 <item
-                    android:id="@+id/nav_version"
-                    android:icon="@drawable/ic_adb_black_24px"
-                    android:title="@string/iello_version" />
+                    android:id="@+id/nav_api"
+                    android:icon="@drawable/ic_github_circle"
+                    android:title="@string/esplora_api" />
             </menu>
         </item>
 

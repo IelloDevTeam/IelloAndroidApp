@@ -9,6 +9,13 @@
     </style>
 
 
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
     <!-- Stili utilizzati da vari elementi di MainActivity -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -23,7 +30,7 @@
 
 
     <!-- Tema di IntroActivity -->
-    <style name="IntroTheme">
+    <style name="IntroTheme" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

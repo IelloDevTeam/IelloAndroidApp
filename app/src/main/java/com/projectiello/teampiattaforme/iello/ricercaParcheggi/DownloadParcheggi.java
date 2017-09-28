@@ -37,14 +37,19 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
     private LatLng mCoordRicerca;
     private int mRange;
 
+    private boolean mAtStart;
+
 
     /**
-     * Costruttore con popolamento degli attributi
+     * Costruttore con popolamento degli attributi. AtStart distingue se il download viene
+     * effettuato all'avvio dell'app; il tal caso bisogna eseguire in maniera particolare.
      */
-    DownloadParcheggi(MainActivity activity, LatLng coordinateRicerca) {
+    public DownloadParcheggi(MainActivity activity, LatLng coordinateRicerca, boolean atStart) {
         mActivity = activity;
         mCoordRicerca = coordinateRicerca;
         mRange = HelperPreferences.getRange(activity);
+
+        mAtStart = atStart;
     }
 
 
@@ -64,12 +69,15 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
 
-        if(HelperRete.isNetworkAvailable(mActivity))  {
+        if(HelperRete.isNetworkAvailable(mActivity)) {
+            // scarica i parcheggi tramite l'Api
             popolaElencoParcheggi();
 
+            // restituisce la corrispondente stringa risultato
             if(ElencoParcheggi.getInstance().getListParcheggi().size() == 0)
                 return COMPLETATA_NO_RIS;
 
+            // riordina la lista dei parcheggi in base alla distanza dall'origine
             ElencoParcheggi.getInstance().ordinaParcheggiPerDistanza();
 
             return RICERCA_COMPLETATA;
@@ -88,7 +96,8 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         switch(result) {
             case RICERCA_COMPLETATA:
-                ParcheggiFragment.newInstance(mActivity);
+                if(!mAtStart)
+                    ParcheggiFragment.newInstance(mActivity);
                 MappaPrincipale.getInstance().settaMarkers(mActivity);
                 break;
 
@@ -117,7 +126,7 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
         // creazione URL
         String url = "http://cloudpi.webhop.me:4000/parking" +
                      "?lat="    + mCoordRicerca.latitude +
-                     "&lon= "   + mCoordRicerca.longitude +
+                     "&lon="   + mCoordRicerca.longitude +
                      "&radius=" + mRange;
 
         // interrogazione dell'Api

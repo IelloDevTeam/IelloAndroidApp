@@ -1,10 +1,10 @@
 package com.projectiello.teampiattaforme.iello.utilities;
 
-import android.app.Activity;
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,11 +15,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.MainActivity;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
+import com.projectiello.teampiattaforme.iello.ricercaParcheggi.DownloadParcheggi;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by riccardomaldini on 26/09/17.
@@ -43,14 +47,14 @@ public class MappaPrincipale {
     private List<Marker> mListMarker = new ArrayList<>();
 
     // coordinate iniziale impostate su urbino
-    private LatLng mCoordIniziali = new LatLng(43.724283, 12.635698);
+    public static LatLng COORD_INIZIALI = new LatLng(43.724283, 12.635698);
 
 
     /**
      * Richiede a GooglePlayServices il download della mappa; quindi la pone nel fragment map, e
      * appena la mappa è disponibile la inizializza
      */
-    public void inizializzaMappa(AppCompatActivity activity) {
+    public void inizializzaMappa(final AppCompatActivity activity) {
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager()
@@ -59,7 +63,11 @@ public class MappaPrincipale {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mGoogleMap = googleMap;
-                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mCoordIniziali, 15.0f));
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(COORD_INIZIALI, 15.0f));
+
+                // avvia una ricerca preliminare cercando i posteggi nelle vicinanze di urbino
+                DownloadParcheggi dp = new DownloadParcheggi((MainActivity) activity, COORD_INIZIALI, true);
+                dp.execute();
             }
         });
     }
@@ -95,10 +103,23 @@ public class MappaPrincipale {
         }
 
 
-        if(ElencoParcheggi.getInstance().getCoordAttuali() != mCoordIniziali) {
+        // aggiungi un marker nella posizione dell'utente
+        if(ElencoParcheggi.getInstance().getCoordAttuali() != COORD_INIZIALI) {
+            LatLng crd = ElencoParcheggi.getInstance().getCoordAttuali();
+            String indirizzo = null;
+
+            Geocoder geocoder = new Geocoder(c, Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(crd.latitude, crd.longitude, 1);
+                indirizzo = c.getString(R.string.tua_posizione) + ", " + addresses.get(0).getAddressLine(0);
+            } catch (IOException e) {
+                e.printStackTrace();
+                indirizzo = c.getString(R.string.tua_posizione);
+            }
+
             Marker marker = mGoogleMap.addMarker(new MarkerOptions()
                     .position(ElencoParcheggi.getInstance().getCoordAttuali())
-                    .title(c.getString(R.string.tua_posizione)));
+                    .title(indirizzo));
             mListMarker.add(marker);
         }
     }

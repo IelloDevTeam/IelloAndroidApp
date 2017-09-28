@@ -1,6 +1,7 @@
 package com.projectiello.teampiattaforme.iello.dataLogic;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,7 @@ public class ElencoParcheggi {
     private List<Parcheggio> mListParcheggi = new ArrayList<>();
 
     // memorizza la posizione dalla quale è stata effettuata la ricerca
-    private LatLng mCoordAttuali;
+    private LatLng mCoordAttuali= MappaPrincipale.COORD_INIZIALI;
 
 
     /**

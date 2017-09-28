@@ -33,6 +33,8 @@
     <string name="personalizza_mappa">Personalizza mappa</string>
     <string name="info_app">Info sull\'app</string>
     <string name="project_iello">Cos\'è project Iello?</string>
-    <string name="iello_version">IelloApp, versione 1.0</string>
+    <string name="esplora_api">Esplora l\'API</string>
+    <string name="project_iello_description">Project Iello è un progetto portato avanti da dei ragazzi dell\'università di Urbino bla bla bla</string>
+    <string name="fantastico">Fantastico!</string>
 
 </resources>

@@ -47,7 +47,5 @@
             android:theme="@style/MainTheme">
         </activity>
 
-
     </application>
-
 </manifest>

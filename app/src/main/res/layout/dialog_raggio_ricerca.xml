@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rgpRaggi">
+
+
+        <RadioButton
+            android:id="@+id/rdb100m"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="100 metri" />
+
+        <RadioButton
+            android:id="@+id/rdb200m"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="200 metri" />
+
+        <RadioButton
+            android:id="@+id/rdb500m"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="500 metri" />
+
+        <RadioButton
+            android:id="@+id/rdb1km"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="1 chilometro" />
+
+        <RadioButton
+            android:id="@+id/rdb10km"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="10 chilometri" />
+    </RadioGroup>
+</FrameLayout>

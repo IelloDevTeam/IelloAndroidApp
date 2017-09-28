@@ -90,7 +90,7 @@ public class AddressedResearch extends AsyncTask<String, Void, JSONObject> {
             mQueryGrezza = mQueryGrezza.substring(0,1).toUpperCase() + mQueryGrezza.substring(1);
             mMainActivity.setTitle(mQueryGrezza);
 
-            DownloadParcheggi adp = new DownloadParcheggi(mMainActivity, coordRicerca);
+            DownloadParcheggi adp = new DownloadParcheggi(mMainActivity, coordRicerca, false);
             adp.execute();
 
         } catch (JSONException e) {
