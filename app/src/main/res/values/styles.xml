@@ -1,6 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Tema base dell'applicazione -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -9,23 +9,27 @@
     </style>
 
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-
+    <!-- Stili utilizzati da vari elementi di MainActivity -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
+    <!-- Tema di MainActivity -->
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <!-- splash screen -->
+
+    <!-- Tema di IntroActivity -->
+    <style name="IntroTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <!-- Tema di SplashActivity -->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -35,33 +39,13 @@
     </style>
 
 
-    <!-- stile searchbar-->
+    <!-- Stile della SearchBar -->
     <style name="MaterialSearchViewStyle">
-        <!-- Background for the search bar -->
         <item name="searchBackground">@color/white</item>
-
-        <!-- Change voice icon -->
         <item name="searchVoiceIcon">@drawable/ic_action_voice_search</item>
-
-        <!-- Change clear text icon -->
-        <!--<item name="searchCloseIcon">@drawable/ic_action_navigation_close_inverted</item>-->
-
-        <!-- Change up icon -->
-        <!--<item name="searchBackIcon">@drawable/ic_action_navigation_arrow_back_inverted</item>-->
-
-        <!-- Change icon for the suggestions -->
-        <!--<item name="searchSuggestionIcon">@drawable/ic_soccer_gray_24dp</item>-->
-
-        <!-- Change background for the suggestions list view -->
         <item name="searchSuggestionBackground">@color/white</item>
-
-        <!-- Change text color for edit text. This will also be the color of the cursor -->
         <item name="android:textColor">@color/black</item>
-
-        <!-- Change hint text color for edit text -->
         <item name="android:textColorHint">@color/lightGreyText</item>
-
-        <!-- Hint for edit text -->
         <item name="android:hint">@string/cerca_ind</item>
     </style>
 
