@@ -29,5 +29,10 @@
     <string name="attiva_gps">Attiva il GPS per poter utilizzare questa funzione</string>
     <string name="autorizza_permesso">Autorizza il permesso per poter indivudare la tua posizione</string>
     <string name="tua_posizione">La tua posizione</string>
+    <string name="raggio_ricerca">Raggio di ricerca</string>
+    <string name="personalizza_mappa">Personalizza mappa</string>
+    <string name="info_app">Info sull\'app</string>
+    <string name="project_iello">Cos\'è project Iello?</string>
+    <string name="iello_version">IelloApp, versione 1.0</string>
 
 </resources>

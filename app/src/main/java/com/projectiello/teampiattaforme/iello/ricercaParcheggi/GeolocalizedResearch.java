@@ -2,6 +2,7 @@ package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -92,8 +93,7 @@ public class GeolocalizedResearch {
             ActivityCompat.requestPermissions(mMainActivity, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
-            // una volta ottenuto il permesso viene riavviata la ricerca posizione (codice in main)
+            // una volta ottenuto il permesso viene riavviata la ricerca posizione (onRequestPermissionResult)
         }
-
     }
 }

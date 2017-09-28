@@ -1,10 +1,15 @@
 package com.projectiello.teampiattaforme.iello.utilities;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
 
+import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -41,9 +46,22 @@ public class MappaPrincipale {
     private LatLng mCoordIniziali = new LatLng(43.724283, 12.635698);
 
 
-    public void inizializzaMappa(GoogleMap gmap) {
-        mGoogleMap = gmap;
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mCoordIniziali, 15.0f));
+    /**
+     * Richiede a GooglePlayServices il download della mappa; quindi la pone nel fragment map, e
+     * appena la mappa è disponibile la inizializza
+     */
+    public void inizializzaMappa(AppCompatActivity activity) {
+        // Get the SupportMapFragment and request notification
+        // when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mGoogleMap = googleMap;
+                mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mCoordIniziali, 15.0f));
+            }
+        });
     }
 
 

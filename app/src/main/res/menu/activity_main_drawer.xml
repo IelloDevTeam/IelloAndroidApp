@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_segnalazione"
             android:icon="@drawable/ic_send_black_24px"
             android:title="@string/segnala_posteggio" />
         <item
-            android:id="@+id/nav_impostazioni"
-            android:icon="@drawable/ic_settings_black_24px"
-            android:title="@string/impostazioni" />
+            android:id="@+id/nav_raggio"
+            android:icon="@drawable/ic_straighten_black_24px"
+            android:title="@string/raggio_ricerca" />
+
+        <item
+            android:id="@+id/nav_personalizza"
+            android:icon="@drawable/ic_layers_black_24px"
+            android:title="@string/personalizza_mappa" />
+
+
+        <item android:title="@string/info_app">
+            <menu>
+                <item
+                    android:id="@+id/nav_project"
+                    android:icon="@drawable/ic_help_outline_black_24px"
+                    android:title="@string/project_iello" />
+                <item
+                    android:id="@+id/nav_version"
+                    android:icon="@drawable/ic_adb_black_24px"
+                    android:title="@string/iello_version" />
+            </menu>
+        </item>
+
     </group>
 
 </menu>
