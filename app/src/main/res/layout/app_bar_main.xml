@@ -9,7 +9,7 @@
 
 
 
-    <include layout="@layout/content_main"/>
+    <include layout="@layout/fragment_mappa"/>
 
 
     <RelativeLayout
@@ -26,7 +26,7 @@
             android:layout_margin="@dimen/fab_margin"
             app:fabSize="normal"
             android:layout_above="@+id/fragment_parcheggi_container"
-            app:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimaryDark"
             app:srcCompat="@drawable/ic_my_location_white_24px" />
 
 

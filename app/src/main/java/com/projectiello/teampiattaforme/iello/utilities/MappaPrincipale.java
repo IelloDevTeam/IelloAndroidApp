@@ -18,10 +18,8 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.MainActivity;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
-import com.projectiello.teampiattaforme.iello.ricercaParcheggi.DownloadParcheggi;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,7 +60,7 @@ public class MappaPrincipale {
     public void inizializzaMappa(final AppCompatActivity activity) {
         // Get the SupportMapFragment and request notification
         // when the map is ready to be used.
-        ((MainActivity) activity).showProgressBar();
+        //((MainActivity) activity).showProgressBar();
 
         SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -89,8 +87,8 @@ public class MappaPrincipale {
                 mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(COORD_INIZIALI, 15.0f));
 
                 // avvia una ricerca preliminare cercando i posteggi nelle vicinanze di urbino
-                DownloadParcheggi dp = new DownloadParcheggi((MainActivity) activity, COORD_INIZIALI, true);
-                dp.execute();
+                //AsyncDownloadParcheggi dp = new AsyncDownloadParcheggi((MainActivity) activity, COORD_INIZIALI, true);
+                //dp.execute();
             }
         });
     }

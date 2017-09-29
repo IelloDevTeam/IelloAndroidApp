@@ -40,8 +40,6 @@ public class Parcheggio {
         double lng = jParcheggio.getDouble("longitudine");
 
         mCoordinate = new LatLng(lat, lng);
-
-        // todo imposta indirizzo tramite reverse geocoding
         mDistanza = ElencoParcheggi.getInstance().calcolaDistanzaDaOrigine(mCoordinate);
 
         Geocoder geocoder = new Geocoder(c, Locale.getDefault());

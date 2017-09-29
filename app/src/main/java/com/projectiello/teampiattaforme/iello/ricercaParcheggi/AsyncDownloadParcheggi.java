@@ -23,7 +23,7 @@ import org.json.JSONObject;
  * ElencoParcheggi.
  */
 
-public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
+public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
 
     // riferimento alla MainActivity che consente di intervenire sull'interfaccia
     private MainActivity mActivity;
@@ -44,7 +44,7 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
      * Costruttore con popolamento degli attributi. AtStart distingue se il download viene
      * effettuato all'avvio dell'app; il tal caso bisogna eseguire in maniera particolare.
      */
-    public DownloadParcheggi(MainActivity activity, LatLng coordinateRicerca, boolean atStart) {
+    public AsyncDownloadParcheggi(MainActivity activity, LatLng coordinateRicerca, boolean atStart) {
         mActivity = activity;
         mCoordRicerca = coordinateRicerca;
         mRange = HelperPreferences.getRange(activity);
@@ -125,9 +125,9 @@ public class DownloadParcheggi extends AsyncTask<Void, Void, String> {
 
         // creazione URL
         String url = "http://cloudpi.webhop.me:4000/parking" +
-                     "?lat="    + mCoordRicerca.latitude +
-                     "&lon="   + mCoordRicerca.longitude +
-                     "&radius=" + mRange;
+                "?lat="    + mCoordRicerca.latitude +
+                "&lon="   + mCoordRicerca.longitude +
+                "&radius=" + mRange;
 
         // interrogazione dell'Api
         JSONObject response = HelperRete.volleySyncRequest(mActivity, url);

@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 public class AddressedResearch extends AsyncTask<String, Void, JSONObject> {
 
-    // utilizzato sia come contesto che come activityMain all'avvio di DownloadParcheggi
+    // utilizzato sia come contesto che come activityMain all'avvio di AsyncDownloadParcheggi
     private MainActivity mMainActivity;
 
     // query inserita dall'utente nella barra di ricerca, convertita in formato per url
@@ -89,7 +89,7 @@ public class AddressedResearch extends AsyncTask<String, Void, JSONObject> {
             mQueryGrezza = mQueryGrezza.substring(0,1).toUpperCase() + mQueryGrezza.substring(1);
             mMainActivity.setTitle(mQueryGrezza);
 
-            DownloadParcheggi adp = new DownloadParcheggi(mMainActivity, coordRicerca, false);
+            AsyncDownloadParcheggi adp = new AsyncDownloadParcheggi(mMainActivity, coordRicerca, false);
             adp.execute();
 
         } catch (JSONException e) {

@@ -2,7 +2,6 @@ package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -74,8 +73,8 @@ public class GeolocalizedResearch {
                                 ElencoParcheggi.getInstance().setCoordAttuali(coordRicerca);
                                 mMainActivity.setTitle(mMainActivity.getString(R.string.tua_posizione));
 
-                                DownloadParcheggi asyncDownload
-                                        = new DownloadParcheggi(mMainActivity, coordRicerca, false);
+                                AsyncDownloadParcheggi asyncDownload
+                                        = new AsyncDownloadParcheggi(mMainActivity, coordRicerca, false);
                                 asyncDownload.execute();
 
                             } else {

@@ -36,4 +36,6 @@
     <string name="esplora_api">Esplora l\'API</string>
     <string name="project_iello_description">Project Iello è un progetto portato avanti da dei ragazzi dell\'università di Urbino bla bla bla</string>
     <string name="fantastico">Fantastico!</string>
+    <string name="descr_segnalazione">Inserisci un indirizzo nella casella di testo, quindi premi su un punto della mappa per selezionare una posizione. Quando sei pronto, invia la posizione premendo il tasto fluttuante.</string>
+    <string name="indirizzo_non_riconosciuto">Indirizzo non riconosciuto.</string>
 </resources>

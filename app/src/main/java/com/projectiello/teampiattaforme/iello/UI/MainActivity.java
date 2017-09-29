@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
                 switch(menuItem.getItemId()) {
                     case R.id.nav_segnalazione: {
+                        Intent i = new Intent(MainActivity.this, SegnalazioneActivity.class);
+                        startActivity(i);
                         break;
                     }
                     case R.id.nav_raggio: {

@@ -37,6 +37,14 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".UI.SegnalazioneActivity"
+            android:label="@string/segnala_posteggio"
+            android:theme="@style/SegnalaTheme"
+            android:parentActivityName=".UI.MainActivity"/>
+
+
         <activity
             android:name=".UI.IntroActivity"
             android:theme="@style/IntroTheme" />
