@@ -194,7 +194,7 @@ public class SegnalazioneActivity extends AppCompatActivity {
                 mGoogleMap.animateCamera(location);
 
 
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(SegnalazioneActivity.this,
                         R.string.indirizzo_non_riconosciuto, Toast.LENGTH_SHORT).show();

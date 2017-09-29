@@ -2,6 +2,7 @@ package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
@@ -92,8 +93,9 @@ public class AddressedResearch extends AsyncTask<String, Void, JSONObject> {
             AsyncDownloadParcheggi adp = new AsyncDownloadParcheggi(mMainActivity, coordRicerca, false);
             adp.execute();
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            Toast.makeText(mMainActivity, R.string.indirizzo_non_riconosciuto, Toast.LENGTH_SHORT).show();
             mMainActivity.hideProgressBar();
         }
 
