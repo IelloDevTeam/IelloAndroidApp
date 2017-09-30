@@ -102,8 +102,7 @@ public class MappaPrincipale {
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
-            boolean success = mGoogleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
+            boolean success = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(
                             c, stileMappa));
 
             if (!success) {

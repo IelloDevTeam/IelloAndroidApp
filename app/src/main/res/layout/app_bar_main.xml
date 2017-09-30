@@ -9,7 +9,7 @@
 
 
 
-    <include layout="@layout/fragment_mappa"/>
+    <include layout="@layout/fragment_mappa" />
 
 
     <RelativeLayout
