@@ -35,7 +35,7 @@
                     android:textColor="@color/white"
                     android:layout_marginBottom="8dp"
                     android:text="@string/descr_segnalazione"/>
-
+                
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_marginLeft="16dp"
@@ -48,7 +48,6 @@
                             android:id="@+id/tilNome"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@+id/fabSearch"
                             android:layout_toStartOf="@+id/fabSearch"
                             android:theme="@style/TextInputLayoutToolbar">
 
@@ -70,12 +69,9 @@
                             android:clickable="true"
                             android:layout_centerVertical="true"
                             app:fabSize="mini"
-                            android:layout_marginRight="4dp"
                             android:layout_marginEnd="4dp"
-                            android:layout_marginLeft="16dp"
                             android:layout_marginStart="16dp"
                             android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
                             app:srcCompat="@drawable/ic_search_white_24px"
                             android:id="@+id/fabSearch"
                             app:backgroundTint="@color/colorPrimaryDark" />
@@ -104,20 +100,19 @@
 
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:indeterminateOnly="true"
                     android:layout_width="match_parent"
+                    android:indeterminateTint="@color/white"
                     android:layout_height="match_parent"
                     android:indeterminate="true"/>
             </FrameLayout>
         </FrameLayout>
-
+        
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabInvia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_margin="16dp"
             android:clickable="true"
             app:backgroundTint="@color/colorPrimaryDark"

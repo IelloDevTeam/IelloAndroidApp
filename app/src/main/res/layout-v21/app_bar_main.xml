@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.projectiello.teampiattaforme.iello.UI.MainActivity">
-
+    
     <include layout="@layout/fragment_mappa" />
 
     <FrameLayout
@@ -24,12 +24,12 @@
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
+                android:indeterminateTint="@color/white"
                 android:layout_height="match_parent"
-                android:indeterminateOnly="true"
                 android:indeterminate="true"/>
         </FrameLayout>
     </FrameLayout>
-
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:layout_margin="@dimen/fab_margin"
             app:fabSize="normal"
             android:layout_above="@+id/fragment_parcheggi_container"
