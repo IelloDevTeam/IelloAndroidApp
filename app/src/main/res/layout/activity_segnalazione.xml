@@ -7,6 +7,7 @@
     android:id="@+id/coordinator"
     tools:context="com.projectiello.teampiattaforme.iello.UI.SegnalazioneActivity"
     android:layout_width="match_parent"
+    android:id="@+id/coordinator"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
@@ -122,6 +123,7 @@
             android:clickable="true"
             app:backgroundTint="@color/colorPrimaryDark"
             app:fabSize="normal"
+            android:visibility="gone"
             app:srcCompat="@drawable/ic_send_white_24px" />
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
