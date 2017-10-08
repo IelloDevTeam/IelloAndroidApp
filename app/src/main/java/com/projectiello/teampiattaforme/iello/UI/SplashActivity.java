@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
 
 /**
@@ -17,9 +18,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // inizializzazioni di varie sezioni dell'applicazioni
-
-
         // procedi in modo diverso a seconda della tipologia dell'accesso
         boolean isFirstLaunch = HelperPreferences.isFirstTimeLaunch(this);
 
@@ -32,11 +30,10 @@ public class SplashActivity extends AppCompatActivity {
             finish();
 
         } else {
-            // altrimenti accesso normale: inizializza la view
+            // altrimenti vai a MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
-
         }
     }
 }

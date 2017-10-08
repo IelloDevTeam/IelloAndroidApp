@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,23 +6,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
-import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
 
 /**
  * Created by riccardomaldini on 28/09/17.
- * Dialog che permette di impostare il raggio della ricerca.
+ * Dialog che permette di impostare lo stile della mappa.
  */
 
 public class DialogStileMappa extends DialogFragment {
@@ -50,7 +45,6 @@ public class DialogStileMappa extends DialogFragment {
         // inizializza l'interfaccia del dialog
         builder.setIcon(R.drawable.ic_layers_black_24px);
         builder.setTitle(getString(R.string.personalizza_mappa));
-
         builder.setMessage("Seleziona i colori della mappa nella schermata principale.");
 
         mGroup = dialogView.findViewById(R.id.rgpStili);
@@ -124,7 +118,7 @@ public class DialogStileMappa extends DialogFragment {
                             HelperPreferences.setStileMappa(getActivity(), R.raw.style_dark);
                             break;
                     }
-                    MappaPrincipale.getInstance().aggiornaStile(getActivity());
+                    ((MainActivity) getActivity()).getMappa().aggiornaStile();
                     dismiss();
 
                 } // end if

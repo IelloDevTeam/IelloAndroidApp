@@ -4,6 +4,7 @@ import com.google.firebase.database.PropertyName;
 
 /**
  * Created by andrea on 30/09/17.
+ * Classe che rappresenta una seghnalazione utente.
  */
 
 public class Segnalazione {

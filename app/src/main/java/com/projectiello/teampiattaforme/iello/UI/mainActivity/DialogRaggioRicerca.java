@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -6,15 +6,11 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
@@ -49,7 +45,6 @@ public class DialogRaggioRicerca extends DialogFragment {
         // inizializza l'interfaccia del dialog
         builder.setIcon(R.drawable.ic_straighten_black_24px);
         builder.setTitle(getString(R.string.raggio_ricerca));
-
         builder.setMessage("Seleziona il raggio entro il quale visualizzare i parcheggi " +
                 "nelle vicinanze.");
 
@@ -130,9 +125,7 @@ public class DialogRaggioRicerca extends DialogFragment {
                             HelperPreferences.setRange(getActivity(), 10000);
                             break;
                     }
-
                     dismiss();
-
                 } // end if
 
             });

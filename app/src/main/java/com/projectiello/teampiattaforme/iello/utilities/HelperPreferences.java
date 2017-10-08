@@ -13,10 +13,7 @@ import com.projectiello.teampiattaforme.iello.R;
 
 public class HelperPreferences {
 
-    // opzione primoAvvio
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
-
-    // opzione range di ricerca
     private static final String RANGE = "Range";
     private static final String STILE_MAPPA = "StileMappa";
 

@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi;
 
 
 import android.os.AsyncTask;
@@ -6,12 +6,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.MainActivity;
-import com.projectiello.teampiattaforme.iello.UI.ParcheggiFragment;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.ParcheggiFragment;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
-import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
+import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
 
     // riferimento alla MainActivity che consente di intervenire sull'interfaccia
-    private MainActivity mActivity;
+    private MainActivity mMainActivity;
 
     // costanti di return
     private static final String RICERCA_COMPLETATA = "RICERCA_COMPLETATA";
@@ -45,7 +45,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
      * effettuato all'avvio dell'app; il tal caso bisogna eseguire in maniera particolare.
      */
     public AsyncDownloadParcheggi(MainActivity activity, LatLng coordinateRicerca, boolean atStart) {
-        mActivity = activity;
+        mMainActivity = activity;
         mCoordRicerca = coordinateRicerca;
         mRange = HelperPreferences.getRange(activity);
 
@@ -58,8 +58,8 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
      */
     @Override
     protected void onPreExecute() {
-        if(HelperRete.isNetworkAvailable(mActivity))
-            MappaPrincipale.getInstance().muoviCamera(mCoordRicerca);
+        if(HelperRete.isNetworkAvailable(mMainActivity))
+            mMainActivity.getMappa().muoviCamera(mCoordRicerca);
     }
 
 
@@ -69,7 +69,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... params) {
 
-        if(HelperRete.isNetworkAvailable(mActivity)) {
+        if(HelperRete.isNetworkAvailable(mMainActivity)) {
             // scarica i parcheggi tramite l'Api
             popolaElencoParcheggi();
 
@@ -97,21 +97,21 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
         switch(result) {
             case RICERCA_COMPLETATA:
                 if(!mAtStart)
-                    ParcheggiFragment.newInstance(mActivity);
-                MappaPrincipale.getInstance().settaMarkers(mActivity);
+                    ParcheggiFragment.newInstance(mMainActivity);
+                mMainActivity.getMappa().settaMarkers();
                 break;
 
             case COMPLETATA_NO_RIS:
-                ParcheggiFragment.clearFragment(mActivity);
-                MappaPrincipale.getInstance().settaMarkers(mActivity);
-                Toast.makeText(mActivity, R.string.no_parcheggi, Toast.LENGTH_SHORT).show();
+                ParcheggiFragment.clearFragment(mMainActivity);
+                mMainActivity.getMappa().settaMarkers();
+                Toast.makeText(mMainActivity, R.string.no_parcheggi, Toast.LENGTH_SHORT).show();
                 break;
 
             case NO_INTERNET:
-                Toast.makeText(mActivity, R.string.no_connection, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mMainActivity, R.string.no_connection, Toast.LENGTH_SHORT).show();
                 break;
         }
-        mActivity.hideProgressBar();
+        mMainActivity.hideProgressBar();
     }
 
 
@@ -130,7 +130,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
                 "&radius=" + mRange;
 
         // interrogazione dell'Api
-        JSONObject response = HelperRete.volleySyncRequest(mActivity, url);
+        JSONObject response = HelperRete.volleySyncRequest(mMainActivity, url);
 
         if (response == null)
             return;
@@ -145,7 +145,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
                 ElencoParcheggi.getInstance().getListParcheggi().clear();
 
                 for(int i = 0; i < jArrayParcheggi.length(); i++) {
-                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i), mActivity);
+                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i), mMainActivity);
                     ElencoParcheggi.getInstance().getListParcheggi().add(newPark);
                 }
             }

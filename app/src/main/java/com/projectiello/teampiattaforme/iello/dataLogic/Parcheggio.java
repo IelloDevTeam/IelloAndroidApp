@@ -39,19 +39,13 @@ public class Parcheggio {
         double lat = jParcheggio.getDouble("latitudine");
         double lng = jParcheggio.getDouble("longitudine");
 
+        // todo passa anche indirizzo dall'api
+        // String ind = jParcheggio.getString("indirizzo);
+        String ind = "Non disponibile";
+
         mCoordinate = new LatLng(lat, lng);
         mDistanza = ElencoParcheggi.getInstance().calcolaDistanzaDaOrigine(mCoordinate);
-
-        Geocoder geocoder = new Geocoder(c, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-            mIndirizzo = addresses.get(0).getAddressLine(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-            mIndirizzo = "Via del Tutto Eccezionale";
-        }
-
-
+        mIndirizzo = ind;
     }
 
 

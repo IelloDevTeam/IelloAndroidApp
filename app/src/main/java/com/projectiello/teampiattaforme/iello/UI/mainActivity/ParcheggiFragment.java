@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -66,19 +66,13 @@ public class ParcheggiFragment extends Fragment {
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-    }
-
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_parcheggi, container, false);
 
-        /* assegna i componenti del fragment */
+        // 1. assegna i componenti del fragment
         TextView mTxtIndirizzoPP = view.findViewById(R.id.txtIndirizzo);
         TextView mTxtDistanzaPP = view.findViewById(R.id.txtDistanza);
         RelativeLayout mLayoutPP = view.findViewById(R.id.item_parcheggio);
@@ -88,7 +82,7 @@ public class ParcheggiFragment extends Fragment {
         final RecyclerView mRecParcheggi = view.findViewById(R.id.recParcheggi);
 
 
-        /* inizializza i componenti del fragment */
+        // 2. inizializza i componenti del fragment
 
         // inizializza il primo elemento
         Parcheggio piuVicino = ElencoParcheggi.getInstance().getParkPiuVicino();
@@ -118,6 +112,7 @@ public class ParcheggiFragment extends Fragment {
                 mRecParcheggi, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                // naviga alla posizione
                 double lat = pAdapter.getListParcheggi().get(position).getCoordinate().latitude;
                 double lng = pAdapter.getListParcheggi().get(position).getCoordinate().longitude;
 

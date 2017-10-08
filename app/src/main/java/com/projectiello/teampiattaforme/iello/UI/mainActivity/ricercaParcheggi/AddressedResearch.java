@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -6,11 +6,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.MainActivity;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
+import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**

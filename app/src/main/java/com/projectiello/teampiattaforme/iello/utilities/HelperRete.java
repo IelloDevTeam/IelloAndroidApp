@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.ricercaParcheggi;
+package com.projectiello.teampiattaforme.iello.utilities;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

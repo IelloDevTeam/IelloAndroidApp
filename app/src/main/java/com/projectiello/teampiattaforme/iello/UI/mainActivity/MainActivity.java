@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,9 +21,9 @@ import android.widget.FrameLayout;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.ricercaParcheggi.AddressedResearch;
-import com.projectiello.teampiattaforme.iello.ricercaParcheggi.GeolocalizedResearch;
-import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
+import com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AddressedResearch;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.GeolocalizedResearch;
 
 
 /**
@@ -32,11 +32,14 @@ import com.projectiello.teampiattaforme.iello.utilities.MappaPrincipale;
  */
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
-    // riferimento alla search bar
+    // riferimento alla searchBar
     private MaterialSearchView mSearchView;
 
-    // riferimento al navigaton drawer
+    // riferimento al navigation drawer, il menù laterale
     private DrawerLayout mDrawerLayout;
+
+    // riferimento alla progressBar
+    private FrameLayout mProgBar;
 
     // classe per la gestione della geolocalizzazione e della ricerca geolocalizzata
     private GeolocalizedResearch mHelpLocalization;
@@ -44,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
     // riferimento al fragment parcheggi
     private ParcheggiFragment mFragmentAttivo;
 
-    // riferimento alla progressbar
-    private FrameLayout mProgBar;
+    // riferimento all'oggetto gestore della mappa
+    private MappaMain mMappa;
 
 
     @Override
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 menuItem.setChecked(false);
                 mDrawerLayout.closeDrawers();
 
+                // setta il comportamento dell'app al click dell'utente sulle voci del menù laterale
                 switch(menuItem.getItemId()) {
                     case R.id.nav_segnalazione: {
                         Intent i = new Intent(MainActivity.this, SegnalazioneActivity.class);
@@ -98,35 +102,38 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                         break;
                     }
                 }
-
                 return true;
             }
         });
 
+        // inizializzazione della mappa mostrata nell'activity
+        mMappa = new MappaMain(this);
 
-        // inizializzazione progressBar e oggetto di gestione geolocalizzazione
-        mHelpLocalization = new GeolocalizedResearch(this);
+        // inizializzazione progressBar. Utilizzata come feedback all'utente durante il download
+        // dei parcheggi dall'API Iello. Di default la barra viene nascosta
         mProgBar = (FrameLayout) findViewById(R.id.clippedProgressBar);
+        hideProgressBar();
 
-
-        // inizializza il fab. Un click nel fab determina la posizione dell'utente, sposta la mappa
-        // su tale posizione, inizializza la mappa e mostra i risultati della ricerca.
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        // inizializzazione gestore della geolocalizzazione e fab. Un click nel fab permette di
+        // determinare la posizione dell'utente (in maniera spesso approssimativa), sposta la mappa
+        // su tale posizione e mostra i risultati della ricerca.
+        mHelpLocalization = new GeolocalizedResearch(this);
+        FloatingActionButton fabGeolocalizzazione = (FloatingActionButton) findViewById(R.id.fab);
+        fabGeolocalizzazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mHelpLocalization.avviaRicercaPosizione();
             }
         });
 
-
-        // inizializzazione searchView
+        // inizializzazione searchView. Questa permette di inserire un indirizzo. Questo verrà poi
+        // utilizzato per cercare parcheggi per disabili in prossimità di tale indirizzo
         mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
         mSearchView.setVoiceSearch(true);
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // al click viene avviata la ricerca dei parcheggi nelle vicinanze dell'indirizzo
+                // al click viene avviata la ricerca
                 AddressedResearch adpi = new AddressedResearch(MainActivity.this, query);
                 adpi.execute();
 
@@ -138,16 +145,11 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                 return false;
             }
         });
-
-
-        // inizializza la mappa mostrata nell'activity
-        MappaPrincipale.getInstance().inizializzaMappa(this);
-
     }
 
 
     /**
-     * Metodo per creare il dialog project.
+     * Metodo per creare il dialog che descrive project Iello all'utente.
      */
     private void avviaDialogProject() {
 
@@ -160,7 +162,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         AlertDialog alert = alertProject.create();
         alert.show();
-
     }
 
 
@@ -180,43 +181,22 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     /**
      * Invocato nel momento in cui l'utente approva un permesso; nel nostro caso la geolocalizzazione.
-     * Tal permesso viene richiesto per individuare i parcheggi in prossinità della posizione dell'
-     * utente. Quindi quando il permesso viene approvato viene invocata una ricerca basata
+     * Tal permesso viene richiesto per individuare i parcheggi in prossimità della posizione dell'
+     * utente. Quindi quando il permesso viene approvato, viene invocata una ricerca basata
      * sulla posizione.
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if(grantResults[0]== PackageManager.PERMISSION_GRANTED)
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
             mHelpLocalization.avviaRicercaPosizione();
     }
 
 
-    /*
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MaterialSearchView.REQUEST_VOICE && resultCode == RESULT_OK) {
-            // gestione ricerca vocale
-
-            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            if (matches != null && matches.size() > 0) {
-                String searchWrd = matches.get(0);
-                if (!TextUtils.isEmpty(searchWrd)) {
-                    searchView.setQuery(searchWrd, false);
-                }
-            }
-            return;
-
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
-
-
     /**
      * Metodo invocato durante la creazione del menù. Assegna alla voce di menù (la lente)
-     * l'azione di ricerca tramite l'Api di terze parti.
+     * l'azione di ricerca tramite l'Api di terze parti "MaterialSearchView".
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -254,5 +234,13 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     public void hideProgressBar() {
         mProgBar.setVisibility(View.GONE);
+    }
+
+
+    /**
+     * Metodo per accedere alla mappa mostrata nell'activity.
+     */
+    public MappaMain getMappa() {
+        return mMappa;
     }
 }

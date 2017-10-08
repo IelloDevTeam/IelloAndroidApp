@@ -9,6 +9,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
 
 /**
  * Created by riccardomaldini on 25/09/17.

@@ -5,9 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator"
-    tools:context="com.projectiello.teampiattaforme.iello.UI.SegnalazioneActivity"
+    tools:context="com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity"
     android:layout_width="match_parent"
-    android:id="@+id/coordinator"
     android:layout_height="match_parent">
 
     <android.support.design.widget.AppBarLayout
@@ -95,7 +94,6 @@
             android:layout_gravity="bottom"
             android:id="@+id/clippedProgressBar"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="4dp">
 
             <FrameLayout
@@ -105,7 +103,6 @@
 
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:indeterminateOnly="true"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:indeterminate="true"/>

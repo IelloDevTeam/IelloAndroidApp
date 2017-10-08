@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.projectiello.teampiattaforme.iello.UI.MainActivity">
+    tools:context="com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity">
 
     <include layout="@layout/fragment_mappa" />
 
@@ -13,7 +13,6 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/clippedProgressBar"
         android:layout_width="match_parent"
-        android:visibility="visible"
         android:layout_height="4dp">
 
         <FrameLayout
@@ -25,7 +24,6 @@
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:indeterminateOnly="true"
                 android:indeterminate="true"/>
         </FrameLayout>
     </FrameLayout>
