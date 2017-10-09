@@ -9,24 +9,7 @@
 
     <include layout="@layout/fragment_mappa" />
 
-    <FrameLayout
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/clippedProgressBar"
-        android:layout_width="match_parent"
-        android:layout_height="4dp">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical">
-
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:indeterminate="true"/>
-        </FrameLayout>
-    </FrameLayout>
+    <include layout="@layout/progress_bar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -81,7 +64,8 @@
                 style="@style/MaterialSearchViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPostalAddress|textCapWords"
+                tools:inputType="textPostalAddress"
+                android:inputType="textCapWords"
                 android:visibility="visible" />
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>

@@ -12,12 +12,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Marker;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,7 +25,7 @@ import static android.content.ContentValues.TAG;
 
 public class MappaGoogle implements OnMapReadyCallback {
     // riferimento alla mappa caricata tramite Google Maps API
-    GoogleMap mGoogleMap;
+    private GoogleMap mGoogleMap;
 
     // contesto corrente, utilizzato in varie occorrenze
     private Context mContext;
@@ -105,7 +101,7 @@ public class MappaGoogle implements OnMapReadyCallback {
     }
 
 
-    public GoogleMap getMappaGoogle() {
+    protected GoogleMap getMappaGoogle() {
         return mGoogleMap;
     }
 }

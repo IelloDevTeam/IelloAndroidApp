@@ -32,6 +32,10 @@ import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.G
  */
 public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
+    // variabile di controllo che permette di verificare senza invocare l'istanza se MainActivity
+    // è attualmente in foreground
+    private static boolean mMainInForeground = false;
+
     // riferimento alla searchBar
     private MaterialSearchView mSearchView;
 
@@ -129,7 +133,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         // inizializzazione searchView. Questa permette di inserire un indirizzo. Questo verrà poi
         // utilizzato per cercare parcheggi per disabili in prossimità di tale indirizzo
         mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
-        mSearchView.setVoiceSearch(true);
+        //mSearchView.setVoiceSearch(true);
+        //mSearchView.showVoice(true);
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -147,6 +152,30 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         });
     }
 
+
+    /*
+     * Durante resume e start vanno gestiti i flag che determinano se mainActivity è in foreground
+     */
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMainInForeground = true;
+    }
+
+
+    @Override
+    protected void onPause() {
+        mMainInForeground = false;
+        super.onPause();
+    }
+
+    /**
+     * Metodo per accedere al flag di foreground
+     */
+    public static boolean isInForeground() {
+        return mMainInForeground;
+    }
 
     /**
      * Metodo per creare il dialog che descrive project Iello all'utente.

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.projectiello.teampiattaforme.iello"
         minSdkVersion 15
@@ -27,18 +27,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.android.support:support-vector-drawable:26.0.0-alpha1'
-    compile 'com.github.aakira:expandable-layout:1.6.0@aar'
-    compile 'com.github.paolorotolo:appintro:4.1.0'
-    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:support-vector-drawable:26.1.0'
     compile 'com.google.android.gms:play-services-location:11.4.0'
     compile 'com.google.android.gms:play-services-maps:11.4.0'
     compile 'com.google.firebase:firebase-core:11.4.0'
-    compile 'com.android.volley:volley:1.0.0'
     compile 'com.google.firebase:firebase-auth:11.4.0'
     compile 'com.google.firebase:firebase-database:11.4.0'
+    compile 'com.android.volley:volley:1.0.0'
+    compile 'com.github.aakira:expandable-layout:1.6.0@aar'
+    compile 'com.github.paolorotolo:appintro:4.1.0'
+    compile 'com.miguelcatalan:materialsearchview:1.4.0'
+
     testCompile 'junit:junit:4.12'
 }
 

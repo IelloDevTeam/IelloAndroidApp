@@ -11,8 +11,6 @@
     </style>
 
 
-
-
     <!-- Stili utilizzati da vari elementi di MainActivity -->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
@@ -32,12 +30,13 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
     <!-- Tema di SegnalazioneActivity -->
     <style name="SegnalaTheme" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/white</item>
     </style>
-
 
 
     <!-- Tema di SplashActivity -->
@@ -60,17 +59,16 @@
         <item name="android:hint">@string/cerca_ind</item>
     </style>
 
+    <style name="ProgBarStyle">
+        <item name="colorAccent">@color/white</item>
+    </style>
 
-    <!-- editText per immettere i dettagli in nuovo consiglio e schedina -->
+
+    <!-- editText di SegnalazioneActivity -->
     <style name="EditTextToolbar" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">18sp</item>
-    </style>
-
-    <!-- stile del TextInput -->
-    <style name="TextInputLayoutToolbar" parent="Widget.Design.TextInputLayout">
         <item name="android:textColorHint">@color/whiteTrasparent</item>
-        <item name="android:textColor">@color/white</item>
         <item name="colorAccent">@color/white</item>
         <item name="colorControlNormal">@color/whiteTrasparent</item>
         <item name="colorControlActivated">@color/white</item>

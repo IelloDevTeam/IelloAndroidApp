@@ -25,6 +25,7 @@ public class HelperPreferences {
         editor.apply();
     }
 
+
     public static boolean isFirstTimeLaunch(Context c) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);

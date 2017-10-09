@@ -11,6 +11,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.dataLogic.Segnalazione;
 
 /**
@@ -46,7 +47,7 @@ class FirebaseHandler implements OnCompleteListener<AuthResult> {
                 .addOnCompleteListener(mSegnalActivity, this);
 
         // avvisa l'utente del collegamento in corso
-        Toast.makeText(mSegnalActivity, "Mi sto collegando al DB Iello...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mSegnalActivity, R.string.collegando_al_db, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -61,16 +62,14 @@ class FirebaseHandler implements OnCompleteListener<AuthResult> {
         if (task.isSuccessful()) {
             // mostra un messaggio all'utente
             Log.d(TAG, "signInWithEmail:success");
-            Toast.makeText(mSegnalActivity, "Connesso al DB! L'app è pronta a inviare segnalazioni.",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(mSegnalActivity, R.string.connesso_db, Toast.LENGTH_LONG).show();
 
             // attiva le funzioni della mappa
             mSegnalActivity.getMappa().attivaFunzioniMappa();
         } else {
             // mostra un messaggio all'utente
             Log.d(TAG, "signInWithEmail:failure", task.getException());
-            Toast.makeText(mSegnalActivity, "Non sei connesso al DB. Non puoi inviare segnalazioni.",
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(mSegnalActivity, R.string.non_connesso_db, Toast.LENGTH_LONG).show();
 
             // lascia disattivate le funzioni della mappa
         }
@@ -120,15 +119,14 @@ class FirebaseHandler implements OnCompleteListener<AuthResult> {
 
             // ... e notifica l'utente
             Log.d(TAG, "Inviata nuova coordinata al DB, " + location.toString());
-            Toast.makeText(mSegnalActivity, "Segnalazione Inviata.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mSegnalActivity, R.string.segnalazione_inviata, Toast.LENGTH_SHORT).show();
 
             // l'interfaccia viene aggiornata di conseguenza
             mSegnalActivity.getMappa().resettaInterfacciaMappa();
 
         } else {
             Log.d(TAG, "Errore inaspettato nell'invio della posizione");
-            Toast.makeText(mSegnalActivity, "Errore inaspettato nell'invio della posizione. Riprova più tardi", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(mSegnalActivity, R.string.errore_invio, Toast.LENGTH_SHORT).show();
         }
     }
 }

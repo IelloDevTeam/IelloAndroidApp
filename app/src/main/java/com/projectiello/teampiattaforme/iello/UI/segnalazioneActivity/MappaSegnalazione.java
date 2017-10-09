@@ -14,7 +14,7 @@ import com.projectiello.teampiattaforme.iello.utilities.MappaGoogle;
  * delle funzionalità collegate alla mappa, accessibili in varie parti dell'applicazione
  */
 class MappaSegnalazione extends MappaGoogle
-        implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
+        implements GoogleMap.OnMapClickListener {
 
     // riferimento all'activity; consente di accedere ad alcuni elementi dell'interfaccia
     private SegnalazioneActivity mSegnalazioneActivity;
@@ -48,7 +48,7 @@ class MappaSegnalazione extends MappaGoogle
      */
     void attivaFunzioniMappa() {
         getMappaGoogle().setOnMapClickListener(this);
-        getMappaGoogle().setOnMarkerClickListener(this);
+        // getMappaGoogle().setOnMarkerClickListener(this);
     }
 
 
@@ -83,13 +83,13 @@ class MappaSegnalazione extends MappaGoogle
     }
 
 
-    /**
-     * Cliccando su un marker, questo viene rimosso
+    /*
+     * Cliccando su un marker, questo viene rimosso; si è deciso di rimuovere questo metodo
      */
-    @Override
+    /*@Override
     public boolean onMarkerClick(Marker marker) {
         clearMarker();
         mSegnalazioneActivity.hideFabInvia();
         return false;
-    }
+    }*/
 }

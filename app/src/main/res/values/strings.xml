@@ -8,34 +8,69 @@
     <string name="segnala_posteggio">Segnala posteggio</string>
     <string name="impostazioni">Impostazioni</string>
     <string name="cerca_ind">Inserisci un indirizzo&#8230;</string>
-    <string name="title_activity_maps">Map</string>
 
-    <string name="slide_1_title">Titolo slide 1</string>
-    <string name="slide_1_desc">Descrizione slide 1</string>
+    <string name="slide_1_title">Benvenuto in Iello!</string>
+    <string name="slide_1_desc">Iello è un\'app che consente di trovare facilmente gli stalli per
+        disabili posti nelle vicinanze.
+    </string>
 
-    <string name="slide_2_title">Titolo slide 2</string>
-    <string name="slide_2_desc">Descrizione slide 2</string>
+    <string name="slide_2_title">Utilizza la tua posizione</string>
+    <string name="slide_2_desc">Dimmi dove ti trovi: ti mostrerò tutti i posteggi per disabili
+        nelle vicinanze, e ti guiderò tramite Google Maps® direttamente sul posto.
+    </string>
 
-    <string name="slide_3_title">Titolo slide 3</string>
-    <string name="slide_3_desc">Descrizione slide 3</string>
+    <string name="slide_3_title">Utilizza un indirizzo</string>
+    <string name="slide_3_desc">Inserisci un indirizzo qualunque sulla barra di ricerca: ti
+    mostrerò i posteggi più vicini a tale posizione.
+    </string>
 
-    <string name="slide_4_title">Titolo slide 4</string>
-    <string name="slide_4_desc">Descrizione slide 4</string>
+    <string name="slide_4_title">Segnala altri posteggi</string>
+    <string name="slide_4_desc">Iello è un progetto di alcuni studenti dell\'Università di
+        Urbino: i posti segnalati si riferiscono al centro di urbino e alcuni comuni tra cui Bari
+        e Jesi. Se lo desideri, l\'app ti consente di contribuire ad ampliare il nostro database!
+    </string>
+
     <string name="divider">Divider</string>
+
     <string name="tutti_i_risultati">Tutti i risultati</string>
     <string name="nascondi_risultati">Nascondi risultati</string>
+
     <string name="no_parcheggi">Non ci sono parcheggi nelle vicinanze.</string>
     <string name="no_connection">Connessione internet non disponibile.</string>
     <string name="attiva_gps">Attiva il GPS per poter utilizzare questa funzione</string>
-    <string name="autorizza_permesso">Autorizza il permesso per poter indivudare la tua posizione</string>
+    <string name="autorizza_permesso">Autorizza il permesso per poter indivudare la tua posizione
+    </string>
+
     <string name="tua_posizione">La tua posizione</string>
     <string name="raggio_ricerca">Raggio di ricerca</string>
     <string name="personalizza_mappa">Personalizza mappa</string>
     <string name="info_app">Info sull\'app</string>
     <string name="project_iello">Cos\'è project Iello?</string>
     <string name="esplora_api">Esplora l\'API</string>
-    <string name="project_iello_description">Project Iello è un progetto portato avanti da dei ragazzi dell\'università di Urbino bla bla bla</string>
-    <string name="fantastico">Fantastico!</string>
-    <string name="descr_segnalazione">Inserisci un indirizzo nella casella di testo, quindi premi su un punto della mappa per selezionare una posizione. Quando sei pronto, invia la posizione premendo il tasto fluttuante.</string>
+
+    <string name="project_iello_description">Project Iello è un progetto portato avanti da dei
+        ragazzi dell\'università di Urbino, nato come progetto correlato ad un esame. Il progetto
+        non è stato pensato per essere a scopo di lucro.\nL\'app è solo una parte di un
+        progetto più ampio, che comprende un database online con tecnologia Firebase, un bot
+        Telegram e un\'Api liberamente fruibile da altri sviluppatori.\nTutto il codice sorgente
+        di ogni componente del progetto è consultabile su GitHub tramite il link nella voce di
+        menù successiva. Il contributo di altri sviluppatori è sempre ben accetto.\n\n\nCreato
+        con amore da Riccardo Maldini, Andrea Petreti, Alessia Ventani e Elia Trufelli.
+    </string>
+    <string name="fantastico">Wow!</string>
+
+
+    <string name="descr_segnalazione">La casella di testo consente di spostare la mappa su un
+        qualunque indirizzo. Premi un punto sulla mappa per appuntare una posizione, quindi
+        invia la posizione premendo il tasto che verrà mostrato in seguito alla selezione.</string>
     <string name="indirizzo_non_riconosciuto">Indirizzo non riconosciuto.</string>
+    <string name="segnalazione_inviata">Segnalazione Inviata. La verificheremo appena possibile,
+        e in caso venga confermata la aggiungeremo al database.
+    </string>
+    <string name="errore_invio">Errore inaspettato nell\'invio della posizione.
+        Riprova più tardi.
+    </string>
+    <string name="connesso_db">Connesso al DB! L\'app è pronta a inviare segnalazioni.</string>
+    <string name="non_connesso_db">Non sei connesso al DB. Non puoi inviare segnalazioni.</string>
+    <string name="collegando_al_db">Mi sto collegando al DB Iello&#8230;</string>
 </resources>

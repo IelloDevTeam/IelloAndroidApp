@@ -94,24 +94,26 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
      */
     @Override
     protected void onPostExecute(String result) {
-        switch(result) {
-            case RICERCA_COMPLETATA:
-                if(!mAtStart)
-                    ParcheggiFragment.newInstance(mMainActivity);
-                mMainActivity.getMappa().settaMarkers();
-                break;
+        if(MainActivity.isInForeground()) {
+            switch (result) {
+                case RICERCA_COMPLETATA:
+                    if (!mAtStart)
+                        ParcheggiFragment.newInstance(mMainActivity);
+                    mMainActivity.getMappa().settaMarkers();
+                    break;
 
-            case COMPLETATA_NO_RIS:
-                ParcheggiFragment.clearFragment(mMainActivity);
-                mMainActivity.getMappa().settaMarkers();
-                Toast.makeText(mMainActivity, R.string.no_parcheggi, Toast.LENGTH_SHORT).show();
-                break;
+                case COMPLETATA_NO_RIS:
+                    ParcheggiFragment.clearFragment(mMainActivity);
+                    mMainActivity.getMappa().settaMarkers();
+                    Toast.makeText(mMainActivity, R.string.no_parcheggi, Toast.LENGTH_SHORT).show();
+                    break;
 
-            case NO_INTERNET:
-                Toast.makeText(mMainActivity, R.string.no_connection, Toast.LENGTH_SHORT).show();
-                break;
+                case NO_INTERNET:
+                    Toast.makeText(mMainActivity, R.string.no_connection, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            mMainActivity.hideProgressBar();
         }
-        mMainActivity.hideProgressBar();
     }
 
 
