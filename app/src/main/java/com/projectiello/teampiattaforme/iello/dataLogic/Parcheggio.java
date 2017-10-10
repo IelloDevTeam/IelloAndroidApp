@@ -29,7 +29,6 @@ public class Parcheggio {
     // cordinate del parcheggio
     private LatLng mCoordinate;
 
-
     /**
      * Costruttore per l'assegnamento del parcheggio da un oggetto JSON, utilizzato durante il
      * download dei parcheggi tramite IelloApi.
@@ -39,13 +38,12 @@ public class Parcheggio {
         double lat = jParcheggio.getDouble("latitudine");
         double lng = jParcheggio.getDouble("longitudine");
 
-        // todo passa anche indirizzo dall'api
-        // String ind = jParcheggio.getString("indirizzo);
-        String ind = "Non disponibile";
-
         mCoordinate = new LatLng(lat, lng);
         mDistanza = ElencoParcheggi.getInstance().calcolaDistanzaDaOrigine(mCoordinate);
-        mIndirizzo = ind;
+        if(jParcheggio.has("street_address"))
+            mIndirizzo = jParcheggio.getString("street_address");
+        else
+            mIndirizzo = "Non Disponibile";
     }
 
 
