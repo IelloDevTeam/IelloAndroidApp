@@ -73,9 +73,10 @@ public class ParcheggiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_parcheggi, container, false);
 
         // 1. assegna i componenti del fragment
-        TextView mTxtIndirizzoPP = view.findViewById(R.id.txtIndirizzo);
-        TextView mTxtDistanzaPP = view.findViewById(R.id.txtDistanza);
-        RelativeLayout mLayoutPP = view.findViewById(R.id.item_parcheggio);
+        TextView txtIndirizzoPP = view.findViewById(R.id.txtIndirizzo);
+        TextView txtDistanzaPP = view.findViewById(R.id.txtDistanza);
+        RelativeLayout layoutPP = view.findViewById(R.id.item_parcheggio);
+        Button btnNavigaPP = view.findViewById(R.id.btnNaviga);
 
         mBtnEspandi = view.findViewById(R.id.btnEspandi);
         mExpLayParcheggi = view.findViewById(R.id.expRecParcheggi);
@@ -86,12 +87,19 @@ public class ParcheggiFragment extends Fragment {
 
         // inizializza il primo elemento
         Parcheggio piuVicino = ElencoParcheggi.getInstance().getParkPiuVicino();
-        mTxtIndirizzoPP.setText(piuVicino.getIndirizzoUI());
-        mTxtDistanzaPP.setText(piuVicino.getDistanzaUI());
-        mLayoutPP.setOnClickListener(new View.OnClickListener() {
+        txtIndirizzoPP.setText(piuVicino.getIndirizzoUI());
+        txtDistanzaPP.setText(piuVicino.getDistanzaUI());
+        layoutPP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // naviga alla posizione
+                // sposta la mappa sulla posizione
+                ((MainActivity) getActivity()).getMappa()
+                        .muoviCamera(ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate());
+            }
+        });
+        btnNavigaPP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 double lat = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().latitude;
                 double lng = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().longitude;
 
@@ -101,6 +109,7 @@ public class ParcheggiFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
 
         // inizializza il RecyclerView
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -112,14 +121,9 @@ public class ParcheggiFragment extends Fragment {
                 mRecParcheggi, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                // naviga alla posizione
-                double lat = pAdapter.getListParcheggi().get(position).getCoordinate().latitude;
-                double lng = pAdapter.getListParcheggi().get(position).getCoordinate().longitude;
-
-                String uri = "http://maps.google.com/maps?daddr="+ lat +"," + lng;
-                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                startActivity(intent);
+                // sposta la mappa sulla posizione
+                ((MainActivity) getActivity()).getMappa()
+                        .muoviCamera(pAdapter.getListParcheggi().get(position).getCoordinate());
             }
 
             @Override
@@ -167,12 +171,14 @@ public class ParcheggiFragment extends Fragment {
 
             // widget dell'interfaccia di ogni elemento
             TextView txtIndirizzo, txtDistanza;
+            Button btnNaviga;
 
 
             MyViewHolder(View view) {
                 super(view);
                 txtIndirizzo = view.findViewById(R.id.txtIndirizzo);
                 txtDistanza = view.findViewById(R.id.txtDistanza);
+                btnNaviga = view.findViewById(R.id.btnNaviga);
             }
         }
 
@@ -190,11 +196,23 @@ public class ParcheggiFragment extends Fragment {
         public void onBindViewHolder(MyViewHolder holder, int position) {
 
             // variabile di appoggio che contiene i dati del parcheggio corrente
-            Parcheggio parcheggio = mParcheggiRecycler.get(position);
+            final Parcheggio parcheggio = mParcheggiRecycler.get(position);
 
             // pone i dati all'interno dei widget
             holder.txtIndirizzo.setText(parcheggio.getIndirizzoUI());
             holder.txtDistanza.setText(parcheggio.getDistanzaUI());
+            holder.btnNaviga.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    double lat = parcheggio.getCoordinate().latitude;
+                    double lng = parcheggio.getCoordinate().longitude;
+
+                    String uri = "http://maps.google.com/maps?daddr="+ lat +"," + lng;
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+                    intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                    startActivity(intent);
+                }
+            });
         }
 
 

@@ -73,4 +73,5 @@
     <string name="connesso_db">Connesso al DB! L\'app è pronta a inviare segnalazioni.</string>
     <string name="non_connesso_db">Non sei connesso al DB. Non puoi inviare segnalazioni.</string>
     <string name="collegando_al_db">Mi sto collegando al DB Iello&#8230;</string>
+    <string name="vai">Vai</string>
 </resources>

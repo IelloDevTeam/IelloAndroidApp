@@ -12,8 +12,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 /**
  * Created by riccardomaldini on 29/09/17.
@@ -61,15 +64,20 @@ public class SegnalazioneActivity extends AppCompatActivity {
         mProgressBar = (FrameLayout) findViewById(R.id.clippedProgressBar);
 
         // l'EditText consente all'utente di digitare un indirizzo sulla barra di ricerca; ...
-        mEditIndirizzo = (EditText) findViewById(R.id.editIndirizzo);
+        mEditIndirizzo = findViewById(R.id.editIndirizzo);
         mEditIndirizzo.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    String query = v.getText().toString();
-                    AsyncRicercaIndirizzo rri
-                            = new AsyncRicercaIndirizzo(query, SegnalazioneActivity.this);
-                    rri.execute();
+                    if(HelperRete.isNetworkAvailable(SegnalazioneActivity.this)) {
+                        String query = v.getText().toString();
+                        AsyncRicercaIndirizzo rri
+                                = new AsyncRicercaIndirizzo(query, SegnalazioneActivity.this);
+                        rri.execute();
+                    } else {
+                        Toast.makeText(SegnalazioneActivity.this, R.string.no_connection,
+                                Toast.LENGTH_SHORT).show();
+                    }
                     return true;
                 }
                 return false;
@@ -82,10 +90,15 @@ public class SegnalazioneActivity extends AppCompatActivity {
         fabSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String query = mEditIndirizzo.getText().toString();
-                AsyncRicercaIndirizzo rri
-                        = new AsyncRicercaIndirizzo(query, SegnalazioneActivity.this);
-                rri.execute();
+                if(HelperRete.isNetworkAvailable(SegnalazioneActivity.this)) {
+                    String query = mEditIndirizzo.getText().toString();
+                    AsyncRicercaIndirizzo rri
+                            = new AsyncRicercaIndirizzo(query, SegnalazioneActivity.this);
+                    rri.execute();
+                } else {
+                    Toast.makeText(SegnalazioneActivity.this, R.string.no_connection,
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

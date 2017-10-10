@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/item_parcheggio"
     android:foreground="?android:attr/selectableItemBackground"
@@ -11,6 +12,7 @@
 
     <RelativeLayout
         android:id="@+id/containerAddress"
+        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,33 +20,40 @@
             android:id="@+id/imgLocation"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginEnd="16dp"
             app:srcCompat="@drawable/ic_location_on_black_48px"/>
 
-        <TextView
-            android:id="@+id/txtIndirizzo"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/imgLocation"
-            android:layout_toEndOf="@+id/imgLocation"
-            android:layout_toLeftOf="@+id/goLayout"
-            android:layout_toRightOf="@+id/imgLocation"
-            android:layout_toStartOf="@+id/goLayout"
-            android:maxLines="2"
-            android:text="Indirizzo"
-            android:textColor="@color/black"
-            android:textSize="16dp"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imgLocation"
+            android:layout_toEndOf="@id/imgLocation"
+            android:orientation="vertical"
+            android:layout_toLeftOf="@id/goLayout"
+            android:layout_toStartOf="@id/goLayout">
 
-        <TextView
-            android:id="@+id/txtDistanza"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/txtIndirizzo"
-            android:layout_alignRight="@+id/txtIndirizzo"
-            android:layout_below="@+id/txtIndirizzo"
-            android:layout_toRightOf="@+id/imgLocation"
-            android:text="105 m"
-            android:textSize="14dp"/>
+
+            <TextView
+                android:id="@+id/txtIndirizzo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="Indirizzo"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txtDistanza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="105 m"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/goLayout"
@@ -52,34 +61,19 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="16dp">
+            android:layout_centerVertical="true">
 
-            <TextView
-                android:id="@+id/textViewGo"
+            <Button
+                android:id="@+id/btnNaviga"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="VAI"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"/>
-
-            <ImageView
-                android:id="@+id/imgNavigation"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_margin="16dp"
-                android:layout_toEndOf="@+id/textViewGo"
-                android:layout_toRightOf="@+id/textViewGo"
-                app:srcCompat="@drawable/ic_navigation_yellow_24px"/>
-
+                android:textColor="@color/colorPrimaryDark"
+                android:drawableRight="@drawable/ic_navigation_yellow_24px"
+                android:drawableEnd="@drawable/ic_navigation_yellow_24px"
+                android:text="@string/vai" />
         </RelativeLayout>
     </RelativeLayout>
-
 
     <ImageView
         android:layout_width="match_parent"
@@ -89,8 +83,5 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:background="@color/lightGrey"
-        android:contentDescription="divider"/>
-
-
+        android:background="@color/lightGrey"/>
 </RelativeLayout>

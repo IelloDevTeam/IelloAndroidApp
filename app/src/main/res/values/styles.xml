@@ -60,7 +60,8 @@
     </style>
 
     <style name="ProgBarStyle">
-        <item name="colorAccent">@color/white</item>
+        <!-- colore della barra -->
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
 

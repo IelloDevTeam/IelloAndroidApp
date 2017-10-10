@@ -18,12 +18,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity;
 import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AddressedResearch;
 import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.GeolocalizedResearch;
+import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 
 /**
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         setContentView(R.layout.activity_main);
 
         // inizializza i vari elementi del navigation drawer
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final ActionBar actionBar = getSupportActionBar();
@@ -71,13 +73,12 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navView = findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 menuItem.setChecked(false);
-                mDrawerLayout.closeDrawers();
 
                 // setta il comportamento dell'app al click dell'utente sulle voci del menù laterale
                 switch(menuItem.getItemId()) {
@@ -88,14 +89,17 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                     }
                     case R.id.nav_raggio: {
                         DialogRaggioRicerca.newInstance(MainActivity.this);
+                        mDrawerLayout.closeDrawers();
                         break;
                     }
                     case R.id.nav_personalizza: {
                         DialogStileMappa.newInstance(MainActivity.this);
+                        mDrawerLayout.closeDrawers();
                         break;
                     }
                     case R.id.nav_project: {
                         avviaDialogProject();
+                        mDrawerLayout.closeDrawers();
                         break;
                     }
                     case R.id.nav_api: {
@@ -115,32 +119,42 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
         // inizializzazione progressBar. Utilizzata come feedback all'utente durante il download
         // dei parcheggi dall'API Iello. Di default la barra viene nascosta
-        mProgBar = (FrameLayout) findViewById(R.id.clippedProgressBar);
+        mProgBar = findViewById(R.id.clippedProgressBar);
         hideProgressBar();
 
         // inizializzazione gestore della geolocalizzazione e fab. Un click nel fab permette di
         // determinare la posizione dell'utente (in maniera spesso approssimativa), sposta la mappa
         // su tale posizione e mostra i risultati della ricerca.
         mHelpLocalization = new GeolocalizedResearch(this);
-        FloatingActionButton fabGeolocalizzazione = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fabGeolocalizzazione = findViewById(R.id.fab);
         fabGeolocalizzazione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mHelpLocalization.avviaRicercaPosizione();
+                if(HelperRete.isNetworkAvailable(MainActivity.this))
+                   mHelpLocalization.avviaRicercaPosizione();
+                else
+                    Toast.makeText(MainActivity.this, R.string.no_connection,
+                            Toast.LENGTH_SHORT).show();
             }
         });
 
         // inizializzazione searchView. Questa permette di inserire un indirizzo. Questo verrà poi
         // utilizzato per cercare parcheggi per disabili in prossimità di tale indirizzo
-        mSearchView = (MaterialSearchView) findViewById(R.id.search_view);
+        mSearchView = findViewById(R.id.search_view);
         //mSearchView.setVoiceSearch(true);
         //mSearchView.showVoice(true);
         mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // al click viene avviata la ricerca
-                AddressedResearch adpi = new AddressedResearch(MainActivity.this, query);
-                adpi.execute();
+                // al click viene avviata la ricerca, se internet è disponibile
+                if(HelperRete.isNetworkAvailable(MainActivity.this)) {
+                    AddressedResearch adpi = new AddressedResearch(MainActivity.this, query);
+                    adpi.execute();
+
+                } else {
+                    Toast.makeText(MainActivity.this, R.string.no_connection,
+                            Toast.LENGTH_SHORT).show();
+                }
 
                 return false;
             }
