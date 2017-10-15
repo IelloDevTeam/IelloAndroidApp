@@ -34,12 +34,13 @@ public class Parcheggio {
      * download dei parcheggi tramite IelloApi.
      * @throws JSONException dovuta alla conversione dell'oggetto JSON in dati del parcheggio
      */
-    public Parcheggio(JSONObject jParcheggio, Context c) throws JSONException {
+    public Parcheggio(JSONObject jParcheggio) throws JSONException {
         double lat = jParcheggio.getDouble("latitudine");
         double lng = jParcheggio.getDouble("longitudine");
-
         mCoordinate = new LatLng(lat, lng);
-        mDistanza = ElencoParcheggi.getInstance().calcolaDistanzaDaOrigine(mCoordinate);
+
+        mDistanza = jParcheggio.getInt("distance");
+
         if(jParcheggio.has("street_address"))
             mIndirizzo = jParcheggio.getString("street_address");
         else

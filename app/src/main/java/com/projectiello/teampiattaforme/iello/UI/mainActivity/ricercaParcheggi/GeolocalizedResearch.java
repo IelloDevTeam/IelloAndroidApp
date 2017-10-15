@@ -77,7 +77,7 @@ public class GeolocalizedResearch {
                                 mMainActivity.setTitle(mMainActivity.getString(R.string.tua_posizione));
 
                                 AsyncDownloadParcheggi asyncDownload
-                                        = new AsyncDownloadParcheggi(mMainActivity, coordRicerca, false);
+                                        = new AsyncDownloadParcheggi(mMainActivity, coordRicerca);
                                 asyncDownload.execute();
 
                             } else {

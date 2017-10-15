@@ -2,15 +2,23 @@ package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AsyncDownloadParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
+import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 import com.projectiello.teampiattaforme.iello.utilities.MappaGoogle;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,10 +31,12 @@ import java.util.Locale;
  * dei markers al download dei parcheggi da Iello API.
  */
 
-public class MappaMain extends MappaGoogle {
+public class MappaMain extends MappaGoogle
+        implements GoogleMap.OnMarkerClickListener, GoogleMap.OnMapClickListener {
 
     // lista dei markers presenti nella mappa
     private List<Marker> mListMarker = new ArrayList<>();
+    private Marker mPosizioneUtente;
 
     // riferimento all'activity generatrice
     private MainActivity mMainActivity;
@@ -41,6 +51,15 @@ public class MappaMain extends MappaGoogle {
         mMainActivity = mainActivity;
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        super.onMapReady(googleMap);
+        getMappaGoogle().setOnMarkerClickListener(this);
+        getMappaGoogle().setOnMapClickListener(this);
+        AsyncDownloadParcheggi adp
+                = new AsyncDownloadParcheggi(mMainActivity, MappaGoogle.COORD_INIZIALI);
+        adp.execute();
+    }
 
     /**
      * Imposta un marker per ogni parcheggio, e se disponibile, per la posizione attuale
@@ -50,6 +69,9 @@ public class MappaMain extends MappaGoogle {
         for(Marker m : mListMarker)
             m.remove();
         mListMarker.clear();
+        if(mPosizioneUtente != null)
+            mPosizioneUtente.remove();
+        mPosizioneUtente = null;
 
         // aggiungi un marker per ogni posizione
         for (Parcheggio p : ElencoParcheggi.getInstance().getListParcheggi()) {
@@ -58,7 +80,7 @@ public class MappaMain extends MappaGoogle {
             Marker marker = getMappaGoogle().addMarker(new MarkerOptions()
                     .position(coordParcheggio)
                     .title(p.getIndirizzoUI())
-                    .icon(BitmapDescriptorFactory.defaultMarker(45)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(52)));
 
             mListMarker.add(marker);
         }
@@ -67,24 +89,45 @@ public class MappaMain extends MappaGoogle {
         if(ElencoParcheggi.getInstance().getCoordAttuali() != COORD_INIZIALI) {
             LatLng coordUsr = ElencoParcheggi.getInstance().getCoordAttuali();
 
-            // trova l'indirizzo corrispondente alla posizione dell'utente tramite
-            // Google Geocoding API
-            String indirizzo;
-            Geocoder geocoder = new Geocoder(mMainActivity, Locale.getDefault());
-            try {
-                List<Address> addresses
-                        = geocoder.getFromLocation(coordUsr.latitude, coordUsr.longitude, 1);
-                indirizzo = mMainActivity.getString(R.string.tua_posizione) + ", " + addresses.get(0).getAddressLine(0);
-            } catch (IOException e) {
-                e.printStackTrace();
-                indirizzo = mMainActivity.getString(R.string.tua_posizione);
-            }
-
             // posizionamento del marker, impostato con l'indirizzo dell'utente come titolo
-            Marker marker = getMappaGoogle().addMarker(new MarkerOptions()
+            mPosizioneUtente = getMappaGoogle().addMarker(new MarkerOptions()
                     .position(ElencoParcheggi.getInstance().getCoordAttuali())
-                    .title(indirizzo));
-            mListMarker.add(marker);
+                    .title(mMainActivity.getString(R.string.tua_posizione)));
         }
+    }
+
+
+    /**
+     * distingue la tipologia del marker passato in ingresso.
+     */
+    private boolean isParcheggio(Marker markerDaTestare) {
+
+        for(Marker markerDaLista : mListMarker) {
+            if (markerDaTestare.equals(markerDaLista))
+                return true;
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        muoviCamera(marker.getPosition());
+        if(isParcheggio(marker)
+                && mMainActivity.getFragmentManager().findFragmentByTag("parchFrag") == null)
+            ParcheggiFragment.newInstance(mMainActivity, marker.getPosition());
+        else {
+            ParcheggiFragment.clearFragment(mMainActivity);
+            Toast.makeText(mMainActivity, marker.getTitle(), Toast.LENGTH_SHORT).show();
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        ParcheggiFragment.clearFragment(mMainActivity);
     }
 }

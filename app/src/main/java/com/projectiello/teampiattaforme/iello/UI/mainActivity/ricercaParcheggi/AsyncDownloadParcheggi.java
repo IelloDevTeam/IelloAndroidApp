@@ -37,19 +37,15 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
     private LatLng mCoordRicerca;
     private int mRange;
 
-    private boolean mAtStart;
-
 
     /**
      * Costruttore con popolamento degli attributi. AtStart distingue se il download viene
      * effettuato all'avvio dell'app; il tal caso bisogna eseguire in maniera particolare.
      */
-    public AsyncDownloadParcheggi(MainActivity activity, LatLng coordinateRicerca, boolean atStart) {
+    public AsyncDownloadParcheggi(MainActivity activity, LatLng coordinateRicerca) {
         mMainActivity = activity;
         mCoordRicerca = coordinateRicerca;
         mRange = HelperPreferences.getRange(activity);
-
-        mAtStart = atStart;
     }
 
 
@@ -60,6 +56,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
     protected void onPreExecute() {
         if(HelperRete.isNetworkAvailable(mMainActivity))
             mMainActivity.getMappa().muoviCamera(mCoordRicerca);
+        ParcheggiFragment.clearFragment(mMainActivity);
     }
 
 
@@ -97,8 +94,6 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
         if(MainActivity.isInForeground()) {
             switch (result) {
                 case RICERCA_COMPLETATA:
-                    if (!mAtStart)
-                        ParcheggiFragment.newInstance(mMainActivity);
                     mMainActivity.getMappa().settaMarkers();
                     break;
 
@@ -147,7 +142,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
                 ElencoParcheggi.getInstance().getListParcheggi().clear();
 
                 for(int i = 0; i < jArrayParcheggi.length(); i++) {
-                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i), mMainActivity);
+                    Parcheggio newPark = new Parcheggio(jArrayParcheggi.getJSONObject(i));
                     ElencoParcheggi.getInstance().getListParcheggi().add(newPark);
                 }
             }

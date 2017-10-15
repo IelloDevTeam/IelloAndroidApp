@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
+import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.RecyclerItemClickListener;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
@@ -36,16 +38,24 @@ public class ParcheggiFragment extends Fragment {
     // componenti del fragment
     private Button mBtnEspandi;
     private ExpandableRelativeLayout mExpLayParcheggi;
+    private Parcheggio mParkSelezionato;
 
 
     /**
      * Metodo statico per instanziare più facilmente il fragment quando necessario
      */
-    public static void newInstance(MainActivity activity) {
+    public static void newInstance(MainActivity activity, LatLng coordinate) {
         ParcheggiFragment newFragment = new ParcheggiFragment();
+        // Supply num input as an argument.
+        Bundle args = new Bundle();
+        args.putDouble("lat", coordinate.latitude);
+        args.putDouble("lng", coordinate.longitude);
+        newFragment.setArguments(args);
+
+
         FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_parcheggi_container, newFragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.replace(R.id.fragment_parcheggi_container, newFragment, "indirizzoParcheggio");
+        //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
         activity.setFragmentAttivo(newFragment);
     }
@@ -59,11 +69,21 @@ public class ParcheggiFragment extends Fragment {
             ParcheggiFragment fragAttivo = activity.getFragmentAttivo();
             FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
             ft.remove(fragAttivo);
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        double lat = getArguments().getDouble("lat");
+        double lng = getArguments().getDouble("lng");
+        LatLng coordinate = new LatLng(lat, lng);
+
+        mParkSelezionato = ElencoParcheggi .getInstance().findParcheggioByCoordinate(coordinate);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,22 +106,21 @@ public class ParcheggiFragment extends Fragment {
         // 2. inizializza i componenti del fragment
 
         // inizializza il primo elemento
-        Parcheggio piuVicino = ElencoParcheggi.getInstance().getParkPiuVicino();
-        txtIndirizzoPP.setText(piuVicino.getIndirizzoUI());
-        txtDistanzaPP.setText(piuVicino.getDistanzaUI());
+        txtIndirizzoPP.setText(mParkSelezionato.getIndirizzoUI());
+        txtDistanzaPP.setText(mParkSelezionato.getDistanzaUI());
         layoutPP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sposta la mappa sulla posizione
                 ((MainActivity) getActivity()).getMappa()
-                        .muoviCamera(ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate());
+                        .muoviCamera(mParkSelezionato.getCoordinate());
             }
         });
         btnNavigaPP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double lat = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().latitude;
-                double lng = ElencoParcheggi.getInstance().getParkPiuVicino().getCoordinate().longitude;
+                double lat = mParkSelezionato.getCoordinate().latitude;
+                double lng = mParkSelezionato.getCoordinate().longitude;
 
                 String uri = "http://maps.google.com/maps?daddr="+ lat +"," + lng;
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
@@ -164,7 +183,7 @@ public class ParcheggiFragment extends Fragment {
         private List<Parcheggio> mParcheggiRecycler = new ArrayList<>();
 
         private ParcheggiAdapter() {
-            mParcheggiRecycler = ElencoParcheggi.getInstance().getListParcheggiRecycler();
+            mParcheggiRecycler = ElencoParcheggi.getInstance().getListParcheggi();
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {

@@ -38,29 +38,17 @@ public class ElencoParcheggi {
     }
 
 
-    /**
-     *  Restituisce la lista utilizzata di parcheggi priva del parcheggio più vicino. Utilizzata nel
-     *  recyclerView del fragmentParcheggi.
-     */
-    public List<Parcheggio> getListParcheggiRecycler() {
-        List<Parcheggio> listRecycler = new ArrayList<>();
+    public Parcheggio findParcheggioByCoordinate(LatLng coordinate) {
+        Parcheggio risultato = null;
 
-        for (Parcheggio p : mListParcheggi)
-            listRecycler.add(p);
+        for(Parcheggio p: mListParcheggi) {
+            if(p.getCoordinate().latitude == coordinate.latitude
+                    && p.getCoordinate().longitude == coordinate.longitude)
+                risultato = p;
+        }
 
-        listRecycler.remove(0);
-
-        return listRecycler;
+        return risultato;
     }
-
-
-    /**
-     * Restituisce il parcheggio più vicino all'utente. Utilizzato nel fragmentParcheggi.
-     */
-    public Parcheggio getParkPiuVicino() {
-        return mListParcheggi.get(0);
-    }
-
 
     public LatLng getCoordAttuali() {
         return mCoordAttuali;
@@ -68,40 +56,6 @@ public class ElencoParcheggi {
 
     public void setCoordAttuali(LatLng mCoordAttuali) {
         this.mCoordAttuali = mCoordAttuali;
-    }
-
-
-    /**
-     * Calcola la distanza in metri di un parcheggio dall'origine
-     */
-    int calcolaDistanzaDaOrigine(LatLng coordParcheggio) {
-
-        double lat1 = mCoordAttuali.latitude;
-        double lon1 = mCoordAttuali.longitude;
-
-        double lat2 = coordParcheggio.latitude;
-        double lon2 = coordParcheggio.longitude;
-
-        double theta = lon1 - lon2;
-        double dist = Math.sin(deg2rad(lat1))
-                * Math.sin(deg2rad(lat2))
-                + Math.cos(deg2rad(lat1))
-                * Math.cos(deg2rad(lat2))
-                * Math.cos(deg2rad(theta));
-        dist = Math.acos(dist);
-        dist = rad2deg(dist);
-        dist = dist * 60 * 1.1515;
-
-        double distInM = dist * 1000;
-        return (int) distInM;
-    }
-
-    private double deg2rad(double deg) {
-        return (deg * Math.PI / 180.0);
-    }
-
-    private double rad2deg(double rad) {
-        return (rad * 180.0 / Math.PI);
     }
 
 
