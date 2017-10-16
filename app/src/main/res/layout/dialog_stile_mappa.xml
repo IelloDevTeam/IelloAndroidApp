@@ -11,34 +11,33 @@
         android:layout_height="wrap_content"
         android:id="@+id/rgpStili">
 
-
         <RadioButton
             android:id="@+id/rdb1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Standard" />
+            android:text="@string/standard" />
 
         <RadioButton
             android:id="@+id/rdb2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Silver" />
+            android:text="@string/silver" />
 
         <RadioButton
             android:id="@+id/rdb3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Night" />
+            android:text="@string/night" />
 
         <RadioButton
             android:id="@+id/rdb4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="Dark" />
+            android:text="@string/dark" />
 
     </RadioGroup>
 </FrameLayout>

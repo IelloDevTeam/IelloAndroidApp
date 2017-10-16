@@ -17,34 +17,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="100 metri" />
+            android:text="@string/_100_metri" />
 
         <RadioButton
             android:id="@+id/rdb200m"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="200 metri" />
+            android:text="@string/_200_metri" />
 
         <RadioButton
             android:id="@+id/rdb500m"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="500 metri" />
+            android:text="@string/_500_metri" />
 
         <RadioButton
             android:id="@+id/rdb1km"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="1 chilometro" />
+            android:text="@string/_1_chilometro" />
 
         <RadioButton
             android:id="@+id/rdb10km"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="10 chilometri" />
+            android:text="@string/_10_chilometri" />
     </RadioGroup>
 </FrameLayout>

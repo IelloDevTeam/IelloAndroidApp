@@ -78,4 +78,17 @@
     <string name="imposta">Imposta</string>
     <string name="annulla">Annulla</string>
     <string name="desc_raggio_ricerca">Seleziona il raggio entro il quale visualizzare i parcheggi nelle vicinanze.</string>
+    <string name="parcheggio_selezionato">Parcheggio selezionato</string>
+    <string name="parcheggi_per_disabili">Parcheggi per disabili</string>
+
+    <string name="dark">Dark</string>
+    <string name="night">Night</string>
+    <string name="silver">Silver</string>
+    <string name="standard">Standard</string>
+
+    <string name="_100_metri">100 metri</string>
+    <string name="_200_metri">200 metri</string>
+    <string name="_500_metri">500 metri</string>
+    <string name="_1_chilometro">1 chilometro</string>
+    <string name="_10_chilometri">10 chilometri</string>
 </resources>
