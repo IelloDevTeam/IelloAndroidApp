@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioGroup;
 
 import com.projectiello.teampiattaforme.iello.R;
@@ -45,8 +44,7 @@ public class DialogRaggioRicerca extends DialogFragment {
         // inizializza l'interfaccia del dialog
         builder.setIcon(R.drawable.ic_straighten_black_24px);
         builder.setTitle(getString(R.string.raggio_ricerca));
-        builder.setMessage("Seleziona il raggio entro il quale visualizzare i parcheggi " +
-                "nelle vicinanze.");
+        builder.setMessage(R.string.desc_raggio_ricerca);
 
         mGroup = dialogView.findViewById(R.id.rgpRaggi);
 
@@ -71,20 +69,34 @@ public class DialogRaggioRicerca extends DialogFragment {
         }
 
 
-        // button positivo: gestito onStart()
-        builder.setPositiveButton("Imposta", new DialogInterface.OnClickListener() {
+        // button positivo: salva il nuovo risultato
+        builder.setPositiveButton(R.string.imposta, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                /* Do nothing here because we override this button later to change the close behaviour.
-                 * However, we still need this because on older versions of Android unless we
-                 * pass a handler the button doesn't get instantiated
-                 */
+                switch(mGroup.getCheckedRadioButtonId()) {
+                    case R.id.rdb100m:
+                        HelperPreferences.setRange(getActivity(), 100);
+                        break;
+                    case R.id.rdb200m:
+                        HelperPreferences.setRange(getActivity(), 200);
+                        break;
+                    case R.id.rdb500m:
+                        HelperPreferences.setRange(getActivity(), 500);
+                        break;
+                    case R.id.rdb1km:
+                        HelperPreferences.setRange(getActivity(), 1000);
+                        break;
+                    case R.id.rdb10km:
+                        HelperPreferences.setRange(getActivity(), 10000);
+                        break;
+                }
+                dismiss();
             }
         });
 
         // Button cancella: esci
-        builder.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.annulla, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dismiss();
             }
@@ -92,43 +104,5 @@ public class DialogRaggioRicerca extends DialogFragment {
 
         builder.setView(dialogView);
         return builder.create();
-
-    } // end onCreateDialog
-
-
-    /** override per gestire il Button aggiungi senza far chiudere il dialog */
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-        final AlertDialog d = (AlertDialog)getDialog();
-        if(d != null) {
-            Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // salva il nuovo risultato
-                    switch(mGroup.getCheckedRadioButtonId()) {
-                        case R.id.rdb100m:
-                            HelperPreferences.setRange(getActivity(), 100);
-                            break;
-                        case R.id.rdb200m:
-                            HelperPreferences.setRange(getActivity(), 200);
-                            break;
-                        case R.id.rdb500m:
-                            HelperPreferences.setRange(getActivity(), 500);
-                            break;
-                        case R.id.rdb1km:
-                            HelperPreferences.setRange(getActivity(), 1000);
-                            break;
-                        case R.id.rdb10km:
-                            HelperPreferences.setRange(getActivity(), 10000);
-                            break;
-                    }
-                    dismiss();
-                } // end if
-
-            });
-        }
     }
 }

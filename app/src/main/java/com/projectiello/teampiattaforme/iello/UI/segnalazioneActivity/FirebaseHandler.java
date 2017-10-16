@@ -91,19 +91,9 @@ class FirebaseHandler implements OnCompleteListener<AuthResult> {
     {
         if (location != null  && getFirebaseUser() != null) {
 
-            /* todo ricava l'indirizzo della coordinata tramite Google Geocoding API, se disponibile
-            String indirizzo;
-            Geocoder geocoder = new Geocoder(mSegnalActivity, Locale.getDefault());
-            try {
-                List<Address> addresses = geocoder.getFromLocation(pos.latitude, pos.longitude, 1);
-                indirizzo = addresses.get(0).getAddressLine(0);
-            } catch (IOException e) {
-                e.printStackTrace();
-                indirizzo = "Indirizzo non disponibile";
-            }
-
+            // todo ricava l'indirizzo della coordinata tramite Google Geocoding API, se disponibile
             // todo carica anche l'indirizzo nell'oggetto segnalazione prima dell'invio
-            */
+            // todo segnalazione con api?
 
             // crea la segnalzaione...
             Segnalazione segnalazione = new Segnalazione(

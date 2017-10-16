@@ -7,6 +7,122 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+
+
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expParcheggioSelezionato"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ael_expanded="false"
+        app:ael_duration="500"
+        android:background="@color/clearBackground"
+        app:ael_interpolator="accelerate"
+        app:ael_orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/lightGrey"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Parcheggio selezionato"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="16dp"/>
+
+
+        <RelativeLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:id="@+id/item_parcheggio"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/containerAddress"
+                android:layout_margin="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imgLocation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:srcCompat="@drawable/ic_location_on_black_48px"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/imgLocation"
+                    android:layout_toEndOf="@id/imgLocation"
+                    android:orientation="vertical"
+                    android:layout_toLeftOf="@+id/goLayout"
+                    android:layout_toStartOf="@+id/goLayout">
+
+
+                    <TextView
+                        android:id="@+id/txtIndirizzo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="Indirizzo\nindirizzo"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/txtDistanza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="105 m"
+                        android:textSize="14sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/goLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true">
+
+                    <Button
+                        android:id="@+id/btnNaviga"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:drawableRight="@drawable/ic_navigation_yellow_24px"
+                        android:drawableEnd="@drawable/ic_navigation_yellow_24px"
+                        android:text="@string/vai" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"/>
     <Button
         android:id="@+id/btnEspandi"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -25,96 +141,7 @@
         android:background="@color/lightGrey"
         android:contentDescription="@string/divider" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parcheggio selezionato"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="16dp"/>
 
-
-    <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:id="@+id/item_parcheggio"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_height="wrap_content">
-
-        <RelativeLayout
-            android:id="@+id/containerAddress"
-            android:layout_margin="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imgLocation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="16dp"
-                android:layout_marginEnd="16dp"
-                app:srcCompat="@drawable/ic_location_on_black_48px"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/imgLocation"
-                android:layout_toEndOf="@id/imgLocation"
-                android:orientation="vertical"
-                android:layout_toLeftOf="@+id/goLayout"
-                android:layout_toStartOf="@+id/goLayout">
-
-
-                <TextView
-                    android:id="@+id/txtIndirizzo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="Indirizzo"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/txtDistanza"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="105 m"
-                    android:textSize="14sp"
-                    tools:ignore="HardcodedText" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/goLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
-
-                <Button
-                    android:id="@+id/btnNaviga"
-                    style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:drawableRight="@drawable/ic_navigation_yellow_24px"
-                    android:drawableEnd="@drawable/ic_navigation_yellow_24px"
-                    android:text="@string/vai" />
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/containerAddress"
-            android:background="@color/lightGrey"/>
-    </RelativeLayout>
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/expRecParcheggi"

@@ -37,6 +37,7 @@ public class AddressedResearch extends AsyncTask<Void, String, String> {
     // costanti di return
     private static final String RICERCA_COMPLETATA = "RICERCA_COMPLETATA";
     private static final String NO_INTERNET = "NO_INTERNET";
+    private static final String ERRORE = "ERRORE";
 
 
 
@@ -108,6 +109,10 @@ public class AddressedResearch extends AsyncTask<Void, String, String> {
      */
     @Override
     protected void onPostExecute(String result) {
+        if(result == null) {
+            result = ERRORE;
+        }
+
         switch(result) {
             case RICERCA_COMPLETATA: {
                 ElencoParcheggi.getInstance().setCoordAttuali(mCoordinateCercate);

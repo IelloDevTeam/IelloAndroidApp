@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         if (isFirstLaunch) {
             // primo accesso assoluto: vai a introScreen
             HelperPreferences.setFirstTimeLaunch(this, false);
-            // intro
+
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
             finish();

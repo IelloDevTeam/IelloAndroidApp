@@ -1,17 +1,9 @@
 package com.projectiello.teampiattaforme.iello.dataLogic;
 
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
-
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by riccardomaldini on 25/09/17.

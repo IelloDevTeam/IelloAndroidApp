@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioGroup;
 
 import com.projectiello.teampiattaforme.iello.R;
@@ -45,7 +44,7 @@ public class DialogStileMappa extends DialogFragment {
         // inizializza l'interfaccia del dialog
         builder.setIcon(R.drawable.ic_layers_black_24px);
         builder.setTitle(getString(R.string.personalizza_mappa));
-        builder.setMessage("Seleziona i colori della mappa nella schermata principale.");
+        builder.setMessage(R.string.desc_personalizza_mappa);
 
         mGroup = dialogView.findViewById(R.id.rgpStili);
 
@@ -66,21 +65,32 @@ public class DialogStileMappa extends DialogFragment {
                 break;
         }
 
-
-        // button positivo: gestito onStart()
-        builder.setPositiveButton("Imposta", new DialogInterface.OnClickListener() {
+        // button positivo: salva il nuovo risultato
+        builder.setPositiveButton(R.string.imposta, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                /* Do nothing here because we override this button later to change the close behaviour.
-                 * However, we still need this because on older versions of Android unless we
-                 * pass a handler the button doesn't get instantiated
-                 */
+                switch(mGroup.getCheckedRadioButtonId()) {
+                    case R.id.rdb1:
+                        HelperPreferences.setStileMappa(getActivity(), R.raw.style_standard);
+                        break;
+                    case R.id.rdb2:
+                        HelperPreferences.setStileMappa(getActivity(), R.raw.style_silver);
+                        break;
+                    case R.id.rdb3:
+                        HelperPreferences.setStileMappa(getActivity(), R.raw.style_night);
+                        break;
+                    case R.id.rdb4:
+                        HelperPreferences.setStileMappa(getActivity(), R.raw.style_dark);
+                        break;
+                }
+                ((MainActivity) getActivity()).getMappa().aggiornaStile();
+                dismiss();
             }
         });
 
         // Button cancella: esci
-        builder.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.annulla, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dismiss();
             }
@@ -88,42 +98,5 @@ public class DialogStileMappa extends DialogFragment {
 
         builder.setView(dialogView);
         return builder.create();
-
-    } // end onCreateDialog
-
-
-    /** override per gestire il Button aggiungi senza far chiudere il dialog */
-    @Override
-    public void onStart()
-    {
-        super.onStart();
-        final AlertDialog d = (AlertDialog)getDialog();
-        if(d != null) {
-            Button positiveButton = d.getButton(Dialog.BUTTON_POSITIVE);
-            positiveButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // salva il nuovo risultato
-                    switch(mGroup.getCheckedRadioButtonId()) {
-                        case R.id.rdb1:
-                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_standard);
-                            break;
-                        case R.id.rdb2:
-                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_silver);
-                            break;
-                        case R.id.rdb3:
-                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_night);
-                            break;
-                        case R.id.rdb4:
-                            HelperPreferences.setStileMappa(getActivity(), R.raw.style_dark);
-                            break;
-                    }
-                    ((MainActivity) getActivity()).getMappa().aggiornaStile();
-                    dismiss();
-
-                } // end if
-
-            });
-        }
     }
 }

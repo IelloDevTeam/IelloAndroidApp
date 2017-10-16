@@ -74,4 +74,8 @@
     <string name="non_connesso_db">Non sei connesso al DB. Non puoi inviare segnalazioni.</string>
     <string name="collegando_al_db">Mi sto collegando al DB Iello&#8230;</string>
     <string name="vai">Vai</string>
+    <string name="desc_personalizza_mappa">Seleziona i colori della mappa nella schermata principale.</string>
+    <string name="imposta">Imposta</string>
+    <string name="annulla">Annulla</string>
+    <string name="desc_raggio_ricerca">Seleziona il raggio entro il quale visualizzare i parcheggi nelle vicinanze.</string>
 </resources>

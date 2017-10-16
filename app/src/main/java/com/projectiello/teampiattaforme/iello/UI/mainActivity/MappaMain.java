@@ -1,7 +1,5 @@
 package com.projectiello.teampiattaforme.iello.UI.mainActivity;
 
-import android.location.Address;
-import android.location.Geocoder;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -13,17 +11,10 @@ import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AsyncDownloadParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
-import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 import com.projectiello.teampiattaforme.iello.utilities.MappaGoogle;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by riccardomaldini on 08/10/17.
@@ -56,6 +47,8 @@ public class MappaMain extends MappaGoogle
         super.onMapReady(googleMap);
         getMappaGoogle().setOnMarkerClickListener(this);
         getMappaGoogle().setOnMapClickListener(this);
+
+        // vengono cercati i parcheggi presso urbino all'avvio
         AsyncDownloadParcheggi adp
                 = new AsyncDownloadParcheggi(mMainActivity, MappaGoogle.COORD_INIZIALI);
         adp.execute();
@@ -69,6 +62,7 @@ public class MappaMain extends MappaGoogle
         for(Marker m : mListMarker)
             m.remove();
         mListMarker.clear();
+
         if(mPosizioneUtente != null)
             mPosizioneUtente.remove();
         mPosizioneUtente = null;
@@ -87,8 +81,6 @@ public class MappaMain extends MappaGoogle
 
         // aggiungi un marker nella posizione dell'utente
         if(ElencoParcheggi.getInstance().getCoordAttuali() != COORD_INIZIALI) {
-            LatLng coordUsr = ElencoParcheggi.getInstance().getCoordAttuali();
-
             // posizionamento del marker, impostato con l'indirizzo dell'utente come titolo
             mPosizioneUtente = getMappaGoogle().addMarker(new MarkerOptions()
                     .position(ElencoParcheggi.getInstance().getCoordAttuali())
@@ -98,7 +90,7 @@ public class MappaMain extends MappaGoogle
 
 
     /**
-     * distingue la tipologia del marker passato in ingresso.
+     * distingue i marker riferiti ai parcheggi dal marker riferito alla posizione dell'utente.
      */
     private boolean isParcheggio(Marker markerDaTestare) {
 
@@ -111,23 +103,38 @@ public class MappaMain extends MappaGoogle
     }
 
 
+    /**
+     * Quando viene cliccato un marker, se questo è un parcheggio, vengono mostrati i dettagli di
+     * quel parcheggio e centrata la mappa su di esso. Se il marker indica la posizione dell'utente,
+     * viene mostrato un toast, e centrata la mappa su quella posizione.
+     */
     @Override
     public boolean onMarkerClick(Marker marker) {
 
         muoviCamera(marker.getPosition());
-        if(isParcheggio(marker)
-                && mMainActivity.getFragmentManager().findFragmentByTag("parchFrag") == null)
-            ParcheggiFragment.newInstance(mMainActivity, marker.getPosition());
-        else {
-            ParcheggiFragment.clearFragment(mMainActivity);
+
+        if(isParcheggio(marker)) {
+            if (mMainActivity.getFragmentAttivo() != null)
+                mMainActivity.getFragmentAttivo().setParcheggioSelezionato(marker.getPosition());
+
+        } else {
+            // il marker è la propria posizione
+            if(mMainActivity.getFragmentAttivo() != null)
+                mMainActivity.getFragmentAttivo().nascondiParcheggioSelezionato();
             Toast.makeText(mMainActivity, marker.getTitle(), Toast.LENGTH_SHORT).show();
         }
 
         return true;
     }
 
+
+    /**
+     * Quando l'utente clicca su un punto qualunque della mappa, vengono nascosti i layout del
+     * fragment per mosttare una porzione più grande di mappa.
+     */
     @Override
     public void onMapClick(LatLng latLng) {
-        ParcheggiFragment.clearFragment(mMainActivity);
+        if(mMainActivity.getFragmentAttivo() != null)
+            mMainActivity.getFragmentAttivo().nascondiParcheggioSelezionato();
     }
 }

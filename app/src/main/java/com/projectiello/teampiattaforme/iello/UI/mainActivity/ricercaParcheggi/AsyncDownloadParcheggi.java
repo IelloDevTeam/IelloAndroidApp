@@ -95,6 +95,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
             switch (result) {
                 case RICERCA_COMPLETATA:
                     mMainActivity.getMappa().settaMarkers();
+                    ParcheggiFragment.newInstance(mMainActivity);
                     break;
 
                 case COMPLETATA_NO_RIS:
@@ -104,6 +105,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
                     break;
 
                 case NO_INTERNET:
+                    ParcheggiFragment.clearFragment(mMainActivity);
                     Toast.makeText(mMainActivity, R.string.no_connection, Toast.LENGTH_SHORT).show();
                     break;
             }

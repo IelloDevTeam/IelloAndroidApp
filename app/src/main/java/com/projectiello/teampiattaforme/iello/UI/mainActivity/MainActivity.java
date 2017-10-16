@@ -32,7 +32,8 @@ import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
  * Created by riccardomaldini on 25/09/17.
  * Activity principale.
  */
-public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class MainActivity extends AppCompatActivity
+        implements ActivityCompat.OnRequestPermissionsResultCallback {
 
     // variabile di controllo che permette di verificare senza invocare l'istanza se MainActivity
     // è attualmente in foreground
@@ -98,7 +99,16 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
                         break;
                     }
                     case R.id.nav_project: {
-                        avviaDialogProject();
+                        // mostra un dialog con la descrizione del progetto
+                        AlertDialog.Builder alertProject = new AlertDialog.Builder(MainActivity.this);
+
+                        alertProject.setIcon(R.drawable.ic_help_outline_black_24px);
+                        alertProject.setTitle(R.string.project_iello);
+                        alertProject.setMessage(R.string.project_iello_description);
+                        alertProject.setPositiveButton(R.string.fantastico, null);
+
+                        AlertDialog alert = alertProject.create();
+                        alert.show();
                         mDrawerLayout.closeDrawers();
                         break;
                     }
@@ -191,22 +201,6 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
         return mMainInForeground;
     }
 
-    /**
-     * Metodo per creare il dialog che descrive project Iello all'utente.
-     */
-    private void avviaDialogProject() {
-
-        AlertDialog.Builder alertProject = new AlertDialog.Builder(this);
-
-        alertProject.setIcon(R.drawable.ic_help_outline_black_24px);
-        alertProject.setTitle(R.string.project_iello);
-        alertProject.setMessage(R.string.project_iello_description);
-        alertProject.setPositiveButton(R.string.fantastico, null);
-
-        AlertDialog alert = alertProject.create();
-        alert.show();
-    }
-
 
     /**
      * Metodo invocato al click sull'hamburger. Apre il navigation drawer.
@@ -224,9 +218,9 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
 
     /**
      * Invocato nel momento in cui l'utente approva un permesso; nel nostro caso la geolocalizzazione.
-     * Tal permesso viene richiesto per individuare i parcheggi in prossimità della posizione dell'
+     * Tale permesso viene richiesto per individuare i parcheggi in prossimità della posizione dell'
      * utente. Quindi quando il permesso viene approvato, viene invocata una ricerca basata
-     * sulla posizione.
+     * sulla posizione dell'utente.
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
