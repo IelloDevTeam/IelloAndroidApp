@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // inizializzazione della mappa mostrata nell'activity
-        mMappa = new MappaMain(this);
-
         // inizializzazione progressBar. Utilizzata come feedback all'utente durante il download
         // dei parcheggi dall'API Iello. Di default la barra viene nascosta
         mProgBar = findViewById(R.id.clippedProgressBar);
         hideProgressBar();
+
+        // inizializzazione della mappa mostrata nell'activity
+        mMappa = new MappaMain(this);
 
         // inizializzazione gestore della geolocalizzazione e fab. Un click nel fab permette di
         // determinare la posizione dell'utente (in maniera spesso approssimativa), sposta la mappa

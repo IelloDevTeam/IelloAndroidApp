@@ -54,6 +54,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
      */
     @Override
     protected void onPreExecute() {
+        mMainActivity.showProgressBar();
         if(HelperRete.isNetworkAvailable(mMainActivity))
             mMainActivity.getMappa().muoviCamera(mCoordRicerca);
         ParcheggiFragment.clearFragment(mMainActivity);
