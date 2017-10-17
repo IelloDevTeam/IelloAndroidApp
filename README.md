@@ -1,14 +1,15 @@
-# Iello App per Android #
+# Iello App per Android (ReadMe in lavorazione) #
 
 Questa repository contiene il codice dell'app Android di Project Iello. L'app consente agli utenti di cercare i posteggi per disabili situati in 
 corrispondenza della propria posizione, o di un determinato indirizzo. Consente inoltre agli utenti di segnalare eventuali posteggi da loro 
 individuati.
-* readme in lavorazione
+
 
 ## Integrazione con Iello API ##
 L'App Iello sfrutta le funzioni fornite da [Iello API](https://bitbucket.org/piattaformeteam/iello-api "Iello API Repo") per reperire i dati 
 relativi ai parcheggi. Viene utilizzata la funzione per il download dei dati dei parcheggi attorno ad una data coordinata ad esempio, o per 
 segnalare un posteggio.
+
 
 ## Funzionalità dell'applicazione ##
 
@@ -39,16 +40,33 @@ un punto nella mappa ed inviarlo ad un database remoto utilizzato per raccoglier
 
 
 ## Librerie aggiuntive utilizzate ##
-* *[Android Support Design Libraries](https://developer.android.com/topic/libraries/support-library/index.html)*:
+* **[Android Support Design Libraries](https://developer.android.com/topic/libraries/support-library/index.html)**:
   utilizzato per la creazione delle interfacce secondo le [linee guida di design Google](https://material.io/guidelines/);
-* Google Play Services for Location and Maps
-* Firebase Core, Authentication and Database Services
-* Volley
-* AppIntro by Paolo Rotolo
-* ExpandableLayout by Aakira
-* MaterialSearchView by Miguel Catalan
+* **[Google Maps API](https://developers.google.com/maps/documentation/android-api/)**:
+  utilizzato per sfruttare le mappe Google e le relative funzioni, geocoding e reverse geocoding;
+* **[Firebase Core, Authentication and Database Services](https://firebase.google.com/docs/reference/android/packages)**:
+  utilizzato per interagire con il database remoto Firebase;
+* **[Volley](https://github.com/google/volley)**: 
+  API sviluppata da Google per effettuare Web request in modo più facile, veloce e sicuro;
+* **[AppIntro by Paolo Rotolo](https://github.com/apl-devs/AppIntro)**: utilizzata per creare la schermata introduttiva;
+* **[ExpandableLayout by Aakira](https://github.com/AAkira/ExpandableLayout)**: utilizzata per i layout espandibili;
+* **[MaterialSearchView by Miguel Catalan](https://github.com/MiguelCatalan/MaterialSearchView)**: utilizzata per la barra di ricerca.
+
 
 ## Licenza ##
+Copyright (C) 2017 TeamPiattaforme
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 ## Contatti & Credits ##
