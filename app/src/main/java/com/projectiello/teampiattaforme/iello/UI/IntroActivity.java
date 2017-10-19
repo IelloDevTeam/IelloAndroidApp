@@ -36,21 +36,21 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slide_2_title),
                 getString(R.string.slide_2_desc),
-                R.mipmap.ic_launcher,
+                R.drawable.ic_my_location_white_192dp,
                 ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null)));
 
 
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slide_3_title),
                 getString(R.string.slide_3_desc),
-                R.mipmap.ic_launcher,
+                R.drawable.ic_search_white_192dp,
                 ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null)));
 
 
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slide_4_title),
                 getString(R.string.slide_4_desc),
-                R.mipmap.ic_launcher,
+                R.drawable.logo_uniurb_192px,
                 ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null)));
 
 
