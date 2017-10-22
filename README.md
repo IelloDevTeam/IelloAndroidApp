@@ -24,7 +24,7 @@ con impostata la funzione di navigazione dalla propria posizione al posteggio se
 
 
 <img src="Screen/geo1.png" width="200" />
-![geo1](Screen/geo1.png){:height="36px" width="36px"}. ![geo2](Screen/geo2.png =250x50) ![geo3](Screen/geo3.png =250x50)
+![geo1](Screen/geo1.png | width=100). ![geo2](Screen/geo2.png =250x50) ![geo3](Screen/geo3.png =250x50)
 
 
 
