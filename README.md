@@ -22,6 +22,8 @@ Quindi, se sono presenti dei posteggi nelle vicinanze, vengono mostrati nella ma
 l'indirizzo e la distanza dalla propria posizione. Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, 
 con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato.
 
+![geo1](Screen/geo1.png)
+
 ### Ricerca tramite indirizzo ###
 La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qualunque, tramite la funzione di ricerca. Premendo sulla lente di 
 ingrandimento in alto a destra, viene mostrata una casella di ricerca, che permette di inserire un indirizzo. Questo viene interpretato tramite 
