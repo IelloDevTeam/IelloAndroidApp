@@ -266,6 +266,8 @@ public class ParcheggiFragment extends Fragment {
                             .muoviCamera(parcheggio.getCoordinate());
                     // seleziona il parcheggio
                     setParcheggioSelezionato(parcheggio.getCoordinate());
+
+                    ((MainActivity) getActivity()).getMappa().deselezionaMarker();
                 }
             });
         }

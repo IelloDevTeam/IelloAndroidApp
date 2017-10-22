@@ -28,6 +28,7 @@ public class MappaMain extends MappaGoogle
     // lista dei markers presenti nella mappa
     private List<Marker> mListMarker = new ArrayList<>();
     private Marker mPosizioneUtente;
+    private Marker mMarkerSelezionato;
 
     // riferimento all'activity generatrice
     private MainActivity mMainActivity;
@@ -62,6 +63,7 @@ public class MappaMain extends MappaGoogle
         for(Marker m : mListMarker)
             m.remove();
         mListMarker.clear();
+        mMarkerSelezionato = null;
 
         if(mPosizioneUtente != null)
             mPosizioneUtente.remove();
@@ -74,7 +76,7 @@ public class MappaMain extends MappaGoogle
             Marker marker = getMappaGoogle().addMarker(new MarkerOptions()
                     .position(coordParcheggio)
                     .title(p.getIndirizzoUI())
-                    .icon(BitmapDescriptorFactory.defaultMarker(52)));
+                    .icon(BitmapDescriptorFactory.defaultMarker(54)));
 
             mListMarker.add(marker);
         }
@@ -111,20 +113,43 @@ public class MappaMain extends MappaGoogle
     @Override
     public boolean onMarkerClick(Marker marker) {
 
-        muoviCamera(marker.getPosition());
-
         if(isParcheggio(marker)) {
             if (mMainActivity.getFragmentAttivo() != null)
                 mMainActivity.getFragmentAttivo().setParcheggioSelezionato(marker.getPosition());
+
+            muoviEseleziona(marker);
 
         } else {
             // il marker è la propria posizione
             if(mMainActivity.getFragmentAttivo() != null)
                 mMainActivity.getFragmentAttivo().nascondiParcheggioSelezionato();
             Toast.makeText(mMainActivity, marker.getTitle(), Toast.LENGTH_SHORT).show();
+
+            muoviCamera(marker.getPosition());
         }
 
         return true;
+    }
+
+
+    public void muoviEseleziona(Marker marker) {
+        muoviCamera(marker.getPosition());
+
+        // deseleziona quello precedente
+        if(mMarkerSelezionato != null)
+            mMarkerSelezionato.setIcon(BitmapDescriptorFactory.defaultMarker(54));
+
+        // seleziona l'attuale
+        mMarkerSelezionato = marker;
+        mMarkerSelezionato.setIcon(BitmapDescriptorFactory.defaultMarker(60));
+    }
+
+
+    public void deselezionaMarker() {
+        if(mMarkerSelezionato != null) {
+            mMarkerSelezionato.setIcon(BitmapDescriptorFactory.defaultMarker(54));
+            mMarkerSelezionato = null;
+        }
     }
 
 
@@ -136,5 +161,7 @@ public class MappaMain extends MappaGoogle
     public void onMapClick(LatLng latLng) {
         if(mMainActivity.getFragmentAttivo() != null)
             mMainActivity.getFragmentAttivo().nascondiParcheggioSelezionato();
+
+        deselezionaMarker();
     }
 }
