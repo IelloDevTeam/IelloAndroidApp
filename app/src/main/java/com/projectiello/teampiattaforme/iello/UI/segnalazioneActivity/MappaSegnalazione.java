@@ -31,6 +31,11 @@ class MappaSegnalazione extends MappaGoogle
         mSegnalazioneActivity = sAct;
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        super.onMapReady(googleMap);
+        googleMap.setOnMapClickListener(this);
+    }
 
     /**
      * Rimuove il marker dalla mappa e ne cancella i riferimenti
@@ -88,7 +93,6 @@ class MappaSegnalazione extends MappaGoogle
      */
     @Override
     public boolean onMarkerClick(Marker marker) {
-
         return true;
     }
 }

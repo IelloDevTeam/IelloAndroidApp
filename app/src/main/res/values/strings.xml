@@ -91,4 +91,8 @@
     <string name="_500_metri">500 metri</string>
     <string name="_1_chilometro">1 chilometro</string>
     <string name="_10_chilometri">10 chilometri</string>
+
+
+    <string name="iello_api_key">e432e713d9544311a819d73fa9ffbdd7</string>
+    <string name="auth_error">Errore di autenticazione!</string>
 </resources>

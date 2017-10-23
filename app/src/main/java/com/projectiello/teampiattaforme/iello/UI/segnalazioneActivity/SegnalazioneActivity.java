@@ -15,8 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.dataLogic.Segnalazione;
 import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
+
+import org.json.JSONObject;
 
 /**
  * Created by riccardomaldini on 29/09/17.
@@ -34,7 +36,7 @@ public class SegnalazioneActivity extends AppCompatActivity {
     private MappaSegnalazione mMappa;
 
     // riferimento alla classe per la gestione del collegamento Firebase
-    private FirebaseHandler mFireHandler;
+    private APIHandler mAPIHandler;
 
 
     @Override
@@ -54,7 +56,7 @@ public class SegnalazioneActivity extends AppCompatActivity {
         }
 
         // inizializza il collegamento a Firebase
-        mFireHandler = new FirebaseHandler(this);
+        mAPIHandler = new APIHandler(this);
 
         // inizializza la mappa
         mMappa = new MappaSegnalazione(this);
@@ -109,7 +111,22 @@ public class SegnalazioneActivity extends AppCompatActivity {
         mFabInvia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mFireHandler.sendLocationToFirebase(mMappa.getMarkerPosition());
+            mAPIHandler.sendLocation(mMappa.getMarkerPosition(), new APIHandler.APICallback() {
+                @Override
+                public void OnResult(boolean isError, JSONObject jsonObject) {
+                    if(!isError)
+                        Toast.makeText(SegnalazioneActivity.this, R.string.segnalazione_inviata, Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(SegnalazioneActivity.this, R.string.errore_invio, Toast.LENGTH_SHORT).show();
+
+                    getMappa().resettaInterfacciaMappa();
+                }
+
+                @Override
+                public void OnAuthError() {
+                    Toast.makeText(SegnalazioneActivity.this, R.string.auth_error, Toast.LENGTH_SHORT).show();
+                }
+            });
             }
         });
     }

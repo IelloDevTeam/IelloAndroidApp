@@ -29,7 +29,7 @@
             app:backgroundTint="@color/colorPrimaryDark"
             app:fabSize="normal"
             android:visibility="gone"
-            app:srcCompat="@drawable/ic_send_white_24px" />
+            app:srcCompat="@drawable/ic_send_location_white" />
     </RelativeLayout>
 
     <android.support.design.widget.AppBarLayout
@@ -94,7 +94,7 @@
                     android:clickable="true"
                     app:backgroundTint="@color/colorPrimaryDark"
                     app:fabSize="mini"
-                    app:srcCompat="@drawable/ic_search_white_24px" />
+                    app:srcCompat="@drawable/ic_search_white_192dp" />
             </RelativeLayout>
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>

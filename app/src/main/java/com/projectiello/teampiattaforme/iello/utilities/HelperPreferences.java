@@ -19,7 +19,7 @@ public class HelperPreferences {
 
 
     public static void setFirstTimeLaunch(Context c, boolean isFirstTime) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
         editor.apply();
@@ -27,13 +27,13 @@ public class HelperPreferences {
 
 
     public static boolean isFirstTimeLaunch(Context c) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 
 
     public static void setRange(Context c, int rangeInMetri){
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(RANGE, rangeInMetri);
         editor.apply();
@@ -41,13 +41,13 @@ public class HelperPreferences {
 
 
     public static int getRange(Context c) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         return pref.getInt(RANGE, 1000);
     }
 
 
     public static void setStileMappa(Context c, int resStile){
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         SharedPreferences.Editor editor = pref.edit();
         editor.putInt(STILE_MAPPA, resStile);
         editor.commit();
@@ -55,7 +55,12 @@ public class HelperPreferences {
 
 
     public static int getStileMappa(Context c) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences pref = getSharedPrefs(c);
         return pref.getInt(STILE_MAPPA, R.raw.style_standard);
+    }
+
+    private static SharedPreferences getSharedPrefs(Context context)
+    {
+        return PreferenceManager.getDefaultSharedPreferences(context);
     }
 }

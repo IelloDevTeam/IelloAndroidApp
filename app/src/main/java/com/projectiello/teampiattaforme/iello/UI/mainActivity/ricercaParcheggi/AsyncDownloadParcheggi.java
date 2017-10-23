@@ -25,6 +25,8 @@ import org.json.JSONObject;
 
 public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
 
+    private static final String BASE_URL = "http://cloudpi.webhop.me:4000/iello/v1/parking";
+
     // riferimento alla MainActivity che consente di intervenire sull'interfaccia
     private MainActivity mMainActivity;
 
@@ -124,13 +126,15 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
         ElencoParcheggi.getInstance().getListParcheggi().clear();
 
         // creazione URL
-        String url = "http://cloudpi.webhop.me:4000/parking" +
-                "?lat="    + mCoordRicerca.latitude +
-                "&lon="   + mCoordRicerca.longitude +
+        String url = BASE_URL +
+                "?latitude="    + mCoordRicerca.latitude +
+                "&longitude="   + mCoordRicerca.longitude +
                 "&radius=" + mRange;
 
         // interrogazione dell'Api
         JSONObject response = HelperRete.volleySyncRequest(mMainActivity, url);
+
+        System.out.println(response);
 
         if (response == null)
             return;
@@ -139,7 +143,7 @@ public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
         try {
             String status = response.getString("status");
 
-            if(status.equals("OK")) {
+            if(status.equals("Success")) {
                 JSONArray jArrayParcheggi = response.getJSONObject("message").getJSONArray("parking");
 
                 ElencoParcheggi.getInstance().getListParcheggi().clear();

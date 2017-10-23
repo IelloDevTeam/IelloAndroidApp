@@ -27,8 +27,8 @@ public class Parcheggio {
      * @throws JSONException dovuta alla conversione dell'oggetto JSON in dati del parcheggio
      */
     public Parcheggio(JSONObject jParcheggio) throws JSONException {
-        double lat = jParcheggio.getDouble("latitudine");
-        double lng = jParcheggio.getDouble("longitudine");
+        double lat = jParcheggio.getDouble("latitude");
+        double lng = jParcheggio.getDouble("longitude");
         mCoordinate = new LatLng(lat, lng);
 
         mDistanza = jParcheggio.getInt("distance");
