@@ -22,7 +22,11 @@ Quindi, se sono presenti dei posteggi nelle vicinanze, vengono mostrati nella ma
 l'indirizzo e la distanza dalla propria posizione. Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, 
 con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato.
 
-![geo1](Screen/geo1.png). ![geo2](Screen/geo2.png =250x50) ![geo3](Screen/geo3.png =250x50)
+Uno                        | due |tre
+:-----------------------------------------:|:------------------------------------------:|:-----------------------------------------:
+<img src="Screen/geo1.png" width="200" />  |  <img src="Screen/geo2.png" width="200" /> | <img src="Screen/geo3.png"  height="400" />
+
+
 
 
 
