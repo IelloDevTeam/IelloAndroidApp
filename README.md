@@ -27,7 +27,7 @@ La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qual
 
 Premi il tasto di ricerca | Inserisci un indirizzo | Consulta i parcheggi
 :---------------------------:|:----------------------------:|:---------------------------:
-<img src="Screen/geo1.png"/> | <img src="Screen/geo2.png"/> | <img src="Screen/geo3.png"/>
+<img src="Screen/ind1.png"/> | <img src="Screen/ind2.png"/> | <img src="Screen/ind3.png"/>
 
 Questo viene interpretato tramite un'API fornita da Google per il geocoding, ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
 
@@ -38,7 +38,7 @@ L'app permette inoltre agli utenti di segnalare eventuali posteggi non presenti 
 
 Accedi alla sezione segnalazione | Seleziona una posizione | Inviala al DB remoto (tramite API)
 :---------------------------:|:----------------------------:|:---------------------------:
-<img src="Screen/geo1.png"/> | <img src="Screen/geo2.png"/> | <img src="Screen/geo3.png"/>
+<img src="Screen/seg1.png"/> | <img src="Screen/seg2.png"/> | <img src="Screen/seg3.png"/>
 
 La segnalazione è stata implementata sfruttando l'apposita funzione di IelloAPI, pensata appunto per segnalare posteggi direttamente dall'app. L'utilizzo dell'API permette di rendere completamente indipendenti tra loro l'app e il database remoto. Collegare direttamente l'app al database sarebbe stato possibile, ma avrebbe rappresentato un problema di sicurezza. La funzione di segnalazione dell'API è stata infatti implementata utilizzando appositi [meccanismi di sicurezza](https://github.com/IelloDevTeam/IelloAPI), per evitare modifiche accidentali o non al database, da parte di utenti non autorizzati.
 
