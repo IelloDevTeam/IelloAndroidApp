@@ -18,10 +18,10 @@ public class HelperPreferences {
     private static final String STILE_MAPPA = "StileMappa";
 
 
-    public static void setFirstTimeLaunch(Context c, boolean isFirstTime) {
+    public static void setFirstTimeLaunchDone(Context c) {
         SharedPreferences pref = getSharedPrefs(c);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime);
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, false);
         editor.apply();
     }
 

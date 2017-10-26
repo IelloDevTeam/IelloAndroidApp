@@ -75,13 +75,13 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <ImageView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/containerAddress"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@color/lightGrey"/>
+        android:layout_marginStart="16dp">
+        <include layout="@layout/divider" />
+    </FrameLayout>
 </RelativeLayout>

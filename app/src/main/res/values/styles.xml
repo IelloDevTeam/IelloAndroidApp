@@ -2,7 +2,6 @@
 
     <!-- Tema base dell'applicazione -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
@@ -63,18 +62,5 @@
         <!-- colore della barra -->
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
-
-
-    <!-- editText di SegnalazioneActivity -->
-    <style name="EditTextToolbar" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColorHint">@color/whiteTrasparent</item>
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlNormal">@color/whiteTrasparent</item>
-        <item name="colorControlActivated">@color/white</item>
-        <item name="colorControlHighlight">@color/white</item>
-    </style>
-
 
 </resources>

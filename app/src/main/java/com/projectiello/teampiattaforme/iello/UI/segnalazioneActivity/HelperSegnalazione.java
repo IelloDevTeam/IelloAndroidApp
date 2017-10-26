@@ -17,10 +17,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.dataLogic.Segnalazione;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
@@ -33,11 +29,12 @@ import java.util.Map;
 
 /**
  * Created by riccardomaldini on 08/10/17.
- * Classe per la gestione della connessione con il DB remoto, gestito con tecnologia Firebase.
+ * Classe per la gestione dell'invio delle segnalazioni tramite IelloAPI. L'API utilizza infatti un
+ * meccanismo di autorizzazioni, che viene gestito qua dentro.
  */
-public class APIHandler extends ContextWrapper {
+public class HelperSegnalazione extends ContextWrapper {
 
-    private static final String TAG = "APIHandler";
+    private static final String TAG = "HelperSegnalazione";
     private static final String BASE_URL = "http://cloudpi.webhop.me:4000/iello/v1/parking/";
 
     public interface APICallback
@@ -46,7 +43,7 @@ public class APIHandler extends ContextWrapper {
         void OnAuthError();
     }
 
-    public APIHandler(Context context) {
+    public HelperSegnalazione(Context context) {
         super(context);
     }
 

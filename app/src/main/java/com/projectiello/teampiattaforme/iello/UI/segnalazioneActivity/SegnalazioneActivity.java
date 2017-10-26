@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.dataLogic.Segnalazione;
 import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 import org.json.JSONObject;
@@ -35,8 +34,8 @@ public class SegnalazioneActivity extends AppCompatActivity {
     // riferimento alla classe per la gestione della mappa
     private MappaSegnalazione mMappa;
 
-    // riferimento alla classe per la gestione del collegamento Firebase
-    private APIHandler mAPIHandler;
+    // riferimento alla classe per la gestione delle segnalazioni
+    private HelperSegnalazione mHelperSegnalazione;
 
 
     @Override
@@ -46,7 +45,7 @@ public class SegnalazioneActivity extends AppCompatActivity {
         // inizializza vari elementi base dell'interfaccia utente
         setContentView(R.layout.activity_segnalazione);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final ActionBar actionBar = getSupportActionBar();
@@ -56,14 +55,15 @@ public class SegnalazioneActivity extends AppCompatActivity {
         }
 
         // inizializza il collegamento a Firebase
-        mAPIHandler = new APIHandler(this);
+        mHelperSegnalazione = new HelperSegnalazione(this);
 
         // inizializza la mappa
         mMappa = new MappaSegnalazione(this);
 
         // la progressBar. Viene resa visibile durante il collegamento al database remoto e durante
         // la ricerca dell'indirizzo sulla mappa
-        mProgressBar = (FrameLayout) findViewById(R.id.clippedProgressBar);
+        mProgressBar = findViewById(R.id.clippedProgressBar);
+        hideProgressBar();
 
         // l'EditText consente all'utente di digitare un indirizzo sulla barra di ricerca; ...
         mEditIndirizzo = findViewById(R.id.editIndirizzo);
@@ -88,7 +88,7 @@ public class SegnalazioneActivity extends AppCompatActivity {
 
         // ... al click su fabSearch vengono cercate le coordinate dell'indirizzo e riposizionata
         // la mappa di conseguenza
-        FloatingActionButton fabSearch = (FloatingActionButton) findViewById(R.id.fabSearch);
+        FloatingActionButton fabSearch = findViewById(R.id.fabSearch);
         fabSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,12 +106,12 @@ public class SegnalazioneActivity extends AppCompatActivity {
 
         // il fabInvia è un tanto che consente di inviare la posizione selezionata dall'utente al
         // database remoto. L'invio viene gestito dall'apposita classe
-        mFabInvia = (FloatingActionButton) findViewById(R.id.fabInvia);
+        mFabInvia = findViewById(R.id.fabInvia);
         mFabInvia.hide();
         mFabInvia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            mAPIHandler.sendLocation(mMappa.getMarkerPosition(), new APIHandler.APICallback() {
+            mHelperSegnalazione.sendLocation(mMappa.getMarkerPosition(), new HelperSegnalazione.APICallback() {
                 @Override
                 public void OnResult(boolean isError, JSONObject jsonObject) {
                     if(!isError)

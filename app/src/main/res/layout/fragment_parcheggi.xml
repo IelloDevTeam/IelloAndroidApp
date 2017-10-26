@@ -7,8 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/expParcheggioSelezionato"
         android:layout_width="match_parent"
@@ -24,10 +22,8 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/lightGrey"/>
+
+        <include layout="@layout/divider" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +34,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="4dp"
             android:layout_marginTop="16dp"/>
-
 
         <RelativeLayout
             xmlns:tools="http://schemas.android.com/tools"
@@ -74,13 +69,12 @@
                     android:layout_toLeftOf="@+id/goLayout"
                     android:layout_toStartOf="@+id/goLayout">
 
-
                     <TextView
                         android:id="@+id/txtIndirizzo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="Indirizzo\nindirizzo"
+                        android:text="@string/indirizzo_base"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         tools:ignore="HardcodedText" />
@@ -113,17 +107,12 @@
                         android:text="@string/vai" />
                 </RelativeLayout>
             </RelativeLayout>
-
         </RelativeLayout>
-
-
     </LinearLayout>
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightGrey"/>
+    <include layout="@layout/divider" />
+
     <Button
         android:id="@+id/btnEspandi"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -136,13 +125,7 @@
         android:text="@string/tutti_i_risultati"
         android:textAlignment="viewStart" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lightGrey"
-        android:contentDescription="@string/divider" />
-
-
+    <include layout="@layout/divider" />
 
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/expRecParcheggi"
@@ -161,5 +144,4 @@
             android:id="@+id/recParcheggi"/>
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
-
 </LinearLayout>

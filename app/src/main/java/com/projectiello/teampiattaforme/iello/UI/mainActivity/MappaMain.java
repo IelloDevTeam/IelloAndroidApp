@@ -43,11 +43,16 @@ public class MappaMain extends MappaGoogle
         mMainActivity = mainActivity;
     }
 
+    /**
+     * Appena la mappa è disponibile, oltre a settare le funzioni di base riportate nella classe
+     * padre, vengono attivate le funzioni specifiche della mappa e avviata una prima ricerca dei
+     * parcheggi nella zona di Urbino (di dafault).
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         super.onMapReady(googleMap);
-        getMappaGoogle().setOnMarkerClickListener(this);
-        getMappaGoogle().setOnMapClickListener(this);
+        googleMap.setOnMarkerClickListener(this);
+        googleMap.setOnMapClickListener(this);
 
         // vengono cercati i parcheggi presso urbino all'avvio
         AsyncDownloadParcheggi adp
@@ -55,11 +60,13 @@ public class MappaMain extends MappaGoogle
         adp.execute();
     }
 
+
     /**
-     * Imposta un marker per ogni parcheggio, e se disponibile, per la posizione attuale
+     * Imposta un marker per ogni parcheggio e, se disponibile, per la posizione attuale
      */
     public void settaMarkers() {
-        // rimuovi tutti i markers
+
+        // rimuovi tutti i markers già presenti nella mappa
         for(Marker m : mListMarker)
             m.remove();
         mListMarker.clear();
@@ -69,7 +76,7 @@ public class MappaMain extends MappaGoogle
             mPosizioneUtente.remove();
         mPosizioneUtente = null;
 
-        // aggiungi un marker per ogni posizione
+        // aggiungi un marker per ogni parcheggio
         for (Parcheggio p : ElencoParcheggi.getInstance().getListParcheggi()) {
             LatLng coordParcheggio = p.getCoordinate();
 
@@ -81,9 +88,10 @@ public class MappaMain extends MappaGoogle
             mListMarker.add(marker);
         }
 
-        // aggiungi un marker nella posizione dell'utente
+        // aggiungi un marker nella posizione dell'utente. Se le coordinate riportate sono
+        // esattamente quelle iniziali (ovvero siamo nella ricerca all'avvio) non viene mostrato
+        // il marker nella posizione dell'utente
         if(ElencoParcheggi.getInstance().getCoordAttuali() != COORD_INIZIALI) {
-            // posizionamento del marker, impostato con l'indirizzo dell'utente come titolo
             mPosizioneUtente = getMappaGoogle().addMarker(new MarkerOptions()
                     .position(ElencoParcheggi.getInstance().getCoordAttuali())
                     .title(mMainActivity.getString(R.string.tua_posizione)));
@@ -116,7 +124,6 @@ public class MappaMain extends MappaGoogle
         if(isParcheggio(marker)) {
             if (mMainActivity.getFragmentAttivo() != null)
                 mMainActivity.getFragmentAttivo().setParcheggioSelezionato(marker.getPosition());
-
             muoviEseleziona(marker);
 
         } else {
@@ -124,7 +131,6 @@ public class MappaMain extends MappaGoogle
             if(mMainActivity.getFragmentAttivo() != null)
                 mMainActivity.getFragmentAttivo().nascondiParcheggioSelezionato();
             Toast.makeText(mMainActivity, marker.getTitle(), Toast.LENGTH_SHORT).show();
-
             muoviCamera(marker.getPosition());
         }
 
@@ -132,12 +138,15 @@ public class MappaMain extends MappaGoogle
     }
 
 
-    public void muoviEseleziona(Marker marker) {
+    /**
+     * Evidenzia nella mappa un marker, e centra la mappa su di esso.
+     */
+    private void muoviEseleziona(Marker marker) {
+
         muoviCamera(marker.getPosition());
 
         // deseleziona quello precedente
-        if(mMarkerSelezionato != null)
-            mMarkerSelezionato.setIcon(BitmapDescriptorFactory.defaultMarker(54));
+        deselezionaMarker();
 
         // seleziona l'attuale
         mMarkerSelezionato = marker;
@@ -145,7 +154,10 @@ public class MappaMain extends MappaGoogle
     }
 
 
-    public void deselezionaMarker() {
+    /**
+     * Deseleziona il marker evidenziato, se presente.
+     */
+    void deselezionaMarker() {
         if(mMarkerSelezionato != null) {
             mMarkerSelezionato.setIcon(BitmapDescriptorFactory.defaultMarker(54));
             mMarkerSelezionato = null;

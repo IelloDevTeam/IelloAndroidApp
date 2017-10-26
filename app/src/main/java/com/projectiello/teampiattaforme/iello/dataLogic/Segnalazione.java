@@ -1,16 +1,13 @@
 package com.projectiello.teampiattaforme.iello.dataLogic;
 
-import com.google.firebase.database.PropertyName;
-
 /**
  * Created by andrea on 30/09/17.
- * Classe che rappresenta una seghnalazione utente.
+ * Classe che rappresenta una segnalazione utente.
  */
 
 public class Segnalazione {
 
     private double mLatitude;
-
     private double mLongitude;
 
     public Segnalazione(double mLatitude, double mLongitude) {

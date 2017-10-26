@@ -1,12 +1,8 @@
 <resources>
     <string name="app_name">Iello</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_search">Search&#8230;</string>
     <string name="segnala_posteggio">Segnala posteggio</string>
-    <string name="impostazioni">Impostazioni</string>
     <string name="cerca_ind">Inserisci un indirizzo&#8230;</string>
 
     <string name="slide_1_title">Benvenuto in Iello!</string>
@@ -26,11 +22,9 @@
 
     <string name="slide_4_title">Segnala altri posteggi</string>
     <string name="slide_4_desc">Iello è un progetto di alcuni studenti dell\'Università di
-        Urbino: i posti segnalati si riferiscono al centro di urbino e alcuni comuni tra cui Bari
-        e Jesi. Se lo desideri, l\'app ti consente di contribuire ad ampliare il nostro database!
+        Urbino: i posti segnalati si riferiscono al centro di Urbino e alcuni comuni tra cui Lecce
+        e Jesi. Se lo desideri, l\'app ti consente di contribuire etools:context="com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity"d ampliare il nostro database!
     </string>
-
-    <string name="divider">Divider</string>
 
     <string name="tutti_i_risultati">Tutti i risultati</string>
     <string name="nascondi_risultati">Nascondi risultati</string>
@@ -70,9 +64,6 @@
     <string name="errore_invio">Errore inaspettato nell\'invio della posizione.
         Riprova più tardi.
     </string>
-    <string name="connesso_db">Connesso al DB! L\'app è pronta a inviare segnalazioni.</string>
-    <string name="non_connesso_db">Non sei connesso al DB. Non puoi inviare segnalazioni.</string>
-    <string name="collegando_al_db">Mi sto collegando al DB Iello&#8230;</string>
     <string name="vai">Vai</string>
     <string name="desc_personalizza_mappa">Seleziona i colori della mappa nella schermata principale.</string>
     <string name="imposta">Imposta</string>
@@ -95,4 +86,5 @@
 
     <string name="iello_api_key">e432e713d9544311a819d73fa9ffbdd7</string>
     <string name="auth_error">Errore di autenticazione!</string>
+    <string name="indirizzo_base">Prima riga indirizzo\nSeconda riga indirizzo</string>
 </resources>

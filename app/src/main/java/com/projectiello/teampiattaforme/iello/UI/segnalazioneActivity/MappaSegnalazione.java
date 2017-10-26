@@ -35,6 +35,7 @@ class MappaSegnalazione extends MappaGoogle
     public void onMapReady(GoogleMap googleMap) {
         super.onMapReady(googleMap);
         googleMap.setOnMapClickListener(this);
+        googleMap.setOnMarkerClickListener(this);
     }
 
     /**
@@ -44,16 +45,6 @@ class MappaSegnalazione extends MappaGoogle
         if(mMarkerCorrente != null)
             mMarkerCorrente.remove();
         mMarkerCorrente = null;
-    }
-
-
-    /**
-     * Attiva le funzionalità per interagire con la mappa per la segnalazione, ovvero:
-     * rende cliccabile la mappa e rende possibile eliminare eventuali marker
-     */
-    void attivaFunzioniMappa() {
-        getMappaGoogle().setOnMapClickListener(this);
-        getMappaGoogle().setOnMarkerClickListener(this);
     }
 
 
@@ -83,7 +74,7 @@ class MappaSegnalazione extends MappaGoogle
     public void onMapClick(LatLng latLng) {
         clearMarker();
         mMarkerCorrente = getMappaGoogle().addMarker(new MarkerOptions().draggable(false).position(latLng));
-        mMarkerCorrente.setIcon(BitmapDescriptorFactory.defaultMarker(52));
+        mMarkerCorrente.setIcon(BitmapDescriptorFactory.defaultMarker(54));
         mSegnalazioneActivity.showFabInvia();
     }
 

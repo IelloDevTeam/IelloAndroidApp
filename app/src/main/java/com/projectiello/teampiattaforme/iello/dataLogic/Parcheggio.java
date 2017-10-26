@@ -40,6 +40,8 @@ public class Parcheggio {
     }
 
 
+    /* getters per la lettura dei dati del parcheggio */
+
     int getDistanza() {
         return mDistanza;
     }

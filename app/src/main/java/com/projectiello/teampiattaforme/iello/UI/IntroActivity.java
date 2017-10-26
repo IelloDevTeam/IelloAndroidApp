@@ -75,7 +75,7 @@ public class IntroActivity extends AppIntro2 {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        // Do something when users tap on Done button.ù
+        // Do something when users tap on Done button.
 
         Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         intent.putExtra("justOpen", true);
