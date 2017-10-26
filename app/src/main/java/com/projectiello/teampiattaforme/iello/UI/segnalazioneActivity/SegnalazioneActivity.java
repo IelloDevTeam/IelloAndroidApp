@@ -1,5 +1,6 @@
 package com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -80,6 +82,15 @@ public class SegnalazioneActivity extends AppCompatActivity {
                         Toast.makeText(SegnalazioneActivity.this, R.string.no_connection,
                                 Toast.LENGTH_SHORT).show();
                     }
+
+                    // nasconde la tastiera
+                    View viewC = getCurrentFocus();
+                    if (viewC != null) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        if(imm != null)
+                            imm.hideSoftInputFromWindow(viewC.getWindowToken(), 0);
+                    }
+
                     return true;
                 }
                 return false;
@@ -100,6 +111,14 @@ public class SegnalazioneActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(SegnalazioneActivity.this, R.string.no_connection,
                             Toast.LENGTH_SHORT).show();
+                }
+
+                // nasconde la tastiera
+                View viewC = getCurrentFocus();
+                if (viewC != null) {
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if(imm != null)
+                        imm.hideSoftInputFromWindow(viewC.getWindowToken(), 0);
                 }
             }
         });
