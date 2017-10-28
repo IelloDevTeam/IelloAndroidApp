@@ -16,8 +16,6 @@ Quest'app è stata pensata per permettere a tutti gli utenti di consultare i dat
 * [Contatti & Credits](#contatti--credits)
 
 
-
-
 ## Integrazione con IelloAPI ##
 L'App Iello sfrutta le funzioni fornite da [Iello API](https://github.com/IelloDevTeam/IelloAPI "Iello API Repo") per reperire i dati relativi ai parcheggi. Viene utilizzata ad esempio la funzione per il download dei dati dei parcheggi attorno ad una data coordinata, o per la segnalazione dei posteggi da parte degli utenti.
 
@@ -25,19 +23,21 @@ L'App Iello sfrutta le funzioni fornite da [Iello API](https://github.com/IelloD
 ## Funzionalità dell'applicazione ##
 
 ### Ricerca tramite geolocalizzazione ###
+
+<img src="Screen/geo2.jpg" width="200px" align="right"/>
+
 La principale funzione dell'app è la ricerca tramite localizzazione. Premendo il tasto FAB in basso a destra nella schermata principale, viene lanciata una ricerca basata sulla posizione dell'utente, fornita dal GPS del proprio smartphone. L'app cerca tutti i posteggi per disabili situati attorno alla posizione dell'utente, entro un raggio specificato (personalizzabile dall'utente), sfruttando l'apposita funzione di Iello API.
 
 Quindi, se sono presenti dei posteggi nelle vicinanze, vengono mostrati nella mappa. Un tap su sun posteggio ne mostra i dettagli, quali l'indirizzo e la distanza dalla propria posizione. 
 
 Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato.
 
-<img src="Screen/geo1.jpg" width="200px"/><img src="Screen/geo2.jpg" width="200px"/><img src="Screen/geo3.jpg" width="200px"/>
-
 
 ### Ricerca tramite indirizzo ###
-La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qualunque, tramite la funzione di ricerca. Premendo sulla lente di ingrandimento in alto a destra, viene mostrata una casella di ricerca, che permette di inserire un indirizzo.
 
-<img src="Screen/ind1.jpg" width="200px"/><img src="Screen/ind2.jpg" width="200px"/><img src="Screen/ind3.jpg" width="200px"/>
+<img src="Screen/ind3.jpg" width="200px" align="left"/>
+
+La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qualunque, tramite la funzione di ricerca. Premendo sulla lente di ingrandimento in alto a destra, viene mostrata una casella di ricerca, che permette di inserire un indirizzo.
 
 Questo viene interpretato tramite un'API fornita da Google per il geocoding, ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
 
@@ -45,11 +45,12 @@ Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezion
 
 
 ### Segnalazioni ###
+
+<img src="Screen/seg2.jpg" width="200px" align="right"/>
+
 L'app permette inoltre agli utenti di segnalare eventuali posteggi non presenti nel database. Dalla schermata segnalazione è possibile selezionare un punto nella mappa ed inviarlo ad un database remoto utilizzato per raccogliere le segnalazioni.
 
 La segnalazione è stata implementata sfruttando l'apposita funzione di IelloAPI, pensata appunto per segnalare posteggi direttamente dall'app. L'utilizzo dell'API permette di rendere completamente indipendenti tra loro l'app e il database remoto. Collegare direttamente l'app al database sarebbe stato possibile, ma avrebbe rappresentato un problema di sicurezza. La funzione di segnalazione dell'API è stata infatti implementata utilizzando appositi [meccanismi di sicurezza](https://github.com/IelloDevTeam/IelloAPI), per evitare modifiche accidentali o non al database, da parte di utenti non autorizzati.
-
-<img src="Screen/seg1.jpg" width="200px"/><img src="Screen/seg2.jpg" width="200px"/><img src="Screen/seg3.jpg" width="200px"/>
 
 
 ### Personalizzazione ###
