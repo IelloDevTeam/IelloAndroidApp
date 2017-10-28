@@ -4,6 +4,7 @@ Questa repository contiene il codice dell'app Android di Project Iello. L'app co
 
 Quest'app è stata pensata per permettere a tutti gli utenti di consultare i dati della piattaforma Iello. Per tali ragioni l'app è anche [disponibile nel Play Store]().
 
+
 ## Indice contenuti ##
 * [Integrazione con IelloAPI](#integrazione-con-ielloapi)
 * [Funzionalità dell'applicazione](#funzionalità-dellapplicazione)
@@ -30,12 +31,9 @@ La principale funzione dell'app è la ricerca tramite localizzazione. Premendo i
 
 Quindi, se sono presenti dei posteggi nelle vicinanze, vengono mostrati nella mappa. Un tap su sun posteggio ne mostra i dettagli, quali l'indirizzo e la distanza dalla propria posizione. 
 
-Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato.
+Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato. </br>
 
-&nbsp;
-
-<img src="Screen/ind3.jpg" width="200px" align="left"/>
-
+<img src="Screen/ind3.jpg" width="200px" align="left"/> </br>
 
 ### Ricerca tramite indirizzo ###
 
@@ -43,29 +41,18 @@ La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qual
 
 Questo viene interpretato tramite un'API fornita da Google per il geocoding, ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
 
-Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione.
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
+Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione. </br></br></br>
   
-
 <img src="Screen/seg2.jpg" width="200px" align="right"/>
 
 ### Segnalazioni ###
 
 L'app permette inoltre agli utenti di segnalare eventuali posteggi non presenti nel database. Dalla schermata segnalazione è possibile selezionare un punto nella mappa ed inviarlo ad un database remoto utilizzato per raccogliere le segnalazioni.
 
-La segnalazione è stata implementata sfruttando l'apposita funzione di IelloAPI, pensata appunto per segnalare posteggi direttamente dall'app. L'utilizzo dell'API permette di rendere completamente indipendenti tra loro l'app e il database remoto. Collegare direttamente l'app al database sarebbe stato possibile, ma avrebbe rappresentato un problema di sicurezza. La funzione di segnalazione dell'API è stata infatti implementata utilizzando appositi [meccanismi di sicurezza](https://github.com/IelloDevTeam/IelloAPI), per evitare modifiche accidentali o non al database, da parte di utenti non autorizzati.
-
-&nbsp;
-
+La segnalazione è stata implementata sfruttando l'apposita funzione di IelloAPI, pensata appunto per segnalare posteggi direttamente dall'app. L'utilizzo dell'API permette di rendere completamente indipendenti tra loro l'app e il database remoto. Collegare direttamente l'app al database sarebbe stato possibile, ma avrebbe rappresentato un problema di sicurezza. La funzione di segnalazione dell'API è stata infatti implementata utilizzando appositi [meccanismi di sicurezza](https://github.com/IelloDevTeam/IelloAPI), per evitare modifiche accidentali o non al database, da parte di utenti non autorizzati. </br>
 
 ### Personalizzazione ###
 L'app permette di personalizzare alcuni aspetti dell'esperienza utente. In primo luogo, è possibile cambiare la combinazione di colori della mappa, scegliendo tra alcune combinazioni disponibili. È inoltre possibile modificare l'ampiezza del raggio di ricerca; ampliando il raggio vengono mostrati più parcheggi, se disponibili.
-
 
 ## Librerie aggiuntive utilizzate ##
 * **[Android Support Design Libraries](https://developer.android.com/topic/libraries/support-library/index.html)**:
