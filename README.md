@@ -32,9 +32,7 @@ Quindi, se sono presenti dei posteggi nelle vicinanze, vengono mostrati nella ma
 
 Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di Google Maps, con impostata la funzione di navigazione dalla propria posizione al posteggio selezionato.
 
-.
-
-.
+&nbsp;
 
 <img src="Screen/ind3.jpg" width="200px" align="left"/>
 
@@ -47,9 +45,11 @@ Questo viene interpretato tramite un'API fornita da Google per il geocoding, ovv
 
 Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione.
 
-.
+&nbsp;
 
-.
+&nbsp;
+
+&nbsp;
   
 
 <img src="Screen/seg2.jpg" width="200px" align="right"/>
@@ -59,6 +59,8 @@ Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezion
 L'app permette inoltre agli utenti di segnalare eventuali posteggi non presenti nel database. Dalla schermata segnalazione è possibile selezionare un punto nella mappa ed inviarlo ad un database remoto utilizzato per raccogliere le segnalazioni.
 
 La segnalazione è stata implementata sfruttando l'apposita funzione di IelloAPI, pensata appunto per segnalare posteggi direttamente dall'app. L'utilizzo dell'API permette di rendere completamente indipendenti tra loro l'app e il database remoto. Collegare direttamente l'app al database sarebbe stato possibile, ma avrebbe rappresentato un problema di sicurezza. La funzione di segnalazione dell'API è stata infatti implementata utilizzando appositi [meccanismi di sicurezza](https://github.com/IelloDevTeam/IelloAPI), per evitare modifiche accidentali o non al database, da parte di utenti non autorizzati.
+
+&nbsp;
 
 
 ### Personalizzazione ###
