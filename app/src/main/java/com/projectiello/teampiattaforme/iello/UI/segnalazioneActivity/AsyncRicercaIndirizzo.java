@@ -34,7 +34,7 @@ class AsyncRicercaIndirizzo extends AsyncTask<Void, JSONObject, JSONObject> {
         // viene interrogata l'Api di Google per il Geocoding: viene passato all'Api un indirizzo,
         // e se questo viene interpretato da Google, vengono fornite in risposta le coordinate di
         // tale indirizzo
-        String queryFormattata = mQuery.replaceAll(" ", "+" + "");
+        String queryFormattata = mQuery.replaceAll(" ", "+");
         String url = "https://maps.google.com/maps/api/geocode/json" +
                 "?address=" + queryFormattata + "&key=" + mSegnalazioneActivity.getString(R.string.google_geoc_key);
 
@@ -49,13 +49,13 @@ class AsyncRicercaIndirizzo extends AsyncTask<Void, JSONObject, JSONObject> {
         try {
             Log.i("jsonresp", response.toString());
 
-            double lng = ((JSONArray) response.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lng");
+            double lng = response.optJSONArray("results").optJSONObject(0)
+                    .optJSONObject("geometry").optJSONObject("location")
+                    .optDouble("lng");
 
-            double lat = ((JSONArray) response.get("results")).getJSONObject(0)
-                    .getJSONObject("geometry").getJSONObject("location")
-                    .getDouble("lat");
+            double lat = response.optJSONArray("results").optJSONObject(0)
+                    .optJSONObject("geometry").optJSONObject("location")
+                    .optDouble("lat");
 
             LatLng coordRicerca = new LatLng(lat, lng);
 

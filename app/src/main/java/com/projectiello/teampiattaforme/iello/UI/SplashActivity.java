@@ -27,14 +27,12 @@ public class SplashActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, IntroActivity.class);
             startActivity(intent);
-            finish();
-
         } else {
             // altrimenti vai a MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-            finish();
         }
+        finish();
     }
 }
 

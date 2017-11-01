@@ -60,15 +60,11 @@ public class HelperSegnalazione extends ContextWrapper {
                 JsonObjectRequest volleyRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL + "report", body, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            String status = response.getString("status");
-                            if(status.equals("Success"))
-                                apiCallback.OnResult(false, response);
-                            else
-                                apiCallback.OnResult(true, response);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        String status = response.optString("status","error");
+                        if(status.equals("Success"))
+                            apiCallback.OnResult(false, response);
+                        else
+                            apiCallback.OnResult(true, response);
                     }
                 }, new Response.ErrorListener() {
                     @Override

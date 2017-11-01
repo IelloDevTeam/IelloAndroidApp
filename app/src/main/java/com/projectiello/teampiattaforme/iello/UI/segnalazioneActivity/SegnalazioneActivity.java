@@ -133,10 +133,10 @@ public class SegnalazioneActivity extends AppCompatActivity {
             mHelperSegnalazione.sendLocation(mMappa.getMarkerPosition(), new HelperSegnalazione.APICallback() {
                 @Override
                 public void OnResult(boolean isError, JSONObject jsonObject) {
-                    if(!isError)
-                        Toast.makeText(SegnalazioneActivity.this, R.string.segnalazione_inviata, Toast.LENGTH_SHORT).show();
-                    else
+                    if(isError)
                         Toast.makeText(SegnalazioneActivity.this, R.string.errore_invio, Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(SegnalazioneActivity.this, R.string.segnalazione_inviata, Toast.LENGTH_SHORT).show();
 
                     getMappa().resettaInterfacciaMappa();
                 }
