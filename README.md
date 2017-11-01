@@ -41,7 +41,7 @@ La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qual
 
 Questo viene interpretato tramite [un'API fornita da Google per il geocoding](https://developers.google.com/maps/documentation/geocoding/intro), ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
 
-Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione. </br></br></br>
+Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione. </br></br></br></br>
   
 <img src="Screen/seg2.jpg" width="200px" align="right"/>
 
