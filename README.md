@@ -39,7 +39,7 @@ Premendo sul tasto "vai" associato al posteggio viene lanciato il navigatore di 
 
 La ricerca dei posteggi può essere effettuata anche inserendo un indirizzo qualunque, tramite la funzione di ricerca. Premendo sulla lente di ingrandimento in alto a destra, viene mostrata una casella di ricerca, che permette di inserire un indirizzo.
 
-Questo viene interpretato tramite un'API fornita da Google per il geocoding, ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
+Questo viene interpretato tramite [un'API fornita da Google per il geocoding](https://developers.google.com/maps/documentation/geocoding/intro), ovvero per interpretare un indirizzo e ricavarne le coordinate corrispondenti. 
 
 Quindi vengono mostrati i parcheggi per disabili attorno alla posizione selezionata, con le stesse modalità della ricerca tramite geolocalizzazione. </br></br></br>
   
@@ -59,8 +59,8 @@ L'app permette di personalizzare alcuni aspetti dell'esperienza utente. In primo
   utilizzato per la creazione delle interfacce secondo le [linee guida di design Google](https://material.io/guidelines/);
 * **[Google Maps API](https://developers.google.com/maps/documentation/android-api/)**:
   utilizzato per sfruttare le mappe Google e le relative funzioni, geocoding e reverse geocoding;
-* **[Volley](https://github.com/google/volley)**: API sviluppata da Google per effettuare Web request in modo più facile, veloce e sicuro;
-* **[Firebase Core Services](https://firebase.google.com/docs/reference/android/packages)**:  utilizzato per integrare funzionalità di controllo Firebase nell'app;
+* **[Volley](https://github.com/google/volley)**: API sviluppata da Google per effettuare Web request in modo facile, veloce e sicuro;
+* **[Firebase Core Services](https://firebase.google.com/docs/reference/android/packages)**: utilizzato per integrare funzionalità di controllo Firebase nell'app;
 * **[AppIntro by Paolo Rotolo](https://github.com/apl-devs/AppIntro)**: utilizzata per creare la schermata introduttiva;
 * **[ExpandableLayout by Aakira](https://github.com/AAkira/ExpandableLayout)**: utilizzata per i layout espandibili;
 * **[MaterialSearchView by Miguel Catalan](https://github.com/MiguelCatalan/MaterialSearchView)**: utilizzata per la barra di ricerca.
