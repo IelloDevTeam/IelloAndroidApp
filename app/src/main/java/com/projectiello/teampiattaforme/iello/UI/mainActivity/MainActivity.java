@@ -18,10 +18,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs.DialogRaggioRicerca;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs.DialogStileMappa;
 import com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity;
 import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AddressedResearch;
 import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.GeolocalizedResearch;
@@ -113,7 +116,8 @@ public class MainActivity extends AppCompatActivity
                         break;
                     }
                     case R.id.nav_api: {
-                        String url = "http://www.github.com";
+                        // visita la repo del progetto
+                        String url = "https://github.com/IelloDevTeam";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -123,6 +127,17 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         });
+
+        // imposta testo header drawer
+        String version;
+        try {
+            version = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            version = "1.0";
+        }
+        TextView txtHeader = navView.getHeaderView(0).findViewById(R.id.txtHeader);
+        txtHeader.setText(getString(R.string.app_name) + " v" + version);
 
         // inizializzazione progressBar. Utilizzata come feedback all'utente durante il download
         // dei parcheggi dall'API Iello. Di default la barra viene nascosta

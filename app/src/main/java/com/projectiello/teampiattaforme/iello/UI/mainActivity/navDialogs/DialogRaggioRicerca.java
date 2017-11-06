@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;

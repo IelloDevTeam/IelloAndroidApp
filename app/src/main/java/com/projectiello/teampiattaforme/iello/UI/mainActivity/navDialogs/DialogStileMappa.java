@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity;
+package com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
 import com.projectiello.teampiattaforme.iello.R;
+import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
 
 /**

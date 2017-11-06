@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -15,11 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.dataLogic.Segnalazione;
-import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,7 +52,9 @@ public class HelperSegnalazione extends ContextWrapper {
                 body.put("longitude", location.longitude);
                 body.put("latitude", location.latitude);
 
-                JsonObjectRequest volleyRequest = new JsonObjectRequest(Request.Method.POST, BASE_URL + "report", body, new Response.Listener<JSONObject>() {
+                JsonObjectRequest volleyRequest
+                        = new JsonObjectRequest(Request.Method.POST, BASE_URL + "report",
+                                                body, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         String status = response.optString("status","error");
