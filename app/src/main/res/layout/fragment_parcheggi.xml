@@ -119,8 +119,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:padding="16dp"
-        android:drawableEnd="@drawable/ic_keyboard_arrow_up_black_24px"
-        android:drawableRight="@drawable/ic_keyboard_arrow_up_black_24px"
+        android:drawableEnd="@drawable/ic_keyboard_arrow_up_black_24dp"
+        android:drawableRight="@drawable/ic_keyboard_arrow_up_black_24dp"
         android:text="@string/tutti_i_risultati"
         android:textAlignment="viewStart" />
 

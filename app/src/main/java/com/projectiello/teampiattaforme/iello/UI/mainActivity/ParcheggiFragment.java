@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -120,13 +121,11 @@ public class ParcheggiFragment extends Fragment {
             public void onClick(View view) {
                 if (mExpLayParcheggi.isExpanded()) {
                     mBtnEspandi.setText(getString(R.string.tutti_i_risultati));
-                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(),
-                                   R.drawable.ic_keyboard_arrow_up_black_24px, null);
+                    Drawable img = ContextCompat.getDrawable(getActivity(), R.drawable.ic_keyboard_arrow_up_black_24dp);
                     mBtnEspandi.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
                 } else {
                     mBtnEspandi.setText(R.string.nascondi_risultati);
-                    Drawable img = VectorDrawableCompat.create(getActivity().getResources(),
-                                   R.drawable.ic_keyboard_arrow_down_black_24px, null);
+                    Drawable img = ContextCompat.getDrawable(getActivity(), R.drawable.ic_keyboard_arrow_down_black_24dp);
                     mBtnEspandi.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
                 }
                 mExpLayParcheggi.toggle();
@@ -178,8 +177,7 @@ public class ParcheggiFragment extends Fragment {
             // nascondi gli altri risultati
             if (mExpLayParcheggi.isExpanded()) {
                 mBtnEspandi.setText(getString(R.string.tutti_i_risultati));
-                Drawable img = VectorDrawableCompat.create(getActivity().getResources(),
-                        R.drawable.ic_keyboard_arrow_up_black_24px, null);
+                Drawable img = ContextCompat.getDrawable(getActivity(), R.drawable.ic_keyboard_arrow_up_black_24dp);
                 mBtnEspandi.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
 
                 mExpLayParcheggi.collapse();
