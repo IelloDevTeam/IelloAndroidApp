@@ -2,7 +2,7 @@
 
 Questa repository contiene il codice dell'app Android di Project Iello. L'app consente agli utenti di cercare i posteggi per disabili situati in corrispondenza della propria posizione, o di un determinato indirizzo. Consente inoltre agli utenti di segnalare eventuali posteggi da loro individuati.
 
-Quest'app è stata pensata per permettere a tutti gli utenti di consultare i dati della piattaforma Iello. Per tali ragioni l'app è anche [disponibile nel Play Store]().
+Quest'app è stata pensata per permettere a tutti gli utenti di consultare i dati della piattaforma Iello. Per tali ragioni l'app è anche [disponibile nel Play Store](https://play.google.com/store/apps/details?id=com.projectiello.teampiattaforme.iello&hl=it).
 
 
 ## Indice contenuti ##
