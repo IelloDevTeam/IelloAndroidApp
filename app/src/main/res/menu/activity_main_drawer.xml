@@ -27,6 +27,11 @@
                     android:id="@+id/nav_api"
                     android:icon="@drawable/ic_github_circle"
                     android:title="@string/esplora_api" />
+
+                <item
+                    android:id="@+id/nav_bot"
+                    android:icon="@drawable/ic_telegram_black_24px"
+                    android:title="@string/utilizza_il_bot" />
             </menu>
         </item>
 

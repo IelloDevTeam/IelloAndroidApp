@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Iello</string>
+    <string name="app_name">iello</string>
 
     <string name="action_search">Search&#8230;</string>
     <string name="segnala_posteggio">Segnala posteggio</string>
     <string name="cerca_ind">Inserisci un indirizzo&#8230;</string>
 
-    <string name="slide_1_title">Benvenuto in Iello!</string>
+    <string name="slide_1_title">Benvenuto in iello!</string>
     <string name="slide_1_desc">Iello è un\'app che consente di trovare facilmente gli stalli per
         disabili posti nelle vicinanze.
     </string>
@@ -39,10 +39,10 @@
     <string name="raggio_ricerca">Raggio di ricerca</string>
     <string name="personalizza_mappa">Personalizza mappa</string>
     <string name="info_app">Info sull\'app</string>
-    <string name="project_iello">Cos\'è project Iello?</string>
+    <string name="project_iello">Cos\'è Project iello?</string>
     <string name="esplora_api">Esplora l\'API</string>
 
-    <string name="project_iello_description">Project Iello è un progetto portato avanti da dei
+    <string name="project_iello_description">Project iello è un progetto portato avanti da dei
         ragazzi dell\'università di Urbino, nato come progetto correlato ad un esame. Il progetto
         non è stato pensato per essere a scopo di lucro.\nL\'app è solo una parte di un
         progetto più ampio, che comprende un database online con tecnologia Firebase, un bot
@@ -87,4 +87,7 @@
     <string name="iello_api_key">e432e713d9544311a819d73fa9ffbdd7</string>
     <string name="auth_error">Errore di autenticazione!</string>
     <string name="indirizzo_base">Prima riga indirizzo\nSeconda riga indirizzo</string>
+    <string name="utilizza_il_bot">Utilizza il bot</string>
+    <string name="project_iello_bot">Il progetto da noi realizzato comprende anche un bot Telegram!
+        \nCerca su Telegram \"ielloBot\", e sfrutta le funzionalità di iello tramite questa piattaforma.</string>
 </resources>

@@ -123,6 +123,20 @@ public class MainActivity extends AppCompatActivity
                         startActivity(i);
                         break;
                     }
+                    case R.id.nav_bot: {
+                        // mostra un dialog con la descrizione del progetto
+                        AlertDialog.Builder alertProject = new AlertDialog.Builder(MainActivity.this);
+
+                        alertProject.setIcon(R.drawable.ic_telegram_black_24px);
+                        alertProject.setTitle(R.string.utilizza_il_bot);
+                        alertProject.setMessage(R.string.project_iello_bot);
+                        alertProject.setPositiveButton(R.string.fantastico, null);
+
+                        AlertDialog alert = alertProject.create();
+                        alert.show();
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    }
                 }
                 return true;
             }

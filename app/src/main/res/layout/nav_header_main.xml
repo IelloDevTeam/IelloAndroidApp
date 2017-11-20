@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="bottom">
 
     <ImageView
@@ -21,7 +21,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="Iello v1.0"
+            android:text="iello v1.0"
             android:id="@+id/txtHeader"
             android:layout_marginBottom="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
