@@ -29,7 +29,7 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slide_1_title),
                 getString(R.string.slide_1_desc),
-                R.mipmap.ic_launcher,
+                R.drawable.ic_launcher,
                 ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null)));
 
 
