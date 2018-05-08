@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity;
+package com.projectiello.teampiattaforme.iello.ui.segnalazioneActivity;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,7 +8,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
 import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**

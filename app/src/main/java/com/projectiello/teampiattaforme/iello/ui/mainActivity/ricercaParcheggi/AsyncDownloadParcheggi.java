@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi;
+package com.projectiello.teampiattaforme.iello.ui.mainActivity.ricercaParcheggi;
 
 
 import android.os.AsyncTask;
@@ -6,8 +6,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.ParcheggiFragment;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.ParcheggiFragment;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
 
-    private static final String BASE_URL = "http://cloudpi.webhop.me:4000/iello/v1/parking";
+    private static final String BASE_URL = "http://iello.webhop.me:4000/iello/v1/parking";
 
     // riferimento alla MainActivity che consente di intervenire sull'interfaccia
     private MainActivity mMainActivity;

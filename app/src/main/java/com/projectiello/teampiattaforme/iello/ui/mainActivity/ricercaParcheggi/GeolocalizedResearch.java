@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi;
+package com.projectiello.teampiattaforme.iello.ui.mainActivity.ricercaParcheggi;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -12,7 +12,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.MainActivity;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 
 import static android.content.ContentValues.TAG;

@@ -1,10 +1,10 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.MainActivity;
 import com.projectiello.teampiattaforme.iello.utilities.HelperPreferences;
 
 /**

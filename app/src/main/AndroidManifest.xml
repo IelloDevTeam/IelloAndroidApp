@@ -25,10 +25,10 @@
         <!-- The API key for Google Maps-based APIs. -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="${mapsKey}" />
 
         <activity
-            android:name=".UI.SplashActivity"
+            android:name=".ui.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,18 +38,18 @@
 
 
         <activity
-            android:name=".UI.segnalazioneActivity.SegnalazioneActivity"
+            android:name=".ui.segnalazioneActivity.SegnalazioneActivity"
             android:label="@string/segnala_posteggio"
             android:theme="@style/SegnalaTheme"
-            android:parentActivityName=".UI.mainActivity.MainActivity"/>
+            android:parentActivityName=".ui.mainActivity.MainActivity"/>
 
 
         <activity
-            android:name=".UI.IntroActivity"
+            android:name=".ui.IntroActivity"
             android:theme="@style/IntroTheme" />
 
         <activity
-            android:name=".UI.mainActivity.MainActivity"
+            android:name=".ui.mainActivity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/MainTheme">
         </activity>

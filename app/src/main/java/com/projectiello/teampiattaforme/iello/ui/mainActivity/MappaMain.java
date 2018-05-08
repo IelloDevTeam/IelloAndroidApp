@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity;
+package com.projectiello.teampiattaforme.iello.ui.mainActivity;
 
 import android.widget.Toast;
 
@@ -8,7 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AsyncDownloadParcheggi;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.ricercaParcheggi.AsyncDownloadParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.ElencoParcheggi;
 import com.projectiello.teampiattaforme.iello.dataLogic.Parcheggio;
 import com.projectiello.teampiattaforme.iello.utilities.MappaGoogle;

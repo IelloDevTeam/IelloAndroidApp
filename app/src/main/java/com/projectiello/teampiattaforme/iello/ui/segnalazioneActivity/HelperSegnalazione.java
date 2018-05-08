@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity;
+package com.projectiello.teampiattaforme.iello.ui.segnalazioneActivity;
 
 import android.content.Context;
 import android.content.ContextWrapper;

@@ -1,48 +1,52 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
     defaultConfig {
         applicationId "com.projectiello.teampiattaforme.iello"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 4
-        versionName "1.3"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 5
+        versionName "1.5"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        resValue "string", "google_maps_key", (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
         resValue "string", "google_geoc_key", (project.findProperty("GOOGLE_GEOCODING_API_KEY") ?: "")
+        resValue "string", "iello_api_key", (project.findProperty("IELLO_API_KEY") ?: "")
     }
     buildTypes {
+        debug {
+            manifestPlaceholders = [mapsKey: "AIzaSyD8r-KFAKkQVDMYqoiFxfhMBas8xeCrS3Y"]
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [mapsKey: "AIzaSyCFzxueWvf8vkdXyh2XtyqV4O0jtx9Zw_8"]
         }
     }
 }
 
-def SUPPORT = "26.1.0"
-def G_SERV = "11.6.0"
+def SUPPORT = "27.1.1"
+def G_SERV = "15.0.0"
+
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile "com.android.support:appcompat-v7:$SUPPORT"
-    compile "com.android.support:design:$SUPPORT"
-    compile "com.android.support:support-vector-drawable:$SUPPORT"
-    compile "com.android.support:cardview-v7:$SUPPORT"
-    compile "com.google.android.gms:play-services-location:$G_SERV"
-    compile "com.google.android.gms:play-services-maps:$G_SERV"
-    compile "com.google.firebase:firebase-core:$G_SERV"
-    compile "com.android.volley:volley:1.0.0"
-    compile "com.github.aakira:expandable-layout:1.6.0@aar"
-    compile "com.github.paolorotolo:appintro:4.1.0"
-    compile "com.miguelcatalan:materialsearchview:1.4.0"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:appcompat-v7:$SUPPORT"
+    implementation "com.android.support:design:$SUPPORT"
+    implementation "com.android.support:support-vector-drawable:$SUPPORT"
+    implementation "com.android.support:cardview-v7:$SUPPORT"
+    implementation "com.google.android.gms:play-services-location:$G_SERV"
+    implementation "com.google.android.gms:play-services-maps:$G_SERV"
+    implementation "com.google.firebase:firebase-core:$G_SERV"
+    implementation "com.android.volley:volley:1.0.0"
+    implementation "com.github.aakira:expandable-layout:1.6.0@aar"
+    implementation "com.github.paolorotolo:appintro:4.1.0"
+    implementation "com.miguelcatalan:materialsearchview:1.4.0"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

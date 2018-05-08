@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI.mainActivity;
+package com.projectiello.teampiattaforme.iello.ui.mainActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,11 +23,11 @@ import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs.DialogRaggioRicerca;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.navDialogs.DialogStileMappa;
-import com.projectiello.teampiattaforme.iello.UI.segnalazioneActivity.SegnalazioneActivity;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.AddressedResearch;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.ricercaParcheggi.GeolocalizedResearch;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.navDialogs.DialogRaggioRicerca;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.navDialogs.DialogStileMappa;
+import com.projectiello.teampiattaforme.iello.ui.segnalazioneActivity.SegnalazioneActivity;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.ricercaParcheggi.AddressedResearch;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.ricercaParcheggi.GeolocalizedResearch;
 import com.projectiello.teampiattaforme.iello.utilities.HelperRete;
 
 

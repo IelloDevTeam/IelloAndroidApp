@@ -1,4 +1,4 @@
-package com.projectiello.teampiattaforme.iello.UI;
+package com.projectiello.teampiattaforme.iello.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import com.github.paolorotolo.appintro.AppIntro2;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.projectiello.teampiattaforme.iello.R;
-import com.projectiello.teampiattaforme.iello.UI.mainActivity.MainActivity;
+import com.projectiello.teampiattaforme.iello.ui.mainActivity.MainActivity;
 
 /**
  * Created by riccardomaldini on 25/09/17.
@@ -29,7 +29,7 @@ public class IntroActivity extends AppIntro2 {
         addSlide(AppIntroFragment.newInstance(
                 getString(R.string.slide_1_title),
                 getString(R.string.slide_1_desc),
-                R.drawable.ic_launcher,
+                R.mipmap.ic_launcher,
                 ResourcesCompat.getColor(getResources(), R.color.colorPrimary, null)));
 
 
