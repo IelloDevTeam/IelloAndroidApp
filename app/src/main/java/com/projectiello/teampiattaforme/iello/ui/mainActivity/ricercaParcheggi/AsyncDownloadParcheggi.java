@@ -25,7 +25,7 @@ import org.json.JSONObject;
 
 public class AsyncDownloadParcheggi extends AsyncTask<Void, Void, String> {
 
-    private static final String BASE_URL = "http://iello.webhop.me:4000/iello/v1/parking";
+    private static final String BASE_URL = "http://iello.herokuapp.com/iello/v1/parking";
 
     // riferimento alla MainActivity che consente di intervenire sull'interfaccia
     private MainActivity mMainActivity;
